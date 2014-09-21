@@ -29,10 +29,12 @@ Robot ROBOT;
 
 void renderGL( void )
 {
-ROBOT=Robot();
-glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-glEnable(GL_DEPTH_TEST);
-ROBOT.makeRobot();
+    ROBOT=Robot();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glEnable(GL_DEPTH_TEST);
+    ROBOT.makeRobot();
+    // glRotatef(1,0.3,00.1,0.2);
+    // defineTrapizoid(1,1.5,0.5,0.75);
 }
 
 int main (int argc, char *argv[]) 

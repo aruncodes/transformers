@@ -12,7 +12,7 @@ void Robot::initHip()
     {
     Hip=glGenLists(1); 
     glNewList(Hip,GL_COMPILE);
-
+    defineTrapizoid(0.25,0.1,0.1,0.1);
     glEndList();
 }
 
@@ -95,7 +95,7 @@ void Robot::initLeftUpperLeg()
     LeftUpperLeg=glGenLists(1);
     glNewList(LeftUpperLeg,GL_COMPILE);
     defineCuboid(0.1,0.25,0.1);
-glEndList();
+    glEndList();
 }
 
 void Robot::initLeftLowerLeg()
@@ -103,7 +103,7 @@ void Robot::initLeftLowerLeg()
     LeftLowerLeg=glGenLists(1);
     glNewList(LeftLowerLeg,GL_COMPILE);
     defineCuboid(0.1,0.25,0.1);
-glEndList();
+    glEndList();
 }
   
 void Robot::initRightUpperLeg()
