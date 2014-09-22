@@ -28,7 +28,7 @@ void Robot::initNeck()
     {
     Neck=glGenLists(1);
     glNewList(Neck,GL_COMPILE);
-
+    defineTrapizoid(0.15+0.05/3,0.15,0.15,0.05);
     glEndList();
 }
   
@@ -36,7 +36,7 @@ void Robot::initHead()
 {
     Head=glGenLists(1);
     glNewList(Head,GL_COMPILE);
-
+    defineTrapizoid(0.2,0.15+0.05/3,0.15,0.1);
     glEndList();
 }
 
@@ -206,12 +206,19 @@ void Robot::makeBust(double angle_x,double angle_y,double angle_z)
 void Robot::makeNeck(void)
 {
     //Tranformations
+    glTranslatef(NeckBustJoint.x,NeckBustJoint.y,NeckBustJoint.z);
+    glTranslatef(0,0.025,0);
     glCallList(Neck);
 }
   
 void Robot::makeHead(double angle_x,double angle_y,double angle_z)
 {
     //Tranformations
+    glTranslatef(HeadNeckJoint.x,HeadNeckJoint.y,HeadNeckJoint.z);
+    glRotatef(angle_x,1,0,0);
+    glRotatef(angle_z,0,0,1);
+    glRotatef(angle_y,0,1,0);
+    glTranslatef(0,0.05,0);
     glCallList(Head);
 }
 
@@ -361,7 +368,7 @@ void Robot::makeRobot(void)
 
         glPushMatrix();
             makeNeck();
-            makeHead(0,0,0);
+            makeHead(10,10,10);
         glPopMatrix();
 
     glPopMatrix();

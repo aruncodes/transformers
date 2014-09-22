@@ -77,7 +77,8 @@ public:
     Bust_Hip_Joint=point(0,0.075,0);
     RightShoulder_Bust_Joint=point(-0.15,0.25,0);
     LeftShoulder_Bust_Joint=point(0.15,0.25,0);
-
+    NeckBustJoint=point(0,0.25,0);
+    HeadNeckJoint=point(0,0.025,0);
     //std::cout<<"Robot";
     initHip();
     initBust();
