@@ -291,8 +291,8 @@ void Robot::makeRobot(void)
         glPopMatrix();
 
         glPushMatrix();
-            makeRightUpperArm(10,10,10);
-            makeRightLowerArm(10);
+            makeRightUpperLeg(10,10,10);
+            makeRightLowerLeg(10);
             makeRightFoot(10);
         glPopMatrix();
 

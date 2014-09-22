@@ -69,7 +69,6 @@ public:
     LeftUpperLeg_LeftLowerLeg_Joint=point(0,-0.125,0.075);
     Hip_RightUpperLeg_Joint=point(-0.075,-0.075,0);
     RightUpperLeg_RightLowerLeg_Joint=point(0,-0.125,0.05);
-    Bust_Hip_Joint=point(0,0.075,0);
 
     //std::cout<<"Robot";
     initHip();
