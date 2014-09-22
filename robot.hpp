@@ -24,11 +24,14 @@ class Robot
 private:
     point HeadNeckJoint;
     point NeckBustJoint;
-    point Bust_LeftUpperArm_Joint;
-    point Bust_RightUpperArm_Joint;
+    point LeftShoulder_LeftUpperArm_Joint;
+    point RightShoulder_RightUpperArm_Joint;
     point Bust_Hip_Joint;
     point Hip_LeftUpperLeg_Joint;
     point Hip_RightUpperLeg_Joint;
+
+    point LeftShoulder_Bust_Joint;
+    point RightShoulder_Bust_Joint;
 
     point LeftUpperArm_LeftLowerArm_Joint;
     point RightUpperArm_RightLowerArm_Joint;
@@ -45,6 +48,8 @@ private:
     GLuint Bust;
     GLuint Neck;
     GLuint Head;
+    GLuint LeftShoulder;
+    GLuint RightShoulder;
 
     GLuint LeftUpperArm;
     GLuint LeftLowerArm;
@@ -70,12 +75,16 @@ public:
     Hip_RightUpperLeg_Joint=point(-0.075,-0.075,0);
     RightUpperLeg_RightLowerLeg_Joint=point(0,-0.125,0.05);
     Bust_Hip_Joint=point(0,0.075,0);
+    RightShoulder_Bust_Joint=point(-0.15,0.25,0);
+    LeftShoulder_Bust_Joint=point(0.15,0.25,0);
 
     //std::cout<<"Robot";
     initHip();
     initBust();
     initNeck();
     initHead();
+    initLeftShoulder();
+    initRightShoulder();
 
     initLeftUpperArm();
     initLeftLowerArm();
@@ -101,6 +110,10 @@ public:
 
   void initNeck();
   void initHead();
+  void initLeftShoulder();
+  void initRightShoulder();
+
+
 
   void initLeftUpperArm();
   void initLeftLowerArm();
@@ -108,6 +121,7 @@ public:
   void initRightLowerArm();
   void initLeftHand();
   void initRightHand();
+
 
 
   void initLeftUpperLeg();
@@ -123,6 +137,8 @@ public:
 
   void makeNeck(void);
   void makeHead(double angle_x,double angle_y,double angle_z);
+  void makeLeftShoulder();
+  void makeRightShoulder();
 
   void makeLeftUpperArm(double angle_x,double angle_y,double angle_z);
   void makeLeftLowerArm(double angle_x);
