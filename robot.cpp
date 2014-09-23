@@ -88,7 +88,7 @@ void Robot::initLeftUpperArm()
     {
     LeftUpperArm=glGenLists(1);
     glNewList(LeftUpperArm,GL_COMPILE);
-	
+    defineCuboid(0.15,0.25,0.05);
     glEndList();
 }
 
@@ -96,7 +96,7 @@ void Robot::initLeftLowerArm()
     {
     LeftLowerArm=glGenLists(1);
     glNewList(LeftLowerArm,GL_COMPILE);
-
+    defineCuboid(0.15,0.25,0.05);
     glEndList();
 }
 
@@ -104,7 +104,7 @@ void Robot::initRightUpperArm()
     {
     RightUpperArm=glGenLists(1);
     glNewList(RightUpperArm,GL_COMPILE);
-
+    defineCuboid(0.15,0.25,0.05);
     glEndList();
 }
 
@@ -112,7 +112,7 @@ void Robot::initRightLowerArm()
     {
     RightLowerArm=glGenLists(1);
     glNewList(RightLowerArm,GL_COMPILE);
-
+    defineCuboid(0.15,0.25,0.05);
     glEndList();
 }
   
@@ -240,24 +240,43 @@ void Robot::makeRightShoulder()
 void Robot::makeLeftUpperArm(double angle_x,double angle_y,double angle_z)
 {
     //Tranformations
+    glTranslatef(LeftShoulder_LeftUpperArm_Joint.x,LeftShoulder_LeftUpperArm_Joint.y,LeftShoulder_LeftUpperArm_Joint.z);
+    glRotatef(angle_x,1,0,0);
+    glRotatef(angle_z,0,0,1);
+    glRotatef(angle_y,0,1,0);
+    glTranslatef(0.075,-0.125,0.025);	
+    glColor3f(0.9,0.91,0.98);
     glCallList(LeftUpperArm);
-}
-  
+}  
 void Robot::makeLeftLowerArm(double angle_x)
 {
     //Tranformations
+     glTranslatef(LeftUpperArm_LeftLowerArm_Joint.x,LeftUpperArm_LeftLowerArm_Joint.y,LeftUpperArm_LeftLowerArm_Joint.z);
+    glRotatef(angle_x,1,0,0);
+    glTranslatef(0,-0.125,0.025);	
+    glColor3f(0.9,0.91,0.98);
     glCallList(LeftLowerArm);
 }
   
 void Robot::makeRightUpperArm(double angle_x,double angle_y,double angle_z)
 {
     //Tranformations
+    glTranslatef(RightShoulder_RightUpperArm_Joint.x,RightShoulder_RightUpperArm_Joint.y,RightShoulder_RightUpperArm_Joint.z);
+    glRotatef(angle_x,1,0,0);
+    glRotatef(-angle_z,0,0,1);
+    glRotatef(-angle_y,0,1,0);
+    glTranslatef(-0.075,-0.125,0.025);	
+    glColor3f(0.9,0.91,0.98);
     glCallList(RightUpperArm);
 }
   
 void Robot::makeRightLowerArm(double angle_x)
 {
     //Tranformations
+     glTranslatef(LeftUpperArm_LeftLowerArm_Joint.x,LeftUpperArm_LeftLowerArm_Joint.y,LeftUpperArm_LeftLowerArm_Joint.z);
+    glRotatef(angle_x,1,0,0);
+    glTranslatef(0,-0.125,0.025);	
+    glColor3f(0.9,0.91,0.98);
     glCallList(RightLowerArm);
 }
   
@@ -354,15 +373,15 @@ void Robot::makeRobot(void)
 
         glPushMatrix();
 	    makeLeftShoulder();
-            makeLeftUpperArm(10,10,10);
-            makeLeftLowerArm(10);
+            makeLeftUpperArm(10,10,0);
+            makeLeftLowerArm(30);
             makeLeftHand(10);
         glPopMatrix();
 
         glPushMatrix();
 	    makeRightShoulder();
-            makeRightUpperArm(10,10,10);
-            makeRightLowerArm(10);
+            makeRightUpperArm(10,10,0);
+            makeRightLowerArm(30);
             makeRightFoot(10);
         glPopMatrix();
 
