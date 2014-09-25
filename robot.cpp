@@ -333,8 +333,9 @@ void Robot::makeRightFoot(double angle_x)
 
 void Robot::makeRobot(void)
 {
-    glLoadIdentity();
+    //glLoadIdentity();
 
+    glPushMatrix();
     makeHip(0,0,0,0);
 
     glPushMatrix();
@@ -372,5 +373,5 @@ void Robot::makeRobot(void)
         glPopMatrix();
 
     glPopMatrix();
-	    
+    glPopMatrix();
 }
