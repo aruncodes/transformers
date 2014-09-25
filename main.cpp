@@ -34,10 +34,7 @@ void renderGL( void )
     glEnable(GL_DEPTH_TEST);
     //glLoadIdentity();
     glRotatef(1,0,1,0);
-   
     ROBOT.makeRobot();
-    // glRotatef(1,0.3,00.1,0.2);
-    // defineTrapizoid(1,1.5,0.5,0.75);
 }
 
 int main (int argc, char *argv[]) 

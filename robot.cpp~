@@ -589,7 +589,7 @@ void Robot::makeRobot(void)
 		glPopMatrix();
             makeRightFrontHand(0);
 		glPushMatrix();
-		    makeRightBehindHand(180);
+		    makeRightBehindHand(0);
 		glPopMatrix();
         glPopMatrix();
 
@@ -599,7 +599,11 @@ void Robot::makeRobot(void)
         glPopMatrix();
 
     glPopMatrix();
+<<<<<<< HEAD
 
     glPopMatrix();
 	    
+=======
+    glPopMatrix();
+>>>>>>> 3d013485ad7d7b2243aea1c201dfce2ed3b1c851
 }

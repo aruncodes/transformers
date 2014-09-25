@@ -601,5 +601,4 @@ void Robot::makeRobot(void)
     glPopMatrix();
 
     glPopMatrix();
-	    
 }
