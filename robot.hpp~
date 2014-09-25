@@ -24,8 +24,8 @@ class Robot
 private:
     point HeadNeckJoint;
     point NeckBustJoint;
-    point LeftShoulder_LeftUpperArm_Joint;
-    point RightShoulder_RightUpperArm_Joint;
+    point LeftShoulder_LeftUpperArmFront_Joint;
+    point RightShoulder_RightUpperArmFront_Joint;
     point Bust_Hip_Joint;
     point Hip_LeftUpperLeg_Joint;
     point Hip_RightUpperLeg_Joint;
@@ -33,15 +33,25 @@ private:
     point LeftShoulder_Bust_Joint;
     point RightShoulder_Bust_Joint;
 
-    point LeftUpperArm_LeftLowerArm_Joint;
-    point RightUpperArm_RightLowerArm_Joint;
-    point LeftLowerArm_LeftHand_Joint;
-    point RightLowerArm_RightHand_Joint;
+    point LeftUpperArmFront_LeftLowerArmFront_Joint;
+    point RightUpperArmFront_RightLowerArmFront_Joint;
+    point LeftLowerArmFront_LeftFrontHand_Joint;
+    point RightLowerArmFront_RightFrontHand_Joint;
+
+    point LeftFrontHand_LeftBehindHand_Joint;
+    point RightFrontHand_RightBehindHand_Joint;
+    
+    point LeftUpperArmFront_LeftUpperArmBehind_Joint;
+    point LeftLowerArmFront_LeftLowerArmBehind_Joint;
+    point RightUpperArmFront_RightUpperArmBehind_Joint;
+    point RightLowerArmFront_RightLowerArmBehind_Joint;
 
     point LeftUpperLeg_LeftLowerLeg_Joint;
     point RightUpperLeg_RightLowerLeg_Joint;
     point LeftLowerLeg_LeftFoot_Joint;
     point RightLowerLeg_RightFoot_Joint;
+
+
 
 //Some more structural constraints and structural parameters.
     GLuint Hip;
@@ -51,12 +61,21 @@ private:
     GLuint LeftShoulder;
     GLuint RightShoulder;
 
-    GLuint LeftUpperArm;
-    GLuint LeftLowerArm;
-    GLuint RightUpperArm;
-    GLuint RightLowerArm;
-    GLuint LeftHand;
-    GLuint RightHand;
+    GLuint LeftUpperArmFront;
+    GLuint LeftLowerArmFront;
+    GLuint RightUpperArmFront;
+    GLuint RightLowerArmFront;
+    
+    GLuint LeftUpperArmBehind;
+    GLuint LeftLowerArmBehind;
+    GLuint RightUpperArmBehind;
+    GLuint RightLowerArmBehind;
+
+    GLuint LeftFrontHand;
+    GLuint RightFrontHand;
+
+    GLuint LeftBehindHand;
+    GLuint RightBehindHand;
 
     GLuint LeftUpperLeg;
     GLuint RightUpperLeg;
@@ -70,19 +89,39 @@ private:
 public:
     Robot()
     {
-    Hip_LeftUpperLeg_Joint=point(0.075,-0.075,0);
-    LeftUpperLeg_LeftLowerLeg_Joint=point(0,-0.125,0.075);
-    Hip_RightUpperLeg_Joint=point(-0.075,-0.075,0);
-    RightUpperLeg_RightLowerLeg_Joint=point(0,-0.125,0.075);
-    Bust_Hip_Joint=point(0,0.075,0);
-    RightShoulder_Bust_Joint=point(-0.15,0.25,0);
-    LeftShoulder_Bust_Joint=point(0.15,0.25,0);
+     Hip_LeftUpperLeg_Joint=point(0.075,0,0);
+    //Hip_LeftUpperLeg_Joint=point(0.075,-0.075,0);
+    LeftUpperLeg_LeftLowerLeg_Joint=point(0,-0.1,-0.075);
+    Hip_RightUpperLeg_Joint=point(-0.075,0,0);
+    //Hip_RightUpperLeg_Joint=point(-0.075,-0.075,0);
+    RightUpperLeg_RightLowerLeg_Joint=point(0,-0.1,-0.075);
+    Bust_Hip_Joint=point(0,0,0);
+    //Bust_Hip_Joint=point(0,0.075,0);
+    RightShoulder_Bust_Joint=point(-0.1,0.25,0);
+    LeftShoulder_Bust_Joint=point(0.1,0.25,0);
+    //RightShoulder_Bust_Joint=point(-0.15,0.25,0);
+    //LeftShoulder_Bust_Joint=point(0.15,0.25,0);
     NeckBustJoint=point(0,0.25,0);
     HeadNeckJoint=point(0,0.025,0);
-    LeftShoulder_LeftUpperArm_Joint=point(0.025,0.075,-0.075);
-    LeftUpperArm_LeftLowerArm_Joint=point(0,-0.125,-0.025);
-    RightShoulder_RightUpperArm_Joint=point(-0.025,0.075,-0.075);
-    LeftUpperArm_LeftLowerArm_Joint=point(-0.025,0.075,-0.075);
+
+    LeftShoulder_LeftUpperArmFront_Joint=point(0.025,0.075,-0.075);
+    LeftUpperArmFront_LeftLowerArmFront_Joint=point(0,-0.125,0.025);
+    RightShoulder_RightUpperArmFront_Joint=point(-0.025,0.075,-0.075);
+    RightUpperArmFront_RightLowerArmFront_Joint=point(0,-0.125,0.025);
+   
+    LeftUpperArmFront_LeftUpperArmBehind_Joint=point(0.0375,0,0.025);
+    LeftLowerArmFront_LeftLowerArmBehind_Joint=point(0.0375,0,0.025);
+    RightUpperArmFront_RightUpperArmBehind_Joint=point(-0.0375,0,0.025);
+    RightLowerArmFront_RightLowerArmBehind_Joint=point(-0.0375,0,0.025);
+
+    LeftLowerArmFront_LeftFrontHand_Joint=point(0,-0.125,0.025);
+    RightLowerArmFront_RightFrontHand_Joint=point(0,-0.125,0.025);
+
+    LeftLowerLeg_LeftFoot_Joint=point(0,-0.15,0);
+    RightLowerLeg_RightFoot_Joint=point(0,-0.15,0);
+
+    LeftFrontHand_LeftBehindHand_Joint=point(0.0375,0,0.05);
+    RightFrontHand_RightBehindHand_Joint=point(-0.0375,0,0.05);
     //std::cout<<"Robot";
     initHip();
     initBust();
@@ -91,13 +130,21 @@ public:
     initLeftShoulder();
     initRightShoulder();
 
-    initLeftUpperArm();
-    initLeftLowerArm();
-    initRightUpperArm();
-    initRightLowerArm();
-    initLeftHand();
-    initRightHand();
+    initLeftUpperArmFront();
+    initLeftLowerArmFront();
+    initRightUpperArmFront();
+    initRightLowerArmFront();
 
+    initLeftUpperArmBehind();
+    initLeftLowerArmBehind();
+    initRightUpperArmBehind();
+    initRightLowerArmBehind();
+
+    initLeftFrontHand();
+    initRightFrontHand();
+
+    initLeftBehindHand();
+    initRightBehindHand();
 
     initLeftUpperLeg();
     initLeftLowerLeg();
@@ -120,13 +167,21 @@ public:
 
 
 
-  void initLeftUpperArm();
-  void initLeftLowerArm();
-  void initRightUpperArm();
-  void initRightLowerArm();
-  void initLeftHand();
-  void initRightHand();
+  void initLeftUpperArmFront();
+  void initLeftLowerArmFront();
+  void initRightUpperArmFront();
+  void initRightLowerArmFront();
 
+  void initLeftUpperArmBehind();
+  void initLeftLowerArmBehind();
+  void initRightUpperArmBehind();
+  void initRightLowerArmBehind();
+
+  void initLeftFrontHand();
+  void initRightFrontHand();
+
+  void initLeftBehindHand();
+  void initRightBehindHand();
 
 
   void initLeftUpperLeg();
@@ -145,12 +200,20 @@ public:
   void makeLeftShoulder();
   void makeRightShoulder();
 
-  void makeLeftUpperArm(double angle_x,double angle_y,double angle_z);
-  void makeLeftLowerArm(double angle_x);
-  void makeRightUpperArm(double angle_x,double angle_y,double angle_z);
-  void makeRightLowerArm(double angle_x);
-  void makeLeftHand(double angle_x);
-  void makeRightHand(double angle_x);
+  void makeLeftUpperArmFront(double angle_x,double angle_y,double angle_z);
+  void makeLeftLowerArmFront(double angle_x);
+  void makeRightUpperArmFront(double angle_x,double angle_y,double angle_z);
+  void makeRightLowerArmFront(double angle_x);
+
+  void makeLeftUpperArmBehind(double angle_y);
+  void makeLeftLowerArmBehind(double angle_y);
+  void makeRightUpperArmBehind(double angle_y);
+  void makeRightLowerArmBehind(double angle_y);
+
+  void makeLeftFrontHand(double angle_x);
+  void makeRightFrontHand(double angle_x);
+  void makeLeftBehindHand(double angle_y);
+  void makeRightBehindHand(double angle_y);
 
 
   void makeLeftUpperLeg(double angle_x,double angle_y,double angle_z);
