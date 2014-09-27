@@ -9,7 +9,7 @@
 using namespace Blocks;
 
 void Robot::initHip()
-{
+    {
     Hip=glGenLists(1); 
     glNewList(Hip,GL_COMPILE);
     defineTrapizoid(0.2,0.15,0.15,0.15);
@@ -17,7 +17,7 @@ void Robot::initHip()
 }
 
 void Robot::initBust()
-{
+    {
     Bust=glGenLists(1);
     glNewList(Bust,GL_COMPILE);
     defineCuboid(0.3,0.5,0.15);
@@ -25,7 +25,7 @@ void Robot::initBust()
 }
 
 void Robot::initNeck()
-{
+    {
     Neck=glGenLists(1);
     glNewList(Neck,GL_COMPILE);
     defineTrapizoid(0.15+0.05/3,0.15,0.15,0.05);
@@ -116,6 +116,7 @@ void Robot::initRightLowerArmFront()
     glEndList();
 }
   
+
 void Robot::initLeftUpperArmBehind()
     {
     LeftUpperArmBehind=glGenLists(1);
@@ -245,7 +246,7 @@ void Robot::initRightBehindHand()
 
 
 void Robot::initLeftUpperLeg()
-{
+    {
     LeftUpperLeg=glGenLists(1);
     glNewList(LeftUpperLeg,GL_COMPILE);
     defineCuboid(0.15,0.2,0.15);
@@ -253,7 +254,7 @@ void Robot::initLeftUpperLeg()
 }
 
 void Robot::initLeftLowerLeg()
-{
+    {
     LeftLowerLeg=glGenLists(1);
     glNewList(LeftLowerLeg,GL_COMPILE);
     defineCuboid(0.15,0.3,0.15);
@@ -543,34 +544,34 @@ void Robot::makeRobot(void)
     //glLoadIdentity();
 
     glPushMatrix();
-    makeHip(keys.hip_TX,keys.hip_TY,keys.hip_TZ,keys.hip_Y);
+    makeHip(0,0,0,0);
 
     glPushMatrix();
-        makeLeftUpperLeg(keys.leftUpperLeg_X,keys.leftUpperLeg_Y,keys.leftUpperLeg_Z);
-        makeLeftLowerLeg(keys.leftLowerLeg_X);
-        makeLeftFoot(keys.leftFoot_X);
+        makeLeftUpperLeg(0,0,30);
+        makeLeftLowerLeg(0);
+        makeLeftFoot(0);
     glPopMatrix();
 
     glPushMatrix();
-        makeRightUpperLeg(keys.rightUpperLeg_X,keys.rightUpperLeg_Y,keys.rightUpperLeg_Z);
-        makeRightLowerLeg(keys.rightLowerLeg_X);
-        makeRightFoot(keys.rightFoot_X);
+        makeRightUpperLeg(0,0,30);
+        makeRightLowerLeg(0);
+        makeRightFoot(0);
     glPopMatrix();
 
     glPushMatrix();
-        makeBust(keys.bust_X,keys.bust_Y,keys.bust_Z);
+        makeBust(0,0,0);
 
         glPushMatrix();
 	    makeLeftShoulder();
-            makeLeftUpperArmFront(keys.leftUpperArm_X,keys.leftUpperArm_Y,keys.leftUpperArm_Z);
+            makeLeftUpperArmFront(0,0,0);
 		glPushMatrix();
 		    makeLeftUpperArmBehind(0);
 		glPopMatrix();
-            makeLeftLowerArmFront(keys.leftLowerArm_X);
+            makeLeftLowerArmFront(0);
 		glPushMatrix();
 		    makeLeftLowerArmBehind(0);
 		glPopMatrix();
-            makeLeftFrontHand(keys.leftHand_X);
+            makeLeftFrontHand(0);
 		glPushMatrix();
 		    makeLeftBehindHand(0);
 		glPopMatrix();
@@ -578,15 +579,15 @@ void Robot::makeRobot(void)
 
         glPushMatrix();
 	    makeRightShoulder();
-            makeRightUpperArmFront(keys.rightUpperArm_X,keys.rightUpperArm_Y,keys.rightUpperArm_Z);
+            makeRightUpperArmFront(0,0,0);
 		glPushMatrix();
 		    makeRightUpperArmBehind(0);
 		glPopMatrix();
-            makeRightLowerArmFront(keys.rightLowerArm_X);
+            makeRightLowerArmFront(0);
 		glPushMatrix();
 		    makeRightLowerArmBehind(0);
 		glPopMatrix();
-            makeRightFrontHand(keys.rightHand_X);
+            makeRightFrontHand(0);
 		glPushMatrix();
 		    makeRightBehindHand(0);
 		glPopMatrix();
@@ -594,9 +595,15 @@ void Robot::makeRobot(void)
 
         glPushMatrix();
             makeNeck();
-            makeHead(keys.head_X,keys.head_Y,keys.head_Z);
+            makeHead(0,0,0);
         glPopMatrix();
-    glPopMatrix();
 
     glPopMatrix();
+<<<<<<< HEAD
+
+    glPopMatrix();
+	    
+=======
+    glPopMatrix();
+>>>>>>> 3d013485ad7d7b2243aea1c201dfce2ed3b1c851
 }

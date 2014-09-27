@@ -34,21 +34,25 @@ public:
 		//Arms
 		leftUpperArm_X=leftUpperArm_Y=leftUpperArm_Z=10;
 		leftLowerArm_X = 30;
-		leftFoot_X = 10;
+		leftHand_X=0;
+		
 		rightUpperArm_X=rightUpperArm_Y=rightUpperArm_Z=10;
 		rightLowerArm_X = 30;
-		rightFoot_X = 10;
+		rightHand_X=10;
 
 		//Bust
 		bust_X=bust_Y=bust_Z=0;
 
 		//Leg
-		leftUpperLeg_X=leftUpperLeg_Y=leftUpperLeg_Z=10;
-		leftLowerLeg_X = 10;
-		leftHand_X=10;
-		rightUpperLeg_X=rightUpperLeg_Y=rightUpperLeg_Z=10;
-		rightLowerLeg_X = 10;
-		rightHand_X=10;
+		leftUpperLeg_X=leftUpperLeg_Y=10;
+		leftUpperLeg_Z=30;
+		leftLowerLeg_X = 0;
+		leftFoot_X = 0;
+
+		rightUpperLeg_X=rightUpperLeg_Y=10;
+		rightUpperLeg_Z=30;
+		rightLowerLeg_X = 0;
+		rightFoot_X = 0;
 
 		//Head
 		head_X=head_Y=head_Z=10;

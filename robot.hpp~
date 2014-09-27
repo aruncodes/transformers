@@ -2,8 +2,6 @@
 #ifndef _ROBOT_HPP_
 #define _ROBOT_HPP_
 
-#include "keycontrols.hpp"
-
 class point
 {
  public:
@@ -86,23 +84,23 @@ private:
     GLuint LeftFoot;
     GLuint RightFoot;
 
-public:
+    
 
-    KeyControls keys;
+public:
     Robot()
     {
-     //Hip_LeftUpperLeg_Joint=point(0.075,0,0);
-    Hip_LeftUpperLeg_Joint=point(0.075,-0.075,0);
+     Hip_LeftUpperLeg_Joint=point(0.075,0,0);
+    //Hip_LeftUpperLeg_Joint=point(0.075,-0.075,0);
     LeftUpperLeg_LeftLowerLeg_Joint=point(0,-0.1,-0.075);
-    //Hip_RightUpperLeg_Joint=point(-0.075,0,0);
-    Hip_RightUpperLeg_Joint=point(-0.075,-0.075,0);
+    Hip_RightUpperLeg_Joint=point(-0.075,0,0);
+    //Hip_RightUpperLeg_Joint=point(-0.075,-0.075,0);
     RightUpperLeg_RightLowerLeg_Joint=point(0,-0.1,-0.075);
-    //Bust_Hip_Joint=point(0,0,0);
-    Bust_Hip_Joint=point(0,0.075,0);
-    // RightShoulder_Bust_Joint=point(-0.1,0.25,0);
-    //LeftShoulder_Bust_Joint=point(0.1,0.25,0);
-    RightShoulder_Bust_Joint=point(-0.15,0.25,0);
-    LeftShoulder_Bust_Joint=point(0.15,0.25,0);
+    Bust_Hip_Joint=point(0,0,0);
+    //Bust_Hip_Joint=point(0,0.075,0);
+    RightShoulder_Bust_Joint=point(-0.1,0.25,0);
+    LeftShoulder_Bust_Joint=point(0.1,0.25,0);
+    //RightShoulder_Bust_Joint=point(-0.15,0.25,0);
+    //LeftShoulder_Bust_Joint=point(0.15,0.25,0);
     NeckBustJoint=point(0,0.25,0);
     HeadNeckJoint=point(0,0.025,0);
 
@@ -154,8 +152,6 @@ public:
     initRightLowerLeg();
     initLeftFoot();
     initRightFoot();    
-
-    keys = KeyControls();
   }
 
   //initilize Hip structure
