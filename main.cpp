@@ -22,6 +22,7 @@
 #include <string>
 
 #include "gl_framework.hpp"
+#include "keycontrols.hpp"
 #include "robot.hpp"
 
 std::string filename, progname;
@@ -29,11 +30,13 @@ Robot ROBOT;
 
 void renderGL( void )
 {
-    ROBOT=Robot();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
-    glRotatef(1,0,1,0);
     ROBOT.makeRobot();
+}
+
+void key_callback_wrapper(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    ROBOT.keys.key_callback(window,key,scancode,action,mods);
 }
 
 int main (int argc, char *argv[]) 
@@ -50,8 +53,6 @@ int main (int argc, char *argv[])
   if (!glfwInit())
     return -1;
 
-  // setup(argc, argv);
-
   int win_width=512;
   int win_height=512;
 
@@ -67,7 +68,7 @@ int main (int argc, char *argv[])
   glfwMakeContextCurrent(window);
 
   //Keyboard Callback
-  glfwSetKeyCallback(window, csX75::key_callback);
+  glfwSetKeyCallback(window, key_callback_wrapper);
   //Framebuffer resize callback
   glfwSetFramebufferSizeCallback(window, csX75::framebuffer_size_callback);
 
@@ -78,6 +79,9 @@ int main (int argc, char *argv[])
   csX75::framebuffer_size_callback(window, win_width, win_height);
   //Initialize GL state
   csX75::initGL();
+  
+  // Initialize robot
+  ROBOT=Robot();
 
   // Loop until the user closes the window
   while (glfwWindowShouldClose(window) == 0)

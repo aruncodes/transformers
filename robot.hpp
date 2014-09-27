@@ -2,6 +2,8 @@
 #ifndef _ROBOT_HPP_
 #define _ROBOT_HPP_
 
+#include "keycontrols.hpp"
+
 class point
 {
  public:
@@ -65,9 +67,9 @@ private:
     GLuint LeftFoot;
     GLuint RightFoot;
 
-    
-
 public:
+
+    KeyControls keys;
     Robot()
     {
     Hip_LeftUpperLeg_Joint=point(0.075,-0.075,0);
@@ -105,6 +107,8 @@ public:
     initRightLowerLeg();
     initLeftFoot();
     initRightFoot();    
+
+    keys = KeyControls();
   }
 
   //initilize Hip structure
