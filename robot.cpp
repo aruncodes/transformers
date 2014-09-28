@@ -1,12 +1,33 @@
 #include <cmath>
 #include <iostream>
 #include <cstdlib>
+#include <stdio.h>
 #include <GL/glew.h>
 
 #include "robot.hpp"
 #include "blocks.hpp"
 
 using namespace Blocks;
+
+
+
+void Robot::makeTextureImage(const char* FilePath,int width,int height)
+{
+    TextureImage=fopen(FilePath,"rb");
+    TextureData=(unsigned char *)malloc(width*height);
+    fread(TextureData,width*height,1,TextureImage);
+    fclose(TextureImage);
+    glGenTextures(1,&texture);
+    glBindTexture(GL_TEXTURE_2D,texture);
+    glPixelStorei(GL_UNPACK_ALIGNMENT,1);
+    glTexEnvf(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
+    glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_REPEAT);
+    glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_REPEAT);
+    glTexImage2D(GL_TEXTURE_2D,0,GL_LUMINANCE,width,height,0,GL_LUMINANCE,GL_UNSIGNED_BYTE,TextureData);
+    delete TextureData;
+}
+
 
 void Robot::initHip()
 {
@@ -18,8 +39,11 @@ void Robot::initHip()
 
 void Robot::initBust()
 {
+    makeTextureImage("2.bmp",300,200);
     Bust=glGenLists(1);
     glNewList(Bust,GL_COMPILE);
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D,texture);
     defineCuboid(0.3,0.5,0.15);
     glEndList();
 }
