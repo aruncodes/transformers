@@ -9,60 +9,39 @@ namespace Blocks {
 		half_length=length/2;
 		half_width=width/2;
 		half_height=height/2;
-		glBegin(GL_QUADS);
-		    glTexCoord2d(0.0,0.0);	    
+		glBegin(GL_QUADS);	    
 		    glVertex3f(-half_length,-half_width,-half_height);
-		    glTexCoord2d(1.0,0.0);
 		    glVertex3f(half_length,-half_width,-half_height);
-		    glTexCoord2d(1.0,1.0);
 		    glVertex3f(half_length,half_width,-half_height);
-		    glTexCoord2d(0.0,1.0);
 		    glVertex3f(-half_length,half_width,-half_height);
 		    
-		    glTexCoord2d(0.0,0.0);	
+		    glColor3f(0,1.0,0);
 		    glVertex3f(half_length,half_width,-half_height);
-	            glTexCoord2d(1.0,0.0);
 		    glVertex3f(-half_length,half_width,-half_height);
-                    glTexCoord2d(1.0,1.0);
 		    glVertex3f(-half_length,half_width,half_height);
-		    glTexCoord2d(0.0,1.0);
 		    glVertex3f(half_length,half_width,half_height);
 
-	            glTexCoord2d(0.0,0.0);
+		    glColor3f(1.0,0.0,0.0);
 		    glVertex3f(half_length,half_width,half_height);
-		    glTexCoord2d(1.0,0.0);
 		    glVertex3f(-half_length,half_width,half_height);
-		    glTexCoord2d(1.0,1.0);
 		    glVertex3f(-half_length,-half_width,half_height);
-		    glTexCoord2d(0.0,1.0);
 		    glVertex3f(half_length,-half_width,half_height);
 
-		    //glColor3f(0,0,1.0);
-		    glTexCoord2d(0.0,0.0);
+		    glColor3f(0,0,1.0);
 		    glVertex3f(half_length,-half_width,half_height);
-		    glTexCoord2d(1.0,0.0);
 		    glVertex3f(-half_length,-half_width,half_height);
-		    glTexCoord2d(1.0,1.0);
 		    glVertex3f(-half_length,-half_width,-half_height);
-		    glTexCoord2d(0.0,1.0);
 		    glVertex3f(half_length,-half_width,-half_height);
 
-		    glTexCoord2d(0.0,0.0);
+		
 		    glVertex3f(half_length,half_width,half_height);
-		    glTexCoord2d(1.0,0.0);
 		    glVertex3f(half_length,-half_width,half_height);
-		    glTexCoord2d(1.0,1.0);
 		    glVertex3f(half_length,-half_width,-half_height);
-		    glTexCoord2d(0.0,1.0);
 		    glVertex3f(half_length,half_width,-half_height);
 		  
-		    glTexCoord2d(0.0,0.0);
 		    glVertex3f(-half_length,half_width,half_height);
-		    glTexCoord2d(1.0,0.0);
 		    glVertex3f(-half_length,-half_width,half_height);
-		    glTexCoord2d(1.0,1.0);
 		    glVertex3f(-half_length,-half_width,-half_height);
-		    glTexCoord2d(0.0,1.0);
 		    glVertex3f(-half_length,half_width,-half_height);
 		glEnd();
 	}

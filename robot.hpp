@@ -85,6 +85,11 @@ private:
     GLuint RightLowerLeg;
     GLuint LeftFoot;
     GLuint RightFoot;
+    
+    
+    FILE* TextureImage;
+    unsigned char* TextureData; 
+    GLuint texture;
 
 public:
 
@@ -157,6 +162,8 @@ public:
 
     keys = KeyControls();
   }
+
+ void makeTextureImage(const char* FilePath,int width,int height); 
 
   //initilize Hip structure
   void initHip();
