@@ -55,7 +55,7 @@ public:
 		rightFoot_X = 0;
 
 		//Head
-		head_X=head_Y=head_Z=10;
+		head_X=head_Y=head_Z=00;
 
 		//Hip
 		hip_TX=hip_TY=hip_TZ=0;
