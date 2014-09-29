@@ -54,6 +54,33 @@ private:
     point RightLowerLeg_RightFoot_Joint;
 
 
+    point Bust_Lower_Point;
+    point Neck_Lower_Point;
+    point Head_Lower_Point;
+    point Left_Shoulder_Lower_Point;
+    point Right_Shoulder_Lower_Point;
+    point LeftUpperArmFront_Upper_Point;
+    point LeftLowerArmFront_Upper_Point;
+    point RightUpperArmFront_Upper_Point;
+    point RightLowerArmFront_Upper_Point;
+    
+    point LeftUpperArmBehind_Right_Point;
+    point LeftLowerArmBehind_Right_Point;
+    point RightUpperArmBehind_Left_Point;
+    point RightLowerArmBehind_Left_Point;
+    point LeftFrontHand_Upper_Point;
+    point RightFrontHand_Upper_Point;
+    point LeftBehindHand_Upper_Point;
+    point RightBehindHand_Upper_Point;
+
+    point LeftUpperLeg_Upper_Point;
+    point LeftLowerLeg_Upper_Point;
+    point RightUpperLeg_Upper_Point;
+    point RightLowerLeg_Upper_Point;
+    point LeftFoot_Behind_Point;
+    point RightFoot_Behind_Point;
+    int behindArmAngle;
+
 
 //Some more structural constraints and structural parameters.
     GLuint Hip;
@@ -96,39 +123,7 @@ public:
     KeyControls keys;
     Robot()
     {
-     //Hip_LeftUpperLeg_Joint=point(0.075,0,0);
-    Hip_LeftUpperLeg_Joint=point(0.075,-0.075,0);
-    LeftUpperLeg_LeftLowerLeg_Joint=point(0,-0.1,-0.075);
-    //Hip_RightUpperLeg_Joint=point(-0.075,0,0);
-    Hip_RightUpperLeg_Joint=point(-0.075,-0.075,0);
-    RightUpperLeg_RightLowerLeg_Joint=point(0,-0.1,-0.075);
-    //Bust_Hip_Joint=point(0,0,0);
-    Bust_Hip_Joint=point(0,0.075,0);
-    // RightShoulder_Bust_Joint=point(-0.1,0.25,0);
-    //LeftShoulder_Bust_Joint=point(0.1,0.25,0);
-    RightShoulder_Bust_Joint=point(-0.15,0.25,0);
-    LeftShoulder_Bust_Joint=point(0.15,0.25,0);
-    NeckBustJoint=point(0,0.25,0);
-    HeadNeckJoint=point(0,0.025,0);
-
-    LeftShoulder_LeftUpperArmFront_Joint=point(0.025,0.075,-0.075);
-    LeftUpperArmFront_LeftLowerArmFront_Joint=point(0,-0.125,0.025);
-    RightShoulder_RightUpperArmFront_Joint=point(-0.025,0.075,-0.075);
-    RightUpperArmFront_RightLowerArmFront_Joint=point(0,-0.125,0.025);
-   
-    LeftUpperArmFront_LeftUpperArmBehind_Joint=point(0.0375,0,0.025);
-    LeftLowerArmFront_LeftLowerArmBehind_Joint=point(0.0375,0,0.025);
-    RightUpperArmFront_RightUpperArmBehind_Joint=point(-0.0375,0,0.025);
-    RightLowerArmFront_RightLowerArmBehind_Joint=point(-0.0375,0,0.025);
-
-    LeftLowerArmFront_LeftFrontHand_Joint=point(0,-0.125,0.025);
-    RightLowerArmFront_RightFrontHand_Joint=point(0,-0.125,0.025);
-
-    LeftLowerLeg_LeftFoot_Joint=point(0,-0.15,0);
-    RightLowerLeg_RightFoot_Joint=point(0,-0.15,0);
-
-    LeftFrontHand_LeftBehindHand_Joint=point(0.0375,0,0.05);
-    RightFrontHand_RightBehindHand_Joint=point(-0.0375,0,0.05);
+    initStructuralConstraints();
     //std::cout<<"Robot";
     initHip();
     initBust();
@@ -146,23 +141,26 @@ public:
     initLeftLowerArmBehind();
     initRightUpperArmBehind();
     initRightLowerArmBehind();
-
     initLeftFrontHand();
     initRightFrontHand();
-
     initLeftBehindHand();
     initRightBehindHand();
-
     initLeftUpperLeg();
     initLeftLowerLeg();
     initRightUpperLeg();
     initRightLowerLeg();
     initLeftFoot();
     initRightFoot();    
-
+    behindArmAngle=0;
     keys = KeyControls();
+    if(keys.frame1==1)
+    {
+	behindArmAngle=180;
+    }
   }
 
+ void makeTextureImage(const char* FilePath,int width,int height); 
+  void initStructuralConstraints();
   //initilize Hip structure
   void initHip();
 

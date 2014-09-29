@@ -10,6 +10,65 @@
 using namespace Blocks;
 
 
+void Robot::initStructuralConstraints()
+{
+    //Hip_LeftUpperLeg_Joint=point(0.075,0,0);
+    Hip_LeftUpperLeg_Joint=point(0.075,-0.075,0);
+    LeftUpperLeg_LeftLowerLeg_Joint=point(0,-0.1,-0.075);
+    //Hip_RightUpperLeg_Joint=point(-0.075,0,0);
+    Hip_RightUpperLeg_Joint=point(-0.075,-0.075,0);
+    RightUpperLeg_RightLowerLeg_Joint=point(0,-0.1,-0.075);
+    //Bust_Hip_Joint=point(0,0,0);
+    Bust_Hip_Joint=point(0,0.075,0);
+    // RightShoulder_Bust_Joint=point(-0.1,0.25,0);
+    //LeftShoulder_Bust_Joint=point(0.1,0.25,0);
+    RightShoulder_Bust_Joint=point(-0.15,0.25,0);
+    LeftShoulder_Bust_Joint=point(0.15,0.25,0);
+    NeckBustJoint=point(0,0.25,0);
+    HeadNeckJoint=point(0,0.025,0);
+    LeftShoulder_LeftUpperArmFront_Joint=point(0.025,0.075,-0.075);
+    LeftUpperArmFront_LeftLowerArmFront_Joint=point(0,-0.125,0.025);
+    RightShoulder_RightUpperArmFront_Joint=point(-0.025,0.075,-0.075);
+    RightUpperArmFront_RightLowerArmFront_Joint=point(0,-0.125,0.025);
+    LeftUpperArmFront_LeftUpperArmBehind_Joint=point(0.0375,0,0.025);
+    LeftLowerArmFront_LeftLowerArmBehind_Joint=point(0.0375,0,0.025);
+    RightUpperArmFront_RightUpperArmBehind_Joint=point(-0.0375,0,0.025);
+    RightLowerArmFront_RightLowerArmBehind_Joint=point(-0.0375,0,0.025);
+    LeftLowerArmFront_LeftFrontHand_Joint=point(0,-0.125,0.025);
+    RightLowerArmFront_RightFrontHand_Joint=point(0,-0.125,0.025);
+    LeftLowerLeg_LeftFoot_Joint=point(0,-0.15,-0.075);
+    RightLowerLeg_RightFoot_Joint=point(0,-0.15,-0.075);
+    LeftFrontHand_LeftBehindHand_Joint=point(0.0375,0,0.05);
+    RightFrontHand_RightBehindHand_Joint=point(-0.0375,0,0.05);
+
+    Bust_Lower_Point=point(0,-0.25,0);
+    Neck_Lower_Point=point(0,-0.025,0);
+    Head_Lower_Point=point(0,-0.05,0);
+    Left_Shoulder_Lower_Point=point(-0.025,-0.075,0);
+    Right_Shoulder_Lower_Point=point(0.025,-0.075,0);
+    LeftUpperArmFront_Upper_Point=point(-0.0375,0.125,-0.025);
+    LeftLowerArmFront_Upper_Point=point(0,0.125,0.025);
+    RightUpperArmFront_Upper_Point=point(0.0375,0.125,-0.025);
+    RightLowerArmFront_Upper_Point=point(0,0.125,0.025);
+    
+    LeftUpperArmBehind_Right_Point=point(0.0375,0,-0.025);
+    LeftLowerArmBehind_Right_Point=point(0.0375,0,-0.025);
+    RightUpperArmBehind_Left_Point=point (-0.0375,0,-0.025);
+    RightLowerArmBehind_Left_Point=point(-0.0375,0,-0.025);
+
+    LeftFrontHand_Upper_Point=point(0,0.075,0.05);
+    RightFrontHand_Upper_Point=point(0,0.075,0.05);
+    LeftBehindHand_Upper_Point=point(0.0375,0,-0.05);
+    RightBehindHand_Upper_Point=point(-0.0375,0,-0.05);
+
+    LeftUpperLeg_Upper_Point=point(0,0.1,0);
+    LeftLowerLeg_Upper_Point=point(0,0.15,-0.075);
+    RightUpperLeg_Upper_Point=point(0,0.1,0);
+    RightLowerLeg_Upper_Point=point(0,0.15,-0.075);
+    LeftFoot_Behind_Point=point(0,-0.025,0.075);
+    RightFoot_Behind_Point=point(0,-0.025,0.075);
+}
+
 
 void Robot::makeTextureImage(const char* FilePath,int width,int height)
 {
@@ -114,6 +173,10 @@ void Robot::initLeftUpperArmFront()
     {
     LeftUpperArmFront=glGenLists(1);
     glNewList(LeftUpperArmFront,GL_COMPILE);
+    	//glPushMatrix();
+	//glTranslatef(-0.0325,0.05,0.05);
+        //defineSphere(0.05,180,180);
+    	//glPopMatrix();
     defineCuboid(0.075,0.25,0.05);
     glEndList();
 }
@@ -121,13 +184,17 @@ void Robot::initLeftUpperArmFront()
 void Robot::initLeftLowerArmFront()
     {
     LeftLowerArmFront=glGenLists(1);
-    glNewList(LeftLowerArmFront,GL_COMPILE);
+    glNewList(LeftLowerArmFront,GL_COMPILE);	
     defineCuboid(0.075,0.25,0.05);
+	//glPushMatrix();
+	//glTranslatef(0,0.125,0);
+        //defineSphere(0.05,180,180);
+    	//glPopMatrix();
     glEndList();
 }
 
 void Robot::initRightUpperArmFront()
-    {
+{
     RightUpperArmFront=glGenLists(1);
     glNewList(RightUpperArmFront,GL_COMPILE);
     defineCuboid(0.075,0.25,0.05);
@@ -167,7 +234,7 @@ void Robot::initRightUpperArmBehind()
 }
 
 void Robot::initRightLowerArmBehind()
-    {
+{
     RightLowerArmBehind=glGenLists(1);
     glNewList(RightLowerArmBehind,GL_COMPILE);
     defineCuboid(0.075,0.25,0.05);
@@ -282,6 +349,10 @@ void Robot::initLeftLowerLeg()
 {
     LeftLowerLeg=glGenLists(1);
     glNewList(LeftLowerLeg,GL_COMPILE);
+    //glPushMatrix();
+	//glTranslatef(0,0.15,0);
+        //defineSphere(0.075,180,180);
+    //glPopMatrix();
     defineCuboid(0.15,0.3,0.15);
     glEndList();
 }
@@ -333,9 +404,10 @@ void Robot::makeBust(double angle_x,double angle_y,double angle_z)
     glRotatef(-angle_x,1,0,0);
     glRotatef(angle_z,0,0,1);
     glRotatef(angle_y,0,1,0);
-    glTranslatef(0,0.25,0);	
+    glTranslatef(-Bust_Lower_Point.x,-Bust_Lower_Point.y,-Bust_Lower_Point.z);	
     glColor3f(0.9,0.91,0.98);
     glCallList(Bust);
+    glDisable(GL_TEXTURE_2D);
 }
 
   
@@ -343,7 +415,7 @@ void Robot::makeNeck(void)
 {
     //Tranformations
     glTranslatef(NeckBustJoint.x,NeckBustJoint.y,NeckBustJoint.z);
-    glTranslatef(0,0.025,0);
+    glTranslatef(-Neck_Lower_Point.x,-Neck_Lower_Point.y,-Neck_Lower_Point.z);
     glCallList(Neck);
 }
   
@@ -354,7 +426,7 @@ void Robot::makeHead(double angle_x,double angle_y,double angle_z)
     glRotatef(angle_x,1,0,0);
     glRotatef(angle_z,0,0,1);
     glRotatef(angle_y,0,1,0);
-    glTranslatef(0,0.06,0);
+    glTranslatef(-Head_Lower_Point.x,-Head_Lower_Point.y,-Head_Lower_Point.z);
     glCallList(Head);
 }
 
@@ -362,14 +434,14 @@ void Robot::makeLeftShoulder()
 {
     //Tranformations
      glTranslatef(LeftShoulder_Bust_Joint.x,LeftShoulder_Bust_Joint.y,LeftShoulder_Bust_Joint.z);
-    glTranslatef(0.025,0.075,0);
+    glTranslatef(-Left_Shoulder_Lower_Point.x,-Left_Shoulder_Lower_Point.y,-Left_Shoulder_Lower_Point.z);
     glCallList(LeftShoulder);
 }
 void Robot::makeRightShoulder()
 {
    //Tranformations
     glTranslatef(RightShoulder_Bust_Joint.x,RightShoulder_Bust_Joint.y,RightShoulder_Bust_Joint.z);
-    glTranslatef(-0.025,0.075,0);	
+    glTranslatef(-Right_Shoulder_Lower_Point.x,-Right_Shoulder_Lower_Point.y,-Right_Shoulder_Lower_Point.z);	
     glCallList(RightShoulder);
 }
   
@@ -380,7 +452,7 @@ void Robot::makeLeftUpperArmFront(double angle_x,double angle_y,double angle_z)
     glRotatef(angle_x,1,0,0);
     glRotatef(angle_z,0,0,1);
     glRotatef(angle_y,0,1,0);
-    glTranslatef(0.0375,-0.125,0.025);	
+    glTranslatef(-LeftUpperArmFront_Upper_Point.x,-LeftUpperArmFront_Upper_Point.y,-LeftUpperArmFront_Upper_Point.z);	
     glColor3f(0.9,0.91,0.98);
     glCallList(LeftUpperArmFront);
 }  
@@ -389,7 +461,7 @@ void Robot::makeLeftLowerArmFront(double angle_x)
     //Tranformations
      glTranslatef(LeftUpperArmFront_LeftLowerArmFront_Joint.x,LeftUpperArmFront_LeftLowerArmFront_Joint.y,LeftUpperArmFront_LeftLowerArmFront_Joint.z);
     glRotatef(angle_x,1,0,0);
-    glTranslatef(0,-0.125,-0.025);	
+    glTranslatef(-LeftLowerArmFront_Upper_Point.x,-LeftLowerArmFront_Upper_Point.y,-LeftLowerArmFront_Upper_Point.z);	
     glColor3f(0.9,0.91,0.98);
     glCallList(LeftLowerArmFront);
 }
@@ -401,7 +473,7 @@ void Robot::makeRightUpperArmFront(double angle_x,double angle_y,double angle_z)
     glRotatef(angle_x,1,0,0);
     glRotatef(-angle_z,0,0,1);
     glRotatef(-angle_y,0,1,0);
-    glTranslatef(-0.0375,-0.125,0.025);	
+    glTranslatef(-RightUpperArmFront_Upper_Point.x,-RightUpperArmFront_Upper_Point.y,-RightUpperArmFront_Upper_Point.z);	
     glColor3f(0.9,0.91,0.98);
     glCallList(RightUpperArmFront);
 }
@@ -411,7 +483,7 @@ void Robot::makeRightLowerArmFront(double angle_x)
     //Tranformations
      glTranslatef(LeftUpperArmFront_LeftLowerArmFront_Joint.x,LeftUpperArmFront_LeftLowerArmFront_Joint.y,LeftUpperArmFront_LeftLowerArmFront_Joint.z);
     glRotatef(angle_x,1,0,0);
-    glTranslatef(0,-0.125,-0.025);	
+    glTranslatef(-RightLowerArmFront_Upper_Point.x,-RightLowerArmFront_Upper_Point.y,-RightLowerArmFront_Upper_Point.z);	
     glColor3f(0.9,0.91,0.98);
     glCallList(RightLowerArmFront);
 }
@@ -422,7 +494,7 @@ void Robot::makeLeftUpperArmBehind(double angle_y)
     //Tranformations
      glTranslatef(LeftUpperArmFront_LeftUpperArmBehind_Joint.x,LeftUpperArmFront_LeftUpperArmBehind_Joint.y,LeftUpperArmFront_LeftUpperArmBehind_Joint.z);
     glRotatef(angle_y,0,1,0);
-    glTranslatef(-0.0375,0,0.025);	
+    glTranslatef(-LeftUpperArmBehind_Right_Point.x,-LeftUpperArmBehind_Right_Point.y,-LeftUpperArmBehind_Right_Point.z);	
     glColor3f(0.9,0.91,0.98);
     glCallList(LeftUpperArmBehind);
 }
@@ -432,7 +504,7 @@ void Robot::makeLeftLowerArmBehind(double angle_y)
     //Tranformations
      glTranslatef(LeftLowerArmFront_LeftLowerArmBehind_Joint.x,LeftLowerArmFront_LeftLowerArmBehind_Joint.y,LeftLowerArmFront_LeftLowerArmBehind_Joint.z);
     glRotatef(angle_y,0,1,0);
-    glTranslatef(-0.0375,0,0.025);	
+    glTranslatef(-LeftLowerArmBehind_Right_Point.x,-LeftLowerArmBehind_Right_Point.y,-LeftLowerArmBehind_Right_Point.z);	
     glColor3f(0.9,0.91,0.98);
     glCallList(LeftLowerArmBehind);
 }
@@ -442,7 +514,7 @@ void Robot::makeRightUpperArmBehind(double angle_y)
     //Tranformations
      glTranslatef(RightUpperArmFront_RightUpperArmBehind_Joint.x,RightUpperArmFront_RightUpperArmBehind_Joint.y,RightUpperArmFront_RightUpperArmBehind_Joint.z);
     glRotatef(-angle_y,0,1,0);
-    glTranslatef(0.0375,0,0.025);	
+    glTranslatef(-RightUpperArmBehind_Left_Point.x,-RightUpperArmBehind_Left_Point.y,-RightUpperArmBehind_Left_Point.z);	
     glColor3f(0.9,0.91,0.98);
     glCallList(RightUpperArmBehind);
 }
@@ -452,7 +524,7 @@ void Robot::makeRightLowerArmBehind(double angle_y)
     //Tranformations
      glTranslatef(RightLowerArmFront_RightLowerArmBehind_Joint.x,RightLowerArmFront_RightLowerArmBehind_Joint.y,RightLowerArmFront_RightLowerArmBehind_Joint.z);
     glRotatef(-angle_y,0,1,0);
-    glTranslatef(0.0375,0,0.025);	
+    glTranslatef(-RightLowerArmBehind_Left_Point.x,-RightLowerArmBehind_Left_Point.y,-RightLowerArmBehind_Left_Point.z);	
     glColor3f(0.9,0.91,0.98);
     glCallList(RightLowerArmBehind);
 }
@@ -462,7 +534,7 @@ void Robot::makeLeftFrontHand(double angle_x)
     //Tranformations
     glTranslatef(LeftLowerArmFront_LeftFrontHand_Joint.x,LeftLowerArmFront_LeftFrontHand_Joint.y,LeftLowerArmFront_LeftFrontHand_Joint.z);
     glRotatef(angle_x,1,0,0);
-    glTranslatef(0,-0.075,-0.05);	
+    glTranslatef(-LeftFrontHand_Upper_Point.x,-LeftFrontHand_Upper_Point.y,-LeftFrontHand_Upper_Point.z);	
     glColor3f(0.9,0.91,0.98);
     glCallList(LeftFrontHand);
 }
@@ -472,7 +544,7 @@ void Robot::makeRightFrontHand(double angle_x)
     //Tranformations
      glTranslatef(RightLowerArmFront_RightFrontHand_Joint.x,RightLowerArmFront_RightFrontHand_Joint.y,RightLowerArmFront_RightFrontHand_Joint.z);
     glRotatef(angle_x,1,0,0);
-    glTranslatef(0,-0.075,-0.05);	
+    glTranslatef(-RightFrontHand_Upper_Point.x,-RightFrontHand_Upper_Point.y,-RightFrontHand_Upper_Point.z);	
     glColor3f(0.9,0.91,0.98);
     glCallList(RightFrontHand);
 }
@@ -482,7 +554,7 @@ void Robot::makeLeftBehindHand(double angle_y)
     //Tranformations
     glTranslatef(LeftFrontHand_LeftBehindHand_Joint.x,LeftFrontHand_LeftBehindHand_Joint.y,LeftFrontHand_LeftBehindHand_Joint.z);
     glRotatef(angle_y,0,1,0);
-    glTranslatef(-0.0375,0,0.05);	
+    glTranslatef(-LeftBehindHand_Upper_Point.x,-LeftBehindHand_Upper_Point.y,-LeftBehindHand_Upper_Point.z);	
     glColor3f(0.9,0.91,0.98);
     glCallList(LeftBehindHand);
 }
@@ -492,7 +564,7 @@ void Robot::makeRightBehindHand(double angle_y)
     //Tranformations
      glTranslatef(RightFrontHand_RightBehindHand_Joint.x,RightFrontHand_RightBehindHand_Joint.y,RightFrontHand_RightBehindHand_Joint.z);
     glRotatef(-angle_y,0,1,0);
-    glTranslatef(0.0375,0,0.05);	
+    glTranslatef(-RightBehindHand_Upper_Point.x,-RightBehindHand_Upper_Point.y,-RightBehindHand_Upper_Point.z);	
     glColor3f(0.9,0.91,0.98);
     glCallList(RightBehindHand);
 }
@@ -506,7 +578,7 @@ void Robot::makeLeftUpperLeg(double angle_x,double angle_y,double angle_z)
     glRotatef(angle_x,1,0,0);
     glRotatef(angle_z,0,0,1);
     glRotatef(-angle_y,0,1,0);
-    glTranslatef(0,-0.1,0);	
+    glTranslatef(-LeftUpperLeg_Upper_Point.x,-LeftUpperLeg_Upper_Point.y, -LeftUpperLeg_Upper_Point.z);	
     glColor3f(0.9,0.91,0.98);
     glCallList(LeftUpperLeg);
 }
@@ -515,7 +587,7 @@ void Robot::makeLeftLowerLeg(double angle_x)
 {
     glTranslatef(LeftUpperLeg_LeftLowerLeg_Joint.x,LeftUpperLeg_LeftLowerLeg_Joint.y,LeftUpperLeg_LeftLowerLeg_Joint.z);
     glRotatef(-angle_x,1,0,0);
-    glTranslatef(0,-0.15,0.075);
+    glTranslatef(-LeftLowerLeg_Upper_Point.x,-LeftLowerLeg_Upper_Point.y,-LeftLowerLeg_Upper_Point.z);
     glColor3f(0.8,0.8,0.88);
     glCallList(LeftLowerLeg);
 }
@@ -529,7 +601,7 @@ void Robot::makeRightUpperLeg(double angle_x,double angle_y,double angle_z)
     glRotatef(angle_x,1,0,0);
     glRotatef(-angle_z,0,0,1);
     glRotatef(angle_y,0,1,0);
-    glTranslatef(0,-0.1,0);
+    glTranslatef(-RightUpperLeg_Upper_Point.x,-RightUpperLeg_Upper_Point.y,-RightUpperLeg_Upper_Point.z);
     glColor3f(0.9,0.9,0.98);
     glCallList(RightUpperLeg);
 }
@@ -538,7 +610,7 @@ void Robot::makeRightLowerLeg(double angle_x)
 {
    glTranslatef(RightUpperLeg_RightLowerLeg_Joint.x,RightUpperLeg_RightLowerLeg_Joint.y,RightUpperLeg_RightLowerLeg_Joint.z);
    glRotatef(-angle_x,1,0,0);
-   glTranslatef(0,-0.15,0.075);
+   glTranslatef(-RightLowerLeg_Upper_Point.x,-RightLowerLeg_Upper_Point.y,-RightLowerLeg_Upper_Point.z);
    glColor3f(0.8,0.8,0.88);
    glCallList(RightLowerLeg);
 }
@@ -548,7 +620,7 @@ void Robot::makeLeftFoot(double angle_x)
   //Tranformations
    glTranslatef(LeftLowerLeg_LeftFoot_Joint.x,LeftLowerLeg_LeftFoot_Joint.y,LeftLowerLeg_LeftFoot_Joint.z);
    glRotatef(angle_x,1,0,0);
-   glTranslatef(0,-0.025,0);
+   glTranslatef(-LeftFoot_Behind_Point.x,-LeftFoot_Behind_Point.y,-LeftFoot_Behind_Point.z);
    glColor3f(0.8,0.8,0.88);
   glCallList(LeftFoot);
 }
@@ -558,7 +630,7 @@ void Robot::makeRightFoot(double angle_x)
   //Tranformations
   glTranslatef(RightLowerLeg_RightFoot_Joint.x,RightLowerLeg_RightFoot_Joint.y,RightLowerLeg_RightFoot_Joint.z);
    glRotatef(angle_x,1,0,0);
-   glTranslatef(0,-0.025,0);
+   glTranslatef(-RightFoot_Behind_Point.x,-RightFoot_Behind_Point.y,-RightFoot_Behind_Point.z);
    glColor3f(0.8,0.8,0.88);
   glCallList(RightFoot);
 }
@@ -567,6 +639,22 @@ void Robot::makeRightFoot(double angle_x)
 void Robot::makeRobot(void)
 {
     //glLoadIdentity();
+    if(keys.frame1==1)
+    {
+	behindArmAngle=180;
+    }
+    if(keys.frame4==1)
+    {
+	RightShoulder_Bust_Joint=point(-0.1,0.25,0);
+    	LeftShoulder_Bust_Joint=point(0.1,0.25,0);
+    }
+    if(keys.frame6==1)
+    { 
+	Hip_LeftUpperLeg_Joint=point(0.075,0,0);
+    	Hip_RightUpperLeg_Joint=point(-0.075,0,0);
+	Bust_Hip_Joint=point(0,0,0);
+    }
+    
 
     glPushMatrix();
     makeHip(keys.hip_TX,keys.hip_TY,keys.hip_TZ,keys.hip_Y);
@@ -590,15 +678,15 @@ void Robot::makeRobot(void)
 	    makeLeftShoulder();
             makeLeftUpperArmFront(keys.leftUpperArm_X,keys.leftUpperArm_Y,keys.leftUpperArm_Z);
 		glPushMatrix();
-		    makeLeftUpperArmBehind(0);
+		    makeLeftUpperArmBehind(behindArmAngle);
 		glPopMatrix();
             makeLeftLowerArmFront(keys.leftLowerArm_X);
 		glPushMatrix();
-		    makeLeftLowerArmBehind(0);
+		    makeLeftLowerArmBehind(behindArmAngle);
 		glPopMatrix();
             makeLeftFrontHand(keys.leftHand_X);
 		glPushMatrix();
-		    makeLeftBehindHand(0);
+		    makeLeftBehindHand(behindArmAngle);
 		glPopMatrix();
         glPopMatrix();
 
@@ -606,15 +694,15 @@ void Robot::makeRobot(void)
 	    makeRightShoulder();
             makeRightUpperArmFront(keys.rightUpperArm_X,keys.rightUpperArm_Y,keys.rightUpperArm_Z);
 		glPushMatrix();
-		    makeRightUpperArmBehind(0);
+		    makeRightUpperArmBehind(behindArmAngle);
 		glPopMatrix();
             makeRightLowerArmFront(keys.rightLowerArm_X);
 		glPushMatrix();
-		    makeRightLowerArmBehind(0);
+		    makeRightLowerArmBehind(behindArmAngle);
 		glPopMatrix();
             makeRightFrontHand(keys.rightHand_X);
 		glPushMatrix();
-		    makeRightBehindHand(0);
+		    makeRightBehindHand(behindArmAngle);
 		glPopMatrix();
         glPopMatrix();
 

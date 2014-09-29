@@ -16,10 +16,10 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 	}
 
 	if( key == GLFW_KEY_UP ) {
-		glRotatef(-5,1,0,0);
+		glRotatef(-5,0,0,1);
 	}
 	else if( key == GLFW_KEY_DOWN ) {
-		glRotatef(5,1,0,0);
+		glRotatef(5,0,0,1);
 	}
 
 /* Left lower arm control*/

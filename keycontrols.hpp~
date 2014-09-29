@@ -45,7 +45,7 @@ public:
 		//Leg
 		leftUpperLeg_X=leftUpperLeg_Y=10;
 		leftUpperLeg_Z=30;
-		leftLowerLeg_X = 0;
+		leftLowerLeg_X = -90;
 		leftFoot_X = 0;
 
 		rightUpperLeg_X=rightUpperLeg_Y=10;
