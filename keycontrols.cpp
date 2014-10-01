@@ -81,7 +81,7 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 	{
 		frame0=frame1=frame2=frame3=frame4=frame5=frame6=frame7=frame8=1;
 	}
-	if(frame0=1){
+	if(frame0==1){
 		//Arms and Hands
                 leftUpperArm_X=leftUpperArm_Y=leftUpperArm_Z=0;
 		leftLowerArm_X = 0;

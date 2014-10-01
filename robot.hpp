@@ -116,7 +116,9 @@ private:
     
     FILE* TextureImage;
     unsigned char* TextureData; 
-    GLuint texture;
+    GLuint* texture;
+
+    enum {LOGO,BLUE,RED,HEAD};
 
 public:
 
@@ -153,9 +155,13 @@ public:
     initRightFoot();    
     behindArmAngle=0;
     keys = KeyControls();
+
+    initTexture();
   }
 
- void makeTextureImage(const char* FilePath,int width,int height); 
+  void initTexture();
+  void makeTexture(const char* FilePath,int width,int height, GLuint texture);
+
   void initStructuralConstraints();
   //initilize Hip structure
   void initHip();

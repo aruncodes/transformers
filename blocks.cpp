@@ -21,14 +21,14 @@ namespace Blocks {
 		    
 		    glTexCoord2d(0.0,0.0);	
 		    glVertex3f(half_length,half_width,-half_height);
-	            glTexCoord2d(1.0,0.0);
+	        glTexCoord2d(1.0,0.0);
 		    glVertex3f(-half_length,half_width,-half_height);
-                    glTexCoord2d(1.0,1.0);
+            glTexCoord2d(1.0,1.0);
 		    glVertex3f(-half_length,half_width,half_height);
 		    glTexCoord2d(0.0,1.0);
 		    glVertex3f(half_length,half_width,half_height);
 
-	            glTexCoord2d(0.0,0.0);
+	        glTexCoord2d(0.0,0.0);
 		    glVertex3f(half_length,half_width,half_height);
 		    glTexCoord2d(1.0,0.0);
 		    glVertex3f(-half_length,half_width,half_height);
@@ -92,7 +92,7 @@ namespace Blocks {
 			POINT_G;
 			POINT_H;
 	
-		    glColor3f(1,1,0);
+		    //glColor3f(1,1,0);
 
 			/* Bottom face*/
 			POINT_D;
@@ -100,7 +100,7 @@ namespace Blocks {
 			POINT_F;
 			POINT_E;
 
-		    glColor3f(0,1.0,0);
+		    //glColor3f(0,1.0,0);
 
 			/* Front face */
 			POINT_A;
@@ -108,7 +108,7 @@ namespace Blocks {
 			POINT_C;
 			POINT_D;
 
-		    glColor3f(0,0,1);
+		    //glColor3f(0,0,1);
 
 			/*Left face*/
 			POINT_A;
@@ -116,7 +116,7 @@ namespace Blocks {
 			POINT_E;
 			POINT_D;
 
-		    glColor3f(1,1.0,0);
+		    //glColor3f(1,1.0,0);
 
 			/*Right face*/
 			POINT_B;
@@ -124,12 +124,16 @@ namespace Blocks {
 			POINT_F;
 			POINT_C;
 
-		    glColor3f(0,1.0,1);
+		    //glColor3f(0,1.0,1);
 
 			/*Back face*/
+			glTexCoord2d(0.0,1.0);
 			POINT_H;
+			glTexCoord2d(1.0,1.0);
 			POINT_G;
+			glTexCoord2d(1.0,0.0);
 			POINT_F;
+			glTexCoord2d(0.0,0.0);
 			POINT_E;
 		glEnd();
 
@@ -162,7 +166,7 @@ namespace Blocks {
 	 void defineCylinder(double radius,double length,double numSteps) {
 	 	double hl = length * 0.5f;
 		double a = 0.0f;
-		double step = 2 * M_PI / (double)numSteps;
+		double step = 2 * (M_PI / (double)numSteps);
 		 
 		glBegin(GL_TRIANGLE_STRIP);
 		for (int i = 0; i < numSteps; ++i)
@@ -175,6 +179,31 @@ namespace Blocks {
 		    a += step;
 		}
 		glEnd();
+
+		a = 0;
+		glBegin(GL_TRIANGLE_FAN);
+		for (int i = 0; i < numSteps; ++i)
+		{
+		    double x = cos(a) * radius;
+		    double y = sin(a) * radius;
+		    glVertex3f(x,y, hl);
+		 
+		    a += step;
+		}
+		glEnd();
+
+		a=0;
+		glBegin(GL_TRIANGLE_FAN);
+		for (int i = 0; i < numSteps; ++i)
+		{
+		    double x = cos(a) * radius;
+		    double y = sin(a) * radius;
+		    glVertex3f(x,y, -hl);
+		 
+		    a += step;
+		}
+		glEnd();
+
 	 }
 
 }
