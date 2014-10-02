@@ -83,6 +83,7 @@ int main (int argc, char *argv[])
   
   // Initialize robot
   ROBOT=Robot();
+  //glLoadIdentity();
 
   // Loop until the user closes the window
   while (glfwWindowShouldClose(window) == 0)

@@ -17,26 +17,25 @@ public:
 
     double leftHand_X;
     double rightHand_X;
-
-	double leftUpperLeg_X,leftUpperLeg_Y,leftUpperLeg_Z;
+    double leftUpperLeg_X,leftUpperLeg_Y,leftUpperLeg_Z;
     double leftLowerLeg_X;
     double rightUpperLeg_X,rightUpperLeg_Y,rightUpperLeg_Z;
     double rightLowerLeg_X;
     double leftFoot_X;
     double rightFoot_X;
     double hip_TX,hip_TY,hip_TZ,hip_Y;
-    int frame0,frame1,frame2,frame3,frame4,frame5,frame6,frame7,frame8;
+    int frame9,frame1,frame2,frame3,frame4,frame5,frame6,frame7,frame8;
 
 	KeyControls() {
 		// Default values
-
+		//glLoadIdentity();
 		//Arms
 		leftUpperArm_X=leftUpperArm_Y=leftUpperArm_Z=10;
-		leftLowerArm_X = 30;
-		leftHand_X=0;
+		leftLowerArm_X = 10;
+		leftHand_X=10;
 		
 		rightUpperArm_X=rightUpperArm_Y=rightUpperArm_Z=10;
-		rightLowerArm_X = 30;
+		rightLowerArm_X =10;
 		rightHand_X=10;
 
 		//Bust
@@ -44,17 +43,17 @@ public:
 
 		//Leg
 		leftUpperLeg_X=leftUpperLeg_Y=10;
-		leftUpperLeg_Z=30;
-		leftLowerLeg_X = 0;
+		leftUpperLeg_Z=10;
+		leftLowerLeg_X =0;
 		leftFoot_X = 0;
 
 		rightUpperLeg_X=rightUpperLeg_Y=10;
-		rightUpperLeg_Z=30;
-		rightLowerLeg_X = 0;
+		rightUpperLeg_Z=0;
+		rightLowerLeg_X =0;
 		rightFoot_X = 0;
 
 		//Head
-		head_X=head_Y=head_Z=00;
+		head_X=head_Y=head_Z=0;
 
 		//Hip
 		hip_TX=hip_TY=hip_TZ=0;

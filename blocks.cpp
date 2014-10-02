@@ -11,63 +11,63 @@ namespace Blocks {
 		half_height=height/2;
 		glBegin(GL_QUADS);
 		    glTexCoord2d(0.0,0.0);	    
-		    glVertex3f(-half_length,-half_width,-half_height);
+		    glVertex3f(-half_length,-half_width,half_height);
 		    glTexCoord2d(1.0,0.0);
-		    glVertex3f(half_length,-half_width,-half_height);
+		    glVertex3f(half_length,-half_width,half_height);
 		    glTexCoord2d(1.0,1.0);
-		    glVertex3f(half_length,half_width,-half_height);
+		    glVertex3f(half_length,half_width,half_height);
 		    glTexCoord2d(0.0,1.0);
-		    glVertex3f(-half_length,half_width,-half_height);
+		    glVertex3f(-half_length,half_width,half_height);
 		    
 		    glTexCoord2d(0.0,0.0);	
-		    glVertex3f(half_length,half_width,-half_height);
-	        glTexCoord2d(1.0,0.0);
-		    glVertex3f(-half_length,half_width,-half_height);
-            glTexCoord2d(1.0,1.0);
-		    glVertex3f(-half_length,half_width,half_height);
-		    glTexCoord2d(0.0,1.0);
 		    glVertex3f(half_length,half_width,half_height);
+	        glTexCoord2d(1.0,0.0);
+		    glVertex3f(-half_length,half_width,half_height);
+            glTexCoord2d(1.0,1.0);
+		    glVertex3f(-half_length,half_width,-half_height);
+		    glTexCoord2d(0.0,1.0);
+		    glVertex3f(half_length,half_width,-half_height);
 
 	        glTexCoord2d(0.0,0.0);
-		    glVertex3f(half_length,half_width,half_height);
+		    glVertex3f(half_length,half_width,-half_height);
 		    glTexCoord2d(1.0,0.0);
-		    glVertex3f(-half_length,half_width,half_height);
+		    glVertex3f(-half_length,half_width,-half_height);
 		    glTexCoord2d(1.0,1.0);
-		    glVertex3f(-half_length,-half_width,half_height);
+		    glVertex3f(-half_length,-half_width,-half_height);
 		    glTexCoord2d(0.0,1.0);
-		    glVertex3f(half_length,-half_width,half_height);
+		    glVertex3f(half_length,-half_width,-half_height);
 
 		    //glColor3f(0,0,1.0);
 		    glTexCoord2d(0.0,0.0);
-		    glVertex3f(half_length,-half_width,half_height);
-		    glTexCoord2d(1.0,0.0);
-		    glVertex3f(-half_length,-half_width,half_height);
-		    glTexCoord2d(1.0,1.0);
-		    glVertex3f(-half_length,-half_width,-half_height);
-		    glTexCoord2d(0.0,1.0);
 		    glVertex3f(half_length,-half_width,-half_height);
+		    glTexCoord2d(1.0,0.0);
+		    glVertex3f(-half_length,-half_width,-half_height);
+		    glTexCoord2d(1.0,1.0);
+		    glVertex3f(-half_length,-half_width,half_height);
+		    glTexCoord2d(0.0,1.0);
+		    glVertex3f(half_length,-half_width,half_height);
 
 		    glTexCoord2d(0.0,0.0);
-		    glVertex3f(half_length,half_width,half_height);
-		    glTexCoord2d(1.0,0.0);
-		    glVertex3f(half_length,-half_width,half_height);
-		    glTexCoord2d(1.0,1.0);
-		    glVertex3f(half_length,-half_width,-half_height);
-		    glTexCoord2d(0.0,1.0);
 		    glVertex3f(half_length,half_width,-half_height);
+		    glTexCoord2d(1.0,0.0);
+		    glVertex3f(half_length,-half_width,-half_height);
+		    glTexCoord2d(1.0,1.0);
+		    glVertex3f(half_length,-half_width,half_height);
+		    glTexCoord2d(0.0,1.0);
+		    glVertex3f(half_length,half_width,half_height);
 		  
 		    glTexCoord2d(0.0,0.0);
-		    glVertex3f(-half_length,half_width,half_height);
-		    glTexCoord2d(1.0,0.0);
-		    glVertex3f(-half_length,-half_width,half_height);
-		    glTexCoord2d(1.0,1.0);
-		    glVertex3f(-half_length,-half_width,-half_height);
-		    glTexCoord2d(0.0,1.0);
 		    glVertex3f(-half_length,half_width,-half_height);
+		    glTexCoord2d(1.0,0.0);
+		    glVertex3f(-half_length,-half_width,-half_height);
+		    glTexCoord2d(1.0,1.0);
+		    glVertex3f(-half_length,-half_width,half_height);
+		    glTexCoord2d(0.0,1.0);
+		    glVertex3f(-half_length,half_width,half_height);
 		glEnd();
 	}
 
-	void defineTrapizoid(double top_length,double bottom_length, double width, double height) {
+	void defineTrapizoid(double top_length,double bottom_length, double width, double height, TextureFaces &tf) {
 
 		double half_top_length, half_bottom_length,half_width,half_height;
 
@@ -76,56 +76,83 @@ namespace Blocks {
 		half_width = width/2;
 		half_height = height/2;
 
-#define 	POINT_A		glVertex3f(-half_top_length,half_height,half_width)
-#define 	POINT_B		glVertex3f(half_top_length,half_height,half_width)
-#define 	POINT_C		glVertex3f(half_bottom_length,-half_height,half_width)
-#define 	POINT_D		glVertex3f(-half_bottom_length,-half_height,half_width)
-#define 	POINT_E		glVertex3f(-half_bottom_length,-half_height,-half_width)
-#define 	POINT_F		glVertex3f(half_bottom_length,-half_height,-half_width)
-#define 	POINT_G		glVertex3f(half_top_length,half_height,-half_width)
-#define 	POINT_H		glVertex3f(-half_top_length,half_height,-half_width)
+#define 	POINT_A		glVertex3f(-half_top_length,half_height,-half_width)
+#define 	POINT_B		glVertex3f(half_top_length,half_height,-half_width)
+#define 	POINT_C		glVertex3f(half_bottom_length,-half_height,-half_width)
+#define 	POINT_D		glVertex3f(-half_bottom_length,-half_height,-half_width)
+#define 	POINT_E		glVertex3f(-half_bottom_length,-half_height,half_width)
+#define 	POINT_F		glVertex3f(half_bottom_length,-half_height,half_width)
+#define 	POINT_G		glVertex3f(half_top_length,half_height,half_width)
+#define 	POINT_H		glVertex3f(-half_top_length,half_height,half_width)
 
+		glBindTexture(GL_TEXTURE_2D,tf.top);
 		glBegin(GL_QUADS);
 			/* Top face*/
+			glTexCoord2d(0,0);
 			POINT_A;
+			glTexCoord2d(1,0);
 			POINT_B;
+			glTexCoord2d(1,1);
 			POINT_G;
+			glTexCoord2d(0,1);
 			POINT_H;
-	
-		    //glColor3f(1,1,0);
+		glEnd();
 
+		glBindTexture(GL_TEXTURE_2D,tf.bottom);
+		glBegin(GL_QUADS);		 
 			/* Bottom face*/
+			glTexCoord2d(0,0);
 			POINT_D;
+			glTexCoord2d(1,0);
 			POINT_C;
+			glTexCoord2d(1,1);
 			POINT_F;
+			glTexCoord2d(0,1);
 			POINT_E;
+		glEnd();
 
-		    //glColor3f(0,1.0,0);
+		glBindTexture(GL_TEXTURE_2D,tf.front);
+		glBegin(GL_QUADS);
 
 			/* Front face */
-			POINT_A;
-			POINT_B;
-			POINT_C;
+			glTexCoord2d(0,0);
 			POINT_D;
-
-		    //glColor3f(0,0,1);
-
+			glTexCoord2d(1,0);
+			POINT_C;
+			glTexCoord2d(1,1);
+			POINT_B;
+			glTexCoord2d(0,1);
+			POINT_A;
+		glEnd();
+		  
+		glBindTexture(GL_TEXTURE_2D,tf.left);
+		glBegin(GL_QUADS);
 			/*Left face*/
-			POINT_A;
-			POINT_H;
+			glTexCoord2d(0,0);
 			POINT_E;
+			glTexCoord2d(0,1);
+			POINT_H;
+			glTexCoord2d(1,1);
+			POINT_A;
+			glTexCoord2d(1,0);
 			POINT_D;
-
-		    //glColor3f(1,1.0,0);
-
+		glEnd();
+		  
+		glBindTexture(GL_TEXTURE_2D,tf.right);
+		glBegin(GL_QUADS);
 			/*Right face*/
-			POINT_B;
-			POINT_G;
-			POINT_F;
+			glTexCoord2d(0,0);
 			POINT_C;
-
-		    //glColor3f(0,1.0,1);
-
+			glTexCoord2d(1,0);
+			POINT_F;
+			glTexCoord2d(1,1);
+			POINT_G;
+			glTexCoord2d(0,1);
+			POINT_B;
+		glEnd();
+		 
+		glBindTexture(GL_TEXTURE_2D,tf.back);
+		glBegin(GL_QUADS);
 			/*Back face*/
 			glTexCoord2d(0.0,1.0);
 			POINT_H;
@@ -167,7 +194,8 @@ namespace Blocks {
 	 	double hl = length * 0.5f;
 		double a = 0.0f;
 		double step = 2 * (M_PI / (double)numSteps);
-		 
+		
+		glColor3f(0.1,0.1,0.1);
 		glBegin(GL_TRIANGLE_STRIP);
 		for (int i = 0; i < numSteps; ++i)
 		{
@@ -179,13 +207,17 @@ namespace Blocks {
 		    a += step;
 		}
 		glEnd();
+		glColor3f(1,1,1);
 
+    // glBindTexture(GL_TEXTURE_2D,5);
 		a = 0;
 		glBegin(GL_TRIANGLE_FAN);
 		for (int i = 0; i < numSteps; ++i)
 		{
 		    double x = cos(a) * radius;
 		    double y = sin(a) * radius;
+
+		    glTexCoord2d(cos(a)*0.5+0.6,sin(a)*0.5+0.5);
 		    glVertex3f(x,y, hl);
 		 
 		    a += step;
@@ -193,11 +225,14 @@ namespace Blocks {
 		glEnd();
 
 		a=0;
-		glBegin(GL_TRIANGLE_FAN);
+		glBegin(GL_POLYGON);
 		for (int i = 0; i < numSteps; ++i)
 		{
 		    double x = cos(a) * radius;
 		    double y = sin(a) * radius;
+
+		    //glTexCoord2d(x/0.17 + 0.8 ,y/0.15 + 0.5 );
+		    glTexCoord2d(cos(a)*0.5+0.6,sin(a)*0.5+0.5);
 		    glVertex3f(x,y, -hl);
 		 
 		    a += step;

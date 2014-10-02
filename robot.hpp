@@ -118,7 +118,7 @@ private:
     unsigned char* TextureData; 
     GLuint* texture;
 
-    enum {LOGO,BLUE,RED,HEAD};
+    enum {LOGO,BLUE,RED,HEAD,WHEEL,HIP};
 
 public:
 
@@ -126,6 +126,7 @@ public:
     Robot()
     {
     initStructuralConstraints();
+    initTexture();
     //std::cout<<"Robot";
     initHip();
     initBust();
@@ -156,11 +157,10 @@ public:
     behindArmAngle=0;
     keys = KeyControls();
 
-    initTexture();
   }
 
   void initTexture();
-  void makeTexture(const char* FilePath,int width,int height, GLuint texture);
+  void makeTexture(const char* FilePath, GLuint texture);
 
   void initStructuralConstraints();
   //initilize Hip structure
@@ -233,6 +233,7 @@ public:
   void makeRightFoot(double angle_x);
 
   void makeRobot(void);
+  void setFrameConstraints();
 }; 
 
 #endif
