@@ -118,7 +118,6 @@ private:
     unsigned char* TextureData; 
     GLuint* texture;
 
-    enum {LOGO,BLUE,RED,HEAD,WHEEL,HIP};
 
 public:
 

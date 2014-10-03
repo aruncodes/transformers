@@ -2,13 +2,15 @@
 
 namespace Blocks {
 
-	void defineCuboid(double length,double width,double height)
+	void defineCuboid(double length,double width,double height,TextureFaces &tf)
 	{
 		//std::cout<<"Cuboid";
 		double half_length,half_width,half_height;
 		half_length=length/2;
 		half_width=width/2;
 		half_height=height/2;
+
+		glBindTexture(GL_TEXTURE_2D,tf.front);
 		glBegin(GL_QUADS);
 		    glTexCoord2d(0.0,0.0);	    
 		    glVertex3f(-half_length,-half_width,half_height);
@@ -18,7 +20,10 @@ namespace Blocks {
 		    glVertex3f(half_length,half_width,half_height);
 		    glTexCoord2d(0.0,1.0);
 		    glVertex3f(-half_length,half_width,half_height);
-		    
+		glEnd();
+
+		glBindTexture(GL_TEXTURE_2D,tf.top);
+		glBegin(GL_QUADS);    
 		    glTexCoord2d(0.0,0.0);	
 		    glVertex3f(half_length,half_width,half_height);
 	        glTexCoord2d(1.0,0.0);
@@ -27,7 +32,10 @@ namespace Blocks {
 		    glVertex3f(-half_length,half_width,-half_height);
 		    glTexCoord2d(0.0,1.0);
 		    glVertex3f(half_length,half_width,-half_height);
-
+		glEnd();
+		
+		glBindTexture(GL_TEXTURE_2D,tf.back);
+		glBegin(GL_QUADS);    
 	        glTexCoord2d(0.0,0.0);
 		    glVertex3f(half_length,half_width,-half_height);
 		    glTexCoord2d(1.0,0.0);
@@ -36,7 +44,10 @@ namespace Blocks {
 		    glVertex3f(-half_length,-half_width,-half_height);
 		    glTexCoord2d(0.0,1.0);
 		    glVertex3f(half_length,-half_width,-half_height);
-
+		glEnd();
+		
+		glBindTexture(GL_TEXTURE_2D,tf.bottom);
+		glBegin(GL_QUADS);    
 		    //glColor3f(0,0,1.0);
 		    glTexCoord2d(0.0,0.0);
 		    glVertex3f(half_length,-half_width,-half_height);
@@ -46,7 +57,10 @@ namespace Blocks {
 		    glVertex3f(-half_length,-half_width,half_height);
 		    glTexCoord2d(0.0,1.0);
 		    glVertex3f(half_length,-half_width,half_height);
-
+		glEnd();
+		
+		glBindTexture(GL_TEXTURE_2D,tf.left);
+		glBegin(GL_QUADS);    
 		    glTexCoord2d(0.0,0.0);
 		    glVertex3f(half_length,half_width,-half_height);
 		    glTexCoord2d(1.0,0.0);
@@ -55,14 +69,17 @@ namespace Blocks {
 		    glVertex3f(half_length,-half_width,half_height);
 		    glTexCoord2d(0.0,1.0);
 		    glVertex3f(half_length,half_width,half_height);
-		  
+		glEnd();
+		
+		glBindTexture(GL_TEXTURE_2D,tf.right);
+		glBegin(GL_QUADS);    
 		    glTexCoord2d(0.0,0.0);
 		    glVertex3f(-half_length,half_width,-half_height);
 		    glTexCoord2d(1.0,0.0);
 		    glVertex3f(-half_length,-half_width,-half_height);
 		    glTexCoord2d(1.0,1.0);
 		    glVertex3f(-half_length,-half_width,half_height);
-		    glTexCoord2d(0.0,1.0);
+		    glTexCoord2d(0.0f,1.0);
 		    glVertex3f(-half_length,half_width,half_height);
 		glEnd();
 	}
@@ -217,7 +234,7 @@ namespace Blocks {
 		    double x = cos(a) * radius;
 		    double y = sin(a) * radius;
 
-		    glTexCoord2d(cos(a)*0.5+0.6,sin(a)*0.5+0.5);
+		    glTexCoord2d(cos(a)*0.5+0.5,sin(a)*0.5+0.5);
 		    glVertex3f(x,y, hl);
 		 
 		    a += step;
@@ -232,7 +249,7 @@ namespace Blocks {
 		    double y = sin(a) * radius;
 
 		    //glTexCoord2d(x/0.17 + 0.8 ,y/0.15 + 0.5 );
-		    glTexCoord2d(cos(a)*0.5+0.6,sin(a)*0.5+0.5);
+		    glTexCoord2d(cos(a)*0.5+0.5,sin(a)*0.5+0.5);
 		    glVertex3f(x,y, -hl);
 		 
 		    a += step;
