@@ -117,7 +117,8 @@ private:
     FILE* TextureImage;
     unsigned char* TextureData; 
     GLuint* texture;
-
+    enum {LOGO,BLUE,RED,HEAD,WHEEL,HIP,BUST_LEFT,
+    RIGHT_FOOT_RIGHT};
 
 public:
 
@@ -233,6 +234,8 @@ public:
 
   void makeRobot(void);
   void setFrameConstraints();
+
+  void animate();
 }; 
 
 #endif

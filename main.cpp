@@ -34,6 +34,7 @@ void renderGL( void )
     glEnable(GL_DEPTH_TEST);
     //glShadeModel(GL_FLAT);
     ROBOT.makeRobot();
+    ROBOT.animate();
 }
 
 void key_callback_wrapper(GLFWwindow* window, int key, int scancode, int action, int mods) {

@@ -26,6 +26,7 @@ public:
     double hip_TX,hip_TY,hip_TZ,hip_Y;
     int frame9,frame1,frame2,frame3,frame4,frame5,frame6,frame7,frame8;
 
+    int startAnim,stage,rotateCount;
 	KeyControls() {
 		// Default values
 		//glLoadIdentity();
@@ -58,6 +59,9 @@ public:
 		//Hip
 		hip_TX=hip_TY=hip_TZ=0;
 		hip_Y=0;
+
+		//Animation
+		startAnim=stage=rotateCount=0;
 	}
 
     void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);

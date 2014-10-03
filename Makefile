@@ -6,7 +6,7 @@ LDFLAGS=-L/usr/local/lib
 CPPFLAGS=-I/usr/local/include
 
 BIN=transformer
-SRCS=main.cpp gl_framework.cpp  robot.cpp blocks.cpp keycontrols.cpp
+SRCS=main.cpp gl_framework.cpp  robot.cpp blocks.cpp keycontrols.cpp animate.cpp texture.cpp
 INCLUDES=gl_framework.hpp robot.hpp blocks.hpp keycontrols.hpp
 
 

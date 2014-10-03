@@ -23,6 +23,10 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 		glRotatef(5,1,0,0);
 	}
 
+	if(key == GLFW_KEY_C) {
+		startAnim = 1;
+	}
+
 //---------Arm Controls-----------------
 /* Left lower arm control*/
 	if( key == GLFW_KEY_X && mods == 0) {
