@@ -77,7 +77,7 @@ void Robot::animate() {
 	}
 	if(keys.stage == 101) {
 		glRotatef(1,0,0,1);
-		keys.rotateCount++;
+		//keys.rotateCount++;
 	}
 
 	keys.stage++;

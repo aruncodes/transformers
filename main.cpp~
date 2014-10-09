@@ -86,7 +86,7 @@ int main (int argc, char *argv[])
   // Initialize robot
  
   ROBOT=Robot();
-  glScalef(0.5,0.5,0.5);
+  //glScalef(0.5,0.5,0.5);
   // Loop until the user closes the window
   while (glfwWindowShouldClose(window) == 0)
     {

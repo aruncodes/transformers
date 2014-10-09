@@ -28,6 +28,7 @@ namespace csX75
 
     glMatrixMode( GL_PROJECTION );
     glLoadIdentity();
+    glScalef(1/4,1/4,1/4);
     //Draw to the whole window
     glViewport( 0, 0, width, height );
 

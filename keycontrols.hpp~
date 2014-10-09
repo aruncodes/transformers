@@ -59,7 +59,7 @@ int frame9,frame1,frame2,frame3,frame4,frame5,frame6,frame7,frame8,frame10,frame
 
 		//Hip
 		hip_TX=hip_TZ=0;
-		hip_TY=-1.4;
+		hip_TY=0;
 		hip_Y=0;
 
 		//Animation

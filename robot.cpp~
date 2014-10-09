@@ -860,7 +860,7 @@ void Robot::makeRobot(void)
 {
     setFrameConstraints();
     glPushMatrix();
-    //glTranslatef(0,-1.5,0);
+    glTranslatef(0,-1.5,0);
     makeHip(keys.hip_TX,keys.hip_TY,keys.hip_TZ,keys.hip_Y);
 
     glPushMatrix();
