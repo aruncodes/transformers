@@ -103,6 +103,14 @@ void Robot::initBust()
 
 }
 
+void Robot::initRoom()
+{
+   Room=glGenLists(1);
+   glNewList(Neck,GL_COMPILE);
+	//Cuboid
+   glEndList();
+}
+
 void Robot::initNeck()
 {
     Neck=glGenLists(1);
@@ -488,6 +496,11 @@ void Robot::initRightFoot()
     glEndList();
 }
 
+void Robot::makeRoom()
+{
+    glCallList(Room);
+}
+
 void Robot::makeHip(double tx,double ty,double tz,double angle_y)
 {
     //Tranformations
@@ -853,14 +866,33 @@ void Robot::setFrameConstraints()
     	Hip_RightUpperLeg_Joint=point(-0.075,0,0);
 	Bust_Hip_Joint=point(0,0,0);
     }
+    if(keys.frame9==1)
+    {
+	glTranslatef(0,-1.8,0);
+	glRotatef(90,0,0,1);
+	glRotatef(90,0,1,0);
+	glTranslatef(0,1.4,0);
+    }
     
+}
+
+void Robot::selectCamera()
+{
+    if(keys.Camera1==1);
+	//Transformation for Camera1
+    if(keys.Camera2==1);
+	//Transformation for Camera2
+    if(keys.Camera3==1);
+	//Transformation for Camera3
 }
 
 void Robot::makeRobot(void)
 {
-    setFrameConstraints();
     glPushMatrix();
-    //glTranslatef(0,-1.5,0);
+    selectCamera();
+    makeRoom();
+    setFrameConstraints();
+    glMultMatrixf(keys.PreMatrixMult);
     makeHip(keys.hip_TX,keys.hip_TY,keys.hip_TZ,keys.hip_Y);
 
     glPushMatrix();

@@ -2,8 +2,36 @@
 #include <iostream>
 #include <cstdlib>
 #include <stdio.h>
+#include <cmath>
 
 using namespace std;
+
+GLfloat* multiply(GLfloat* a,GLfloat b[])
+{
+     GLfloat* Result_Matrix;
+     GLfloat a2D[4][4];
+     GLfloat b2D[4][4];
+     GLfloat result2D[4][4];
+     Result_Matrix=new GLfloat[16];
+     for(int i=0;i<16;i++){
+	a2D[i%4][i/4]=a[i];
+	b2D[i%4][i/4]=b[i];
+     }
+     for(int i=0;i<4;i++){
+	for(int j=0;j<4;j++){
+	    result2D[i][j]=0;
+	    for(int k=0;k<4;k++){
+		result2D[i][j]+=a2D[i][k]*b2D[k][j];
+	    }
+	}
+     }
+     
+     for(int i=0;i<16;i++){
+	Result_Matrix[i]=result2D[i%4][i/4];
+     }
+     return Result_Matrix;
+}
+
 //!GLFW keyboard callback
 void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -185,26 +213,17 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 		head_Z -= 5;
 	} 
 //----------Transformation--------------------------
-	if((key == GLFW_KEY_0)||(key == GLFW_KEY_1)||(key == GLFW_KEY_2)||(key == GLFW_KEY_3)||(key == GLFW_KEY_4)||(key == GLFW_KEY_5)||(key == GLFW_KEY_6)||(key == GLFW_KEY_7)||(key == GLFW_KEY_8))
-	{
-	if (frame9==1){
-		    glTranslatef(0,-1.4,0);
-		    glRotatef(-90,0,1,0);
-		    glRotatef(-90,0,0,1);
-		    glTranslatef(0,1.8,0);
-		}
-	}
 /*stage 0*/
 	if(key == GLFW_KEY_0)
 	{
 		frame1=frame2=frame3=frame4=frame5=frame6=frame7=frame8=frame9=frame10=frame11=0;
 	}
-	if(key == GLFW_KEY_1 && mods==0)
+	if(key == GLFW_KEY_1 )
 	{
         	frame1=1;
 		frame9=frame2=frame3=frame4=frame5=frame6=frame7=frame8=frame10=frame11=0;
 	}
-	if(key == GLFW_KEY_2 && mods==0)
+	if(key == GLFW_KEY_2 )
 	{
 		frame1=frame2=1;
 		frame3=frame4=frame5=frame6=frame7=frame8=frame9=frame10=frame11=0;
@@ -242,11 +261,6 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 	}
 	if(key == GLFW_KEY_9 && action == GLFW_PRESS)
 	{
-		glTranslatef(0,-1.8,0);
-		//glTranslatef(0,-1.8,0);
-		glRotatef(90,0,0,1);
-		glRotatef(90,0,1,0);
-		glTranslatef(0,1.4,0);
 		frame1=frame2=frame3=frame4=frame5=frame6=frame7=frame8=frame9=1;
 		frame10=frame11=0;
 	}
@@ -309,30 +323,58 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 
 	if( key == GLFW_KEY_UP  && frame9==1) {
 		wheel_angle=0;
-		glTranslatef(0,0.02,0);
+		//glTranslatef(0,0.02,0);
+		GLfloat Translate[16]={1,0,0,0,0,1,0,0,0,0,1,0,0,0.02,0,1};
+		PreMatrixMult=multiply(PreMatrixMult,Translate);
 	}
 	else if( key == GLFW_KEY_DOWN  && frame9==1) {
 		wheel_angle=0;
-		glTranslatef(0,-0.02,0);
+		//glTranslatef(0,-0.02,0);
+		GLfloat Translate[16]={1,0,0,0,0,1,0,0,0,0,1,0,0,-0.02,0,1};
+		PreMatrixMult=multiply(PreMatrixMult,Translate);
 	}
 
 	if( key == GLFW_KEY_LEFT  && frame9==1) {
 		if(wheel_angle!=20)
 		    wheel_angle=20;
 		else{
-		    glTranslatef(0,-1.4,0);
-		    glRotatef(5,0,0,1);
-		    glTranslatef(0,1.4,0);
+		    //glTranslatef(0,-1.4,0);
+		    //glRotatef(5,0,0,1);
+		    //glTranslatef(0,1.4,0);
+		    float theta=5*3.14/180;
+		    GLfloat ITRT[16]={cos(theta),sin(theta),0,0,-sin(theta),cos(theta),0,0,0,0,1,0,-1.4*sin(theta),1.4*cos(theta)-1.4,0,1};
+		    PreMatrixMult=multiply(PreMatrixMult,ITRT);
 		}
 	}
 	else if( key == GLFW_KEY_RIGHT && frame9==1 ) {
 		if(wheel_angle!=-20)
 		    wheel_angle=-20;
 		else{
-		    glTranslatef(0,-1.4,0);
-		    glRotatef(-5,0,0,1);
-		    glTranslatef(0,1.4,0);
+		    //glTranslatef(0,-1.4,0);
+		    //glRotatef(-5,0,0,1);
+		    //glTranslatef(0,1.4,0);
+		    float theta=-5*3.14/180;
+		    GLfloat ITRT[16]={cos(theta),sin(theta),0,0,-sin(theta),cos(theta),0,0,0,0,1,0,-1.4*sin(theta),1.4*cos(theta)-1.4,0,1};
+		    PreMatrixMult=multiply(PreMatrixMult,ITRT);
 		}
+	}
+  
+        if(key == GLFW_KEY_F1 && action == GLFW_PRESS)
+	{
+		Camera1=1;
+		Camera2=Camera3=0;
+	}
+
+	if(key == GLFW_KEY_F2 && action == GLFW_PRESS)
+	{
+		Camera2=1;
+		Camera1=Camera3=0;
 	}		
+
+	if(key == GLFW_KEY_F3 && action == GLFW_PRESS)
+	{
+		Camera3=1;
+		Camera1=Camera2=0;
+	}
 
 }

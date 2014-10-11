@@ -26,6 +26,8 @@ public:
     double hip_TX,hip_TY,hip_TZ,hip_Y;
     int wheel_angle;
 int frame9,frame1,frame2,frame3,frame4,frame5,frame6,frame7,frame8,frame10,frame11;
+    GLfloat* PreMatrixMult;
+    int Camera1,Camera2,Camera3;
 
     int startAnim,stage,rotateCount;
 	KeyControls() {
@@ -64,6 +66,15 @@ int frame9,frame1,frame2,frame3,frame4,frame5,frame6,frame7,frame8,frame10,frame
 
 		//Animation
 		startAnim=stage=rotateCount=0;
+
+		//Initializing Matrix for Pre-Multiplication to Identity
+		PreMatrixMult=new GLfloat[16]; 
+		for(int i=0;i<16;i++){
+		   PreMatrixMult[i]=0;
+		   if(i/4==i%4)
+			PreMatrixMult[i]=1;
+		   
+		}
 	}
 
     void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);

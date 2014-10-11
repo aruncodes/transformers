@@ -112,6 +112,7 @@ private:
     GLuint RightLowerLeg;
     GLuint LeftFoot;
     GLuint RightFoot;
+    GLuint Room;
     
     
     FILE* TextureImage;
@@ -127,6 +128,7 @@ public:
     {
     initStructuralConstraints();
     initTexture();
+    initRoom();
     //std::cout<<"Robot";
     initHip();
     initBust();
@@ -160,6 +162,9 @@ public:
   }
 
   void initTexture();
+  void initRoom();
+  void makeRoom();
+  void selectCamera();
   void makeTexture(const char* FilePath, GLuint texture);
 
   void initStructuralConstraints();
