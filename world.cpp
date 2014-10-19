@@ -4,11 +4,14 @@ using namespace Blocks;
 using namespace Texture;
 
 void World::drawScene() {
-	
-	makeScene();
 
-	robot.makeRobot();
-	robot.animate();
+	glPushMatrix();
+		selectCamera();	
+		makeScene();
+
+		robot.makeRobot();
+		robot.animate();
+	glPopMatrix();
 }
 
 void World::makeScene() {
@@ -103,4 +106,42 @@ void World::initTexture() {
     makeTexture("tex/world/bottom.bmp",texture[4]);
     makeTexture("tex/world/top.bmp",texture[5]);
 
+}
+
+//!GLFW keyboard callback
+void World::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	if(key == GLFW_KEY_F1 && action == GLFW_PRESS) {
+		Camera=1;
+	}
+
+	if(key == GLFW_KEY_F2 && action == GLFW_PRESS) {
+		Camera=2;
+	}		
+
+	if(key == GLFW_KEY_F3 && action == GLFW_PRESS) {
+		Camera=3;
+	}
+}
+
+void World::selectCamera()
+{
+	if(Camera==1){
+		//gluPerspective(90,1,-2,2);
+		//glFrustum(-1,1,0,2,0.1,2);
+		gluPerspective(30,1,-1,1000);
+		gluLookAt(0,0,3,0,-0.1,0,0.0f,1.0f,0.0f);
+	}
+	
+	//Transformation for Camera1
+	if(Camera==2){
+		//Transformation for Camera2
+		
+		//glFrustum(-15,15,0,15,0.1,2);
+		gluPerspective(10,1,0,1000);
+		gluLookAt(robot.keys.camera2[0],robot.keys.camera2[1],robot.keys.camera2[2],robot.keys.camera2[0]+robot.keys.camera2_l[0],robot.keys.camera2[1]+robot.keys.camera2_l[1],robot.keys.camera2[2]+robot.keys.camera2_l[2],0.0f,1.0f,0.0f);
+	}
+	
+	//Transformation for Camera3
+	if(Camera==3);
 }

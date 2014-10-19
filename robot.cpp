@@ -406,7 +406,6 @@ void Robot::initRightFrontHand()
     glEndList();
 }
 
-
 void Robot::initLeftBehindHand()
 {
     TextureFaces tf(texture[RED]);
@@ -468,9 +467,6 @@ void Robot::initRightBehindHand()
 	glEnd();
     glEndList();
 }
-
-
-
 
 void Robot::initLeftUpperLeg()
 {
@@ -786,9 +782,6 @@ void Robot::makeRightBehindHand(double angle_y)
     glCallList(RightBehindHand);
     glDisable(GL_TEXTURE_2D);
 }
-
-
-
   
 void Robot::makeLeftUpperLeg(double angle_x,double angle_y,double angle_z)
 {
@@ -820,9 +813,6 @@ void Robot::makeLeftLowerLeg(double angle_x)
     glCallList(LeftLowerLeg);
     glDisable(GL_TEXTURE_2D);
 }
-
-
-
   
 void Robot::makeRightUpperLeg(double angle_x,double angle_y,double angle_z)
 {
@@ -924,25 +914,9 @@ void Robot::setFrameConstraints()
 
 }
 
-void Robot::selectCamera()
-{
-    if(keys.Camera==1){
-	//gluPerspective(90,1,-2,2);
-	//glFrustum(-1,1,0,2,0.1,2);
-       gluPerspective(30,1,-1,1);
-       gluLookAt(0,0,3,0,-0.1,0,0.0f,1.0f,0.0f);
-   }
-	//Transformation for Camera1
-   if(keys.Camera==2);
-	//Transformation for Camera2
-   if(keys.Camera==3);
-	//Transformation for Camera3
-}
-
 void Robot::makeRobot(void)
 {
     glPushMatrix();
-    selectCamera();
     setFrameConstraints();
     makeHip(keys.hip_TX,keys.hip_TY,keys.hip_TZ,keys.hip_X,keys.hip_Y,keys.hip_Z);
 

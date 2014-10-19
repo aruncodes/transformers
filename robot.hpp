@@ -157,7 +157,6 @@ public:
     }
 
   void initTexture();
-  void selectCamera();
 
   void initStructuralConstraints();
   //initilize Hip structure

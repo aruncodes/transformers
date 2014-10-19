@@ -34,6 +34,7 @@ void renderGL( void )
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
     //glShadeModel(GL_FLAT);
+    
     // ROBOT.makeRobot();
     // ROBOT.animate();
     // glRotatef(1,0,01,0);
@@ -42,6 +43,7 @@ void renderGL( void )
 
 void key_callback_wrapper(GLFWwindow* window, int key, int scancode, int action, int mods) {
     WORLD.robot.keys.key_callback(window,key,scancode,action,mods);
+    WORLD.key_callback(window,key,scancode,action,mods);
 }
 
 int main (int argc, char *argv[]) 

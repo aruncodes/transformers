@@ -10,15 +10,21 @@ class World {
 public:
 	Robot robot;
 	GLuint* texture;
+    int Camera;
 
 	World() {
+		
 		initTexture();
 		robot = Robot();
+		
+		Camera=1;
 	}
 
 	void initTexture();
 	void makeScene();
 	void drawScene();
+	void selectCamera();
+	void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 };
 
 
