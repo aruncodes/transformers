@@ -22,20 +22,20 @@ void Robot::animate() {
 	if(keys.stage == 25) {
 		if( !keys.isCarMode){
 			// glRotatef(90,0,1,0);
-			keys.hip_Y = 90;
+			keys.hip_Y += 0;
 		} else {
 			// glRotatef(-90,0,1,0);
-			keys.hip_Y = -90;
+			keys.hip_Y += 0;
 		}
 	}
 
 	if(keys.stage == 75) {
 		if( !keys.isCarMode){
 			// glRotatef(-90,1,0,0);
-			keys.hip_X = -90;
+			keys.hip_X += -90;
 		} else {
 			// glRotatef(90,1,0,0);
-			keys.hip_X = 0;
+			keys.hip_X += 90;
 		}
 	}
 	if(keys.stage == 95) {

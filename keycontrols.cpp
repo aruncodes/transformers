@@ -263,7 +263,7 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 		head_X=head_Y=head_Z=00;
 		//Hip
 		//hip_TX=hip_TY=hip_TZ=0;
-		hip_Y=0;
+		// hip_Y=0;
 	}
 
 	if(frame >= 3){
@@ -294,40 +294,39 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 
 	if( key == GLFW_KEY_UP  && frame==9) {
 		wheel_angle=0;
-		//glTranslatef(0,0.02,0);
-		GLfloat Translate[16]={1,0,0,0,0,1,0,0,0,0,1,0,0,0.02,0,1};
-		PreMatrixMult=multiply(PreMatrixMult,Translate);
+
+		double x = cos(hip_Z * M_PI/180.0);
+		double y = sin(hip_Z * M_PI/180.0);
+
+		hip_TZ -=   0.1 * x;
+		hip_TX -=   0.1 * y;
 	}
 	else if( key == GLFW_KEY_DOWN  && frame==9) {
 		wheel_angle=0;
-		//glTranslatef(0,-0.02,0);
-		GLfloat Translate[16]={1,0,0,0,0,1,0,0,0,0,1,0,0,-0.02,0,1};
-		PreMatrixMult=multiply(PreMatrixMult,Translate);
+		
+		double x = cos(hip_Z * M_PI/180.0);
+		double y = sin(hip_Z * M_PI/180.0);
+
+		hip_TZ +=   0.1 * x;
+		hip_TX +=   0.1 * y;
 	}
 
 	if( key == GLFW_KEY_LEFT  && frame==9) {
 		if(wheel_angle!=20)
 		    wheel_angle=20;
 		else{
-		    //glTranslatef(0,-1.4,0);
-		    //glRotatef(5,0,0,1);
-		    //glTranslatef(0,1.4,0);
-		    float theta=5*3.14/180;
-		    GLfloat ITRT[16]={cos(theta),sin(theta),0,0,-sin(theta),cos(theta),0,0,0,0,1,0,-1*sin(theta),1*cos(theta)-1,0,1};
-		    PreMatrixMult=multiply(PreMatrixMult,ITRT);
+			hip_Z += 5;
+			if(hip_Z > 360) hip_Z -= 360;
+			// std::cout<<hip_Z<<std::endl;
 		}
 	}
 	else if( key == GLFW_KEY_RIGHT && frame==9 ) {
 		if(wheel_angle!=-20)
 		    wheel_angle=-20;
 		else{
-		    //glTranslatef(0,-1.4,0);
-		    //glRotatef(-5,0,0,1);
-		    //glTranslatef(0,1.4,0);
-		    float theta=-5*3.14/180;
-		    GLfloat ITRT[16]={cos(theta),sin(theta),0,0,-sin(theta),cos(theta),0,0,0,0,1,0,-1*sin(theta),1*cos(theta)-1,0,1};
-			
-		    PreMatrixMult=multiply(PreMatrixMult,ITRT);
+			hip_Z -= 5;
+			if(hip_Z < 0) hip_Z += 360;
+			// std::cout<<hip_Z<<std::endl;
 		}
 	}
   

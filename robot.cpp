@@ -181,11 +181,7 @@ void Robot::initHead()
     Head=glGenLists(1);
 
     TextureFaces tf(texture[HEAD]);
-    // tf.back = texture[HEAD];
-    // tf.front = texture[HEAD];
     tf.top = texture[16];
-    // tf.left = texture[HEAD];
-    // tf.right = texture[HEAD];
 
     glNewList(Head,GL_COMPILE);
     defineTrapizoid(0.2,0.15+0.03/3,0.15,0.12,tf);
@@ -550,15 +546,14 @@ void Robot::initRightFoot()
     glEndList();
 }
 
-void Robot::makeHip(double tx,double ty,double tz,double angle_x,double angle_y)
+void Robot::makeHip(double tx,double ty,double tz,double angle_x,double angle_y,double angle_z)
 {
     //Tranformations
     //glTranslatef(0,-0.05,0);
     glTranslatef(tx,ty,tz);	
     glRotatef(angle_x,1,0,0);
     glRotatef(angle_y,0,1,0);
-    if(keys.isCarMode)
-     glMultMatrixf(keys.PreMatrixMult);
+    glRotatef(angle_z,0,0,1);
     glTranslatef(0,-0.5,0);
     glEnable(GL_TEXTURE_2D);
     glCallList(Hip);
@@ -934,13 +929,13 @@ void Robot::selectCamera()
     if(keys.Camera==1){
 	//gluPerspective(90,1,-2,2);
 	//glFrustum(-1,1,0,2,0.1,2);
-	gluPerspective(30,1,-1,1000);
-	gluLookAt(0,0,3,0,-0.1,0,0.0f,1.0f,0.0f);
-     }
+       gluPerspective(30,1,-1,1);
+       gluLookAt(0,0,3,0,-0.1,0,0.0f,1.0f,0.0f);
+   }
 	//Transformation for Camera1
-    if(keys.Camera==2);
+   if(keys.Camera==2);
 	//Transformation for Camera2
-    if(keys.Camera==3);
+   if(keys.Camera==3);
 	//Transformation for Camera3
 }
 
@@ -949,8 +944,7 @@ void Robot::makeRobot(void)
     glPushMatrix();
     selectCamera();
     setFrameConstraints();
-    //glMultMatrixf(keys.PreMatrixMult);
-    makeHip(keys.hip_TX,keys.hip_TY,keys.hip_TZ,keys.hip_X,keys.hip_Y);
+    makeHip(keys.hip_TX,keys.hip_TY,keys.hip_TZ,keys.hip_X,keys.hip_Y,keys.hip_Z);
 
     glPushMatrix();
         makeLeftUpperLeg(keys.leftUpperLeg_X,keys.leftUpperLeg_Y,keys.leftUpperLeg_Z);

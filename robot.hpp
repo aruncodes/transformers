@@ -198,7 +198,7 @@ public:
   void initRightFoot();
 
 
-  void makeHip(double tx,double ty,double tz,double angle_x,double angle_y);
+  void makeHip(double tx,double ty,double tz,double angle_x,double angle_y,double angle_z);
   void makeBust(double angle_x,double angle_y,double angle_z);
 
   void makeNeck(void);

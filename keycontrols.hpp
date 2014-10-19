@@ -23,7 +23,7 @@ public:
     double rightLowerLeg_X;
     double leftFoot_X;
     double rightFoot_X;
-    double hip_TX,hip_TY,hip_TZ,hip_X,hip_Y;
+    double hip_TX,hip_TY,hip_TZ,hip_X,hip_Y,hip_Z;
     int wheel_angle;
 	int frame;
     GLfloat* PreMatrixMult;
@@ -64,7 +64,7 @@ public:
 		//Hip
 		hip_TX=hip_TZ=0;
 		hip_TY=-0.5;//-1.4;
-		hip_X=hip_Y=0;
+		hip_X=hip_Y=hip_Z=0;
 
 		//Animation
 		startAnim=stage=0;

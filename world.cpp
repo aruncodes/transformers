@@ -76,7 +76,6 @@ void World::makeScene() {
 		glEnd();
 	glBindTexture(GL_TEXTURE_2D,tf.bottom);
 		glBegin(GL_QUADS);    
-		    //glColor3f(0,0,1.0);
 		    glTexCoord2d(0.0,0.0);
 		    glVertex3f(half_length,-half_width,-half_height);
 		    glTexCoord2d(1.0,0.0);
@@ -87,7 +86,6 @@ void World::makeScene() {
 		    glVertex3f(half_length,-half_width,half_height);
 		glEnd();
 		
-// defineCuboid(1,1,1,tf);
 	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 }
