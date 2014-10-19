@@ -22,11 +22,11 @@
 #include <string>
 
 #include "gl_framework.hpp"
-#include "keycontrols.hpp"
-#include "robot.hpp"
+#include "world.hpp"
 
 std::string filename, progname;
-Robot ROBOT;
+// Robot ROBOT;
+World WORLD;
 
 void renderGL( void )
 {
@@ -34,12 +34,14 @@ void renderGL( void )
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
     //glShadeModel(GL_FLAT);
-    ROBOT.makeRobot();
-    ROBOT.animate();
+    // ROBOT.makeRobot();
+    // ROBOT.animate();
+    // glRotatef(1,0,01,0);
+    WORLD.drawScene();
 }
 
 void key_callback_wrapper(GLFWwindow* window, int key, int scancode, int action, int mods) {
-    ROBOT.keys.key_callback(window,key,scancode,action,mods);
+    WORLD.robot.keys.key_callback(window,key,scancode,action,mods);
 }
 
 int main (int argc, char *argv[]) 
@@ -85,7 +87,9 @@ int main (int argc, char *argv[])
   
   // Initialize robot
  
-  ROBOT=Robot();
+  // ROBOT=Robot();
+  WORLD=World();
+  
   glScalef(0.5,0.5,0.5);
   // Loop until the user closes the window
   while (glfwWindowShouldClose(window) == 0)

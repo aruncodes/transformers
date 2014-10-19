@@ -4,18 +4,7 @@
 #include <GL/glew.h>
 #include <cmath>
 
-
-class TextureFaces {
-public:
-	GLuint front,back,top,bottom,left,right;
-	TextureFaces() {
-		front=back=top=bottom=left=right=-1;
-	}
-	TextureFaces(GLuint all) {
-		front=back=top=bottom=left=right=all;
-	}
-};
-
+#include "texture.hpp"
 
 namespace Blocks {
 

@@ -112,12 +112,9 @@ private:
     GLuint RightLowerLeg;
     GLuint LeftFoot;
     GLuint RightFoot;
-    GLuint Room;
     
-    
-    FILE* TextureImage;
-    unsigned char* TextureData; 
     GLuint* texture;
+    
     enum {LOGO,BLUE,RED,HEAD,WHEEL,HIP,BUST_LEFT,
     RIGHT_FOOT_RIGHT};
 
@@ -126,46 +123,41 @@ public:
     KeyControls keys;
     Robot()
     {
-    initStructuralConstraints();
-    initTexture();
-    initRoom();
-    //std::cout<<"Robot";
-    initHip();
-    initBust();
-    initNeck();
-    initHead();
-    initLeftShoulder();
-    initRightShoulder();
+      initStructuralConstraints();
+      initTexture();
+      initHip();
+      initBust();
+      initNeck();
+      initHead();
+      initLeftShoulder();
+      initRightShoulder();
 
-    initLeftUpperArmFront();
-    initLeftLowerArmFront();
-    initRightUpperArmFront();
-    initRightLowerArmFront();
+      initLeftUpperArmFront();
+      initLeftLowerArmFront();
+      initRightUpperArmFront();
+      initRightLowerArmFront();
 
-    initLeftUpperArmBehind();
-    initLeftLowerArmBehind();
-    initRightUpperArmBehind();
-    initRightLowerArmBehind();
-    initLeftFrontHand();
-    initRightFrontHand();
-    initLeftBehindHand();
-    initRightBehindHand();
-    initLeftUpperLeg();
-    initLeftLowerLeg();
-    initRightUpperLeg();
-    initRightLowerLeg();
-    initLeftFoot();
-    initRightFoot();    
-    behindArmAngle=0;
-    keys = KeyControls();
+      initLeftUpperArmBehind();
+      initLeftLowerArmBehind();
+      initRightUpperArmBehind();
+      initRightLowerArmBehind();
+      initLeftFrontHand();
+      initRightFrontHand();
+      initLeftBehindHand();
+      initRightBehindHand();
+      initLeftUpperLeg();
+      initLeftLowerLeg();
+      initRightUpperLeg();
+      initRightLowerLeg();
+      initLeftFoot();
+      initRightFoot();    
+      behindArmAngle=0;
+      keys = KeyControls();
 
-  }
+    }
 
   void initTexture();
-  void initRoom();
-  void makeRoom();
   void selectCamera();
-  void makeTexture(const char* FilePath, GLuint texture);
 
   void initStructuralConstraints();
   //initilize Hip structure
@@ -206,7 +198,7 @@ public:
   void initRightFoot();
 
 
-  void makeHip(double tx,double ty,double tz,double angle_y);
+  void makeHip(double tx,double ty,double tz,double angle_x,double angle_y);
   void makeBust(double angle_x,double angle_y,double angle_z);
 
   void makeNeck(void);

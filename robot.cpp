@@ -6,9 +6,10 @@
 
 #include "robot.hpp"
 #include "blocks.hpp"
+#include "texture.hpp"
 
 using namespace Blocks;
-
+using namespace Texture;
 
 void Robot::initStructuralConstraints()
 {
@@ -70,6 +71,67 @@ void Robot::initStructuralConstraints()
 }
 
 
+void Robot::initTexture() {
+
+    int nTex = 45;
+    texture = new GLuint[nTex];
+    glGenTextures(nTex,texture);
+
+    makeTexture("tex/bust.bmp",texture[LOGO]);
+    makeTexture("tex/bustback.bmp",texture[43]);
+    // makeTexture("tex/fire.bmp",texture[BLUE]);
+    makeTexture("parts/side/lower_leg_left.bmp",texture[BLUE]);
+    makeTexture("parts/side/shoulder_back.bmp",texture[RED]);
+    // makeTexture("tex/blue_fire.bmp",texture[RED]);
+    makeTexture("tex/head.bmp",texture[HEAD]);
+    makeTexture("tex/wheel.bmp",texture[WHEEL]);
+    makeTexture("tex/hip.bmp",texture[HIP]);
+
+//-----Side----
+    makeTexture("parts/side/bust_left.bmp",texture[BUST_LEFT]);
+    makeTexture("parts/side/foot_left.bmp",texture[RIGHT_FOOT_RIGHT]);
+    makeTexture("parts/side/lower_arm_front_left.bmp",texture[9]);
+    makeTexture("parts/side/lower_leg_left.bmp",texture[10]);
+    makeTexture("parts/side/shoulder_back.bmp",texture[11]);
+    makeTexture("parts/side/upper_arm_front_left.bmp",texture[12]);
+    makeTexture("parts/side/upper_leg_left.bmp",texture[13]);
+    makeTexture("parts/side/hand_behind_left.bmp",texture[14]);
+    makeTexture("parts/side/arm_left_tira.bmp",texture[15]);
+
+//----Front---
+    makeTexture("parts/front/head_top.bmp",texture[16]);
+    makeTexture("parts/front/left_hand_behind.bmp",texture[17]);
+    makeTexture("parts/front/left_hand_front.bmp",texture[18]);
+    makeTexture("parts/front/left_upper_arm_behind_top.bmp",texture[19]);
+    makeTexture("parts/front/left_upper_arm_front_top.bmp",texture[20]);
+    makeTexture("parts/front/right_hand_behind.bmp",texture[21]);
+    makeTexture("parts/front/right_hand_front.bmp",texture[22]);
+    makeTexture("parts/front/right_upper_arm_behind_top.bmp",texture[23]);
+    makeTexture("parts/front/right_upper_arm_front_top.bmp",texture[24]);
+    makeTexture("parts/front/shoulder_top.bmp",texture[25]);
+    makeTexture("parts/front/shoulder_top_right.bmp",texture[26]);
+
+//-----BACK--------
+    makeTexture("parts/back/left_lower_leg_top.bmp",texture[27]);
+    makeTexture("parts/back/left_upper_leg_bottom.bmp",texture[28]);
+    makeTexture("parts/back/right_lower_leg_top.bmp",texture[29]);
+    makeTexture("parts/back/right_upper_leg_bottom.bmp",texture[30]);
+//-----Top---------
+    makeTexture("parts/top/left_lower_leg_back.bmp",texture[31]);
+    makeTexture("parts/top/right_lower_leg_back.bmp",texture[32]);
+    makeTexture("parts/top/left_foot_front.bmp",texture[33]);
+    makeTexture("parts/top/right_foot_front.bmp",texture[34]);
+    makeTexture("parts/top/left_hand_front_front.bmp",texture[35]);
+    makeTexture("parts/top/left_hand_behind_back.bmp",texture[36]);
+    makeTexture("parts/top/right_larm_behind_lower_back.bmp",texture[37]);
+    makeTexture("parts/top/right_larm_front_lower_back.bmp",texture[38]);
+    makeTexture("parts/top/left_uarm_behind_back.bmp",texture[39]);
+    makeTexture("parts/top/left_uarm_front_back.bmp",texture[40]);
+    makeTexture("parts/top/right_uarm_behind_back.bmp",texture[41]);
+    makeTexture("parts/top/right_uarm_front_back.bmp",texture[42]);
+
+}
+
 void Robot::initHip()
 {
     Hip=glGenLists(1); 
@@ -101,14 +163,6 @@ void Robot::initBust()
     defineCuboid(0.3,0.5,0.15,tf);
     glEndList();
 
-}
-
-void Robot::initRoom()
-{
-   Room=glGenLists(1);
-   glNewList(Neck,GL_COMPILE);
-	//Cuboid
-   glEndList();
 }
 
 void Robot::initNeck()
@@ -496,16 +550,12 @@ void Robot::initRightFoot()
     glEndList();
 }
 
-void Robot::makeRoom()
-{
-    glCallList(Room);
-}
-
-void Robot::makeHip(double tx,double ty,double tz,double angle_y)
+void Robot::makeHip(double tx,double ty,double tz,double angle_x,double angle_y)
 {
     //Tranformations
     glTranslatef(0,-0.05,0);
     glTranslatef(tx,ty,tz);	
+    glRotatef(angle_x,1,0,0);
     glRotatef(angle_y,0,1,0);
     glEnable(GL_TEXTURE_2D);
     glCallList(Hip);
@@ -834,55 +884,55 @@ void Robot::makeRightFoot(double angle_x)
 
 void Robot::setFrameConstraints()
 {
-  if(keys.frame2==1)
+    if(keys.frame >= 2)
     {
-	behindArmAngle=180;
-	RightShoulder_Bust_Joint=point(-0.15,0.25,0);
-    	LeftShoulder_Bust_Joint=point(0.15,0.25,0);
-	Hip_LeftUpperLeg_Joint=point(0.075,-0.075,0);
-    	Hip_RightUpperLeg_Joint=point(-0.075,-0.075,0);
-    	Bust_Hip_Joint=point(0,0.075,0);
+        behindArmAngle=180;
+        RightShoulder_Bust_Joint=point(-0.15,0.25,0);
+        LeftShoulder_Bust_Joint=point(0.15,0.25,0);
+        Hip_LeftUpperLeg_Joint=point(0.075,-0.075,0);
+        Hip_RightUpperLeg_Joint=point(-0.075,-0.075,0);
+        Bust_Hip_Joint=point(0,0.075,0);
     }
     else
     {
-	behindArmAngle=0;
-	RightShoulder_Bust_Joint=point(-0.15,0.25,0);
-    	LeftShoulder_Bust_Joint=point(0.15,0.25,0);
-	Hip_LeftUpperLeg_Joint=point(0.075,-0.075,0);
-    	Hip_RightUpperLeg_Joint=point(-0.075,-0.075,0);
-    	Bust_Hip_Joint=point(0,0.075,0);
+        behindArmAngle=0;
+        RightShoulder_Bust_Joint=point(-0.15,0.25,0);
+        LeftShoulder_Bust_Joint=point(0.15,0.25,0);
+        Hip_LeftUpperLeg_Joint=point(0.075,-0.075,0);
+        Hip_RightUpperLeg_Joint=point(-0.075,-0.075,0);
+        Bust_Hip_Joint=point(0,0.075,0);
     }
-    if(keys.frame5==1)
+    if(keys.frame >= 5)
     {
-	RightShoulder_Bust_Joint=point(-0.1,0.25,0);
-    	LeftShoulder_Bust_Joint=point(0.1,0.25,0);
-	Hip_LeftUpperLeg_Joint=point(0.075,-0.075,0);
-    	Hip_RightUpperLeg_Joint=point(-0.075,-0.075,0);
-    	Bust_Hip_Joint=point(0,0.075,0);
+        RightShoulder_Bust_Joint=point(-0.1,0.25,0);
+        LeftShoulder_Bust_Joint=point(0.1,0.25,0);
+        Hip_LeftUpperLeg_Joint=point(0.075,-0.075,0);
+        Hip_RightUpperLeg_Joint=point(-0.075,-0.075,0);
+        Bust_Hip_Joint=point(0,0.075,0);
     }
-    if(keys.frame7==1)
+    if(keys.frame >= 7)
     { 
-	Hip_LeftUpperLeg_Joint=point(0.075,0,0);
-    	Hip_RightUpperLeg_Joint=point(-0.075,0,0);
-	Bust_Hip_Joint=point(0,0,0);
+        Hip_LeftUpperLeg_Joint=point(0.075,0,0);
+        Hip_RightUpperLeg_Joint=point(-0.075,0,0);
+        Bust_Hip_Joint=point(0,0,0);
     }
-    if(keys.frame9==1)
+    if(keys.frame >= 9)
     {
-	glTranslatef(0,-1.8,0);
-	glRotatef(90,0,0,1);
-	glRotatef(90,0,1,0);
-	glTranslatef(0,1.4,0);
+        // glTranslatef(0,-1.8,0);
+        // glRotatef(90,0,0,1);
+        // glRotatef(90,0,1,0);
+        // glTranslatef(0,1.4,0);
     }
-    
+
 }
 
 void Robot::selectCamera()
 {
-    if(keys.Camera1==1);
+    if(keys.Camera==1);
 	//Transformation for Camera1
-    if(keys.Camera2==1);
+    if(keys.Camera==2);
 	//Transformation for Camera2
-    if(keys.Camera3==1);
+    if(keys.Camera==3);
 	//Transformation for Camera3
 }
 
@@ -890,10 +940,9 @@ void Robot::makeRobot(void)
 {
     glPushMatrix();
     selectCamera();
-    makeRoom();
     setFrameConstraints();
     glMultMatrixf(keys.PreMatrixMult);
-    makeHip(keys.hip_TX,keys.hip_TY,keys.hip_TZ,keys.hip_Y);
+    makeHip(keys.hip_TX,keys.hip_TY,keys.hip_TZ,keys.hip_X,keys.hip_Y);
 
     glPushMatrix();
         makeLeftUpperLeg(keys.leftUpperLeg_X,keys.leftUpperLeg_Y,keys.leftUpperLeg_Z);
@@ -911,35 +960,35 @@ void Robot::makeRobot(void)
         makeBust(keys.bust_X,keys.bust_Y,keys.bust_Z);
 
         glPushMatrix();
-	    makeLeftShoulder();
+	        makeLeftShoulder();
             makeLeftUpperArmFront(keys.leftUpperArm_X,keys.leftUpperArm_Y,keys.leftUpperArm_Z);
-		glPushMatrix();
-		    makeLeftUpperArmBehind(behindArmAngle);
-		glPopMatrix();
-            makeLeftLowerArmFront(keys.leftLowerArm_X);
-		glPushMatrix();
-		    makeLeftLowerArmBehind(behindArmAngle);
-		glPopMatrix();
-            makeLeftFrontHand(keys.leftHand_X);
-		glPushMatrix();
-		    makeLeftBehindHand(behindArmAngle);
-		glPopMatrix();
+    		glPushMatrix();
+    		    makeLeftUpperArmBehind(behindArmAngle);
+    		glPopMatrix();
+                makeLeftLowerArmFront(keys.leftLowerArm_X);
+    		glPushMatrix();
+    		    makeLeftLowerArmBehind(behindArmAngle);
+    		glPopMatrix();
+                makeLeftFrontHand(keys.leftHand_X);
+    		glPushMatrix();
+    		    makeLeftBehindHand(behindArmAngle);
+    		glPopMatrix();
         glPopMatrix();
 
         glPushMatrix();
-	    makeRightShoulder();
+	        makeRightShoulder();
             makeRightUpperArmFront(keys.rightUpperArm_X,keys.rightUpperArm_Y,keys.rightUpperArm_Z);
-		glPushMatrix();
-		    makeRightUpperArmBehind(behindArmAngle);
-		glPopMatrix();
-            makeRightLowerArmFront(keys.rightLowerArm_X);
-		glPushMatrix();
-		    makeRightLowerArmBehind(behindArmAngle);
-		glPopMatrix();
-            makeRightFrontHand(keys.rightHand_X);
-		glPushMatrix();
-		    makeRightBehindHand(behindArmAngle);
-		glPopMatrix();
+    		glPushMatrix();
+    		    makeRightUpperArmBehind(behindArmAngle);
+    		glPopMatrix();
+                makeRightLowerArmFront(keys.rightLowerArm_X);
+    		glPushMatrix();
+    		    makeRightLowerArmBehind(behindArmAngle);
+    		glPopMatrix();
+                makeRightFrontHand(keys.rightHand_X);
+    		glPushMatrix();
+    		    makeRightBehindHand(behindArmAngle);
+    		glPopMatrix();
         glPopMatrix();
 
         glPushMatrix();

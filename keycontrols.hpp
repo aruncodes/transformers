@@ -23,13 +23,15 @@ public:
     double rightLowerLeg_X;
     double leftFoot_X;
     double rightFoot_X;
-    double hip_TX,hip_TY,hip_TZ,hip_Y;
+    double hip_TX,hip_TY,hip_TZ,hip_X,hip_Y;
     int wheel_angle;
-int frame9,frame1,frame2,frame3,frame4,frame5,frame6,frame7,frame8,frame10,frame11;
+	int frame;
     GLfloat* PreMatrixMult;
-    int Camera1,Camera2,Camera3;
+    int Camera;
 
-    int startAnim,stage,rotateCount;
+    int isCarMode;
+
+    int startAnim,stage;
 	KeyControls() {
 		// Default values
 		//glLoadIdentity();
@@ -61,11 +63,12 @@ int frame9,frame1,frame2,frame3,frame4,frame5,frame6,frame7,frame8,frame10,frame
 
 		//Hip
 		hip_TX=hip_TZ=0;
-		hip_TY=-1.4;
-		hip_Y=0;
+		hip_TY=0;//-1.4;
+		hip_X=hip_Y=0;
 
 		//Animation
-		startAnim=stage=rotateCount=0;
+		startAnim=stage=0;
+		isCarMode=0;
 
 		//Initializing Matrix for Pre-Multiplication to Identity
 		PreMatrixMult=new GLfloat[16]; 
