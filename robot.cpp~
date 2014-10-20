@@ -934,7 +934,7 @@ void Robot::selectCamera()
     if(keys.Camera==1){
 	//gluPerspective(90,1,-2,2);
 	//glFrustum(-1,1,0,2,0.1,2);
-	gluPerspective(30,1,-1,1000);
+	gluPerspective(30,1,-2,1000);
 	gluLookAt(0,0,3,0,-0.1,0,0.0f,1.0f,0.0f);
      }
 	//Transformation for Camera1
