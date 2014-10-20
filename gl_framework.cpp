@@ -23,10 +23,10 @@ namespace csX75
   //!GLFW framebuffer resize callback
   void framebuffer_size_callback(GLFWwindow* window, int width, int height)
   {
-    
+
     if  ( height == 0 ) height = 1;
 
-    glMatrixMode( GL_PROJECTION );
+    glMatrixMode( GL_MODELVIEW );
     glLoadIdentity();
     //Draw to the whole window
     glViewport( 0, 0, width, height );
@@ -34,16 +34,16 @@ namespace csX75
     //Keep the aspect ratio fixed
     double aspect;
     if (width > height)
-      {
-	aspect = (double)width/(double)height;
-	glOrtho(-aspect, aspect, -1.0, 1.0, -1.0, 1.0);
-      }
+    {
+      aspect = (double)width/(double)height;
+      glOrtho(-aspect, aspect, -1.0, 1.0, -1.0, 1.0);
+    }
     else
-      {
-	aspect = (double)height/(double)width;
-	glOrtho(-1.0, 1.0, -aspect, aspect, -1.0, 1.0);
-      }
-    
+    {
+      aspect = (double)height/(double)width;
+      glOrtho(-1.0, 1.0, -aspect, aspect, -1.0, 1.0);
+    }
+
     win_width = width;
     win_height = height;
   }

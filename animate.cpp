@@ -73,7 +73,7 @@ void Robot::animate() {
 
 	if(keys.stage%10 == 0 || keys.stage%10 == 5) {
 		glfwSwapBuffers(glfwGetCurrentContext());  
-	  	usleep(50*1000);	
+	  	sleep(0.1);	
 	}
 
 }

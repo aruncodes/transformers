@@ -12,6 +12,7 @@ namespace Blocks {
 
 		glBindTexture(GL_TEXTURE_2D,tf.front);
 		glBegin(GL_QUADS);
+			glNormal3f(0.0f, 0.0f, -1.0f);
 		    glTexCoord2d(0.0,0.0);	    
 		    glVertex3f(-half_length,-half_width,half_height);
 		    glTexCoord2d(1.0,0.0);
@@ -24,6 +25,7 @@ namespace Blocks {
 
 		glBindTexture(GL_TEXTURE_2D,tf.top);
 		glBegin(GL_QUADS);    
+			glNormal3f(0.0f, -1.0f,0.0f);
 		    glTexCoord2d(0.0,0.0);	
 		    glVertex3f(half_length,half_width,half_height);
 	        glTexCoord2d(1.0,0.0);
@@ -36,6 +38,7 @@ namespace Blocks {
 		
 		glBindTexture(GL_TEXTURE_2D,tf.back);
 		glBegin(GL_QUADS);    
+			glNormal3f(0.0f, 0.0f, 1.0f);
 	        glTexCoord2d(0.0,0.0);
 		    glVertex3f(half_length,half_width,-half_height);
 		    glTexCoord2d(1.0,0.0);
@@ -49,6 +52,7 @@ namespace Blocks {
 		glBindTexture(GL_TEXTURE_2D,tf.bottom);
 		glBegin(GL_QUADS);    
 		    //glColor3f(0,0,1.0);
+			glNormal3f(0.0f, 1.0f,0.0f);
 		    glTexCoord2d(0.0,0.0);
 		    glVertex3f(half_length,-half_width,-half_height);
 		    glTexCoord2d(1.0,0.0);
@@ -61,6 +65,7 @@ namespace Blocks {
 		
 		glBindTexture(GL_TEXTURE_2D,tf.left);
 		glBegin(GL_QUADS);    
+			glNormal3f(-1.0f, 0.0f,0.0f);
 		    glTexCoord2d(0.0,0.0);
 		    glVertex3f(half_length,half_width,-half_height);
 		    glTexCoord2d(1.0,0.0);
@@ -73,6 +78,7 @@ namespace Blocks {
 		
 		glBindTexture(GL_TEXTURE_2D,tf.right);
 		glBegin(GL_QUADS);    
+			glNormal3f(1.0f, 0.0f,0.0f);
 		    glTexCoord2d(0.0,0.0);
 		    glVertex3f(-half_length,half_width,-half_height);
 		    glTexCoord2d(1.0,0.0);
@@ -105,6 +111,7 @@ namespace Blocks {
 		glBindTexture(GL_TEXTURE_2D,tf.top);
 		glBegin(GL_QUADS);
 			/* Top face*/
+			glNormal3f(0.0f, -1.0f,0.0f);
 			glTexCoord2d(0,0);
 			POINT_A;
 			glTexCoord2d(1,0);
@@ -118,6 +125,7 @@ namespace Blocks {
 		glBindTexture(GL_TEXTURE_2D,tf.bottom);
 		glBegin(GL_QUADS);		 
 			/* Bottom face*/
+			glNormal3f(0.0f, 1.0f,0.0f);
 			glTexCoord2d(0,0);
 			POINT_D;
 			glTexCoord2d(1,0);
@@ -132,6 +140,7 @@ namespace Blocks {
 		glBegin(GL_QUADS);
 
 			/* Front face */
+			glNormal3f(0.0f, 0.0f,1.0f);
 			glTexCoord2d(0,0);
 			POINT_D;
 			glTexCoord2d(1,0);
@@ -145,6 +154,7 @@ namespace Blocks {
 		glBindTexture(GL_TEXTURE_2D,tf.left);
 		glBegin(GL_QUADS);
 			/*Left face*/
+			glNormal3f(1.0f, 0.0f,0.0f);
 			glTexCoord2d(0,0);
 			POINT_E;
 			glTexCoord2d(0,1);
@@ -158,6 +168,7 @@ namespace Blocks {
 		glBindTexture(GL_TEXTURE_2D,tf.right);
 		glBegin(GL_QUADS);
 			/*Right face*/
+			glNormal3f(-1.0f, 0.0f,0.0f);
 			glTexCoord2d(0,0);
 			POINT_C;
 			glTexCoord2d(1,0);
@@ -171,6 +182,7 @@ namespace Blocks {
 		glBindTexture(GL_TEXTURE_2D,tf.back);
 		glBegin(GL_QUADS);
 			/*Back face*/
+			glNormal3f(0.0f, 0.0f,-1.0f);
 			glTexCoord2d(0.0,1.0);
 			POINT_H;
 			glTexCoord2d(1.0,1.0);

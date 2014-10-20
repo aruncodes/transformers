@@ -26,7 +26,7 @@ void Texture::makeTexture(const char* FilePath,GLuint gltexture)
 
     glBindTexture(GL_TEXTURE_2D,gltexture);
     glPixelStorei(GL_UNPACK_ALIGNMENT,2);
-    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR,GL_REPLACE);
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR,GL_MODULATE);
 
     glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR);

@@ -15,6 +15,7 @@ public:
 	World() {
 		
 		initTexture();
+		// initLights();
 		robot = Robot();
 		
 		Camera=1;
@@ -24,7 +25,12 @@ public:
 	void makeScene();
 	void drawScene();
 	void selectCamera();
+	void initLights();
+	void setLights();
 	void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+
+	void debugCoord();
+
 };
 
 
