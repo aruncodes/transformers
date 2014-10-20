@@ -1,14 +1,35 @@
 #include "world.hpp"
+#include "keycontrols.hpp"
 
 using namespace Blocks;
 using namespace Texture;
 
 void World::drawScene() {
-	
+	glPushMatrix();
+	selectCamera();
 	makeScene();
-
 	robot.makeRobot();
 	robot.animate();
+	glPopMatrix();
+}
+
+void World::selectCamera()
+{
+    if(robot.keys.Camera==1){
+	//gluPerspective(90,1,-2,2);
+	//glFrustum(-1,1,0,2,0.1,2);
+	gluPerspective(30,1,-1,1000);
+	gluLookAt(0,0,3,0,-0.1,0,0.0f,1.0f,0.0f);
+     }
+	//Transformation for Camera1
+    if(robot.keys.Camera==2){
+	//Transformation for Camera2
+	//glFrustum(-15,15,0,15,0.1,2);
+	gluPerspective(10,1,0,1000);
+        gluLookAt(robot.keys.camera2[0],robot.keys.camera2[1],robot.keys.camera2[2],robot.keys.camera2[0]+robot.keys.camera2_l[0],robot.keys.camera2[1]+robot.keys.camera2_l[1],robot.keys.camera2[2]+robot.keys.camera2_l[2],0.0f,1.0f,0.0f);
+    }
+    if(robot.keys.Camera==3);
+	//Transformation for Camera3
 }
 
 void World::makeScene() {

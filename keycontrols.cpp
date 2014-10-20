@@ -32,6 +32,25 @@ GLfloat* multiply(GLfloat* a,GLfloat b[])
 	return Result_Matrix;
 }
 
+
+float* multiplyVector(GLfloat* M , float* camera2){
+	GLfloat M2D[4][4];
+	float* result;
+	result=new float[4];
+	for(int i=0;i<16;i++){
+		M2D[i%4][i/4]=M[i];
+     	}
+
+	for(int i=0;i<4;i++){
+		result[i]=0;
+		for(int j=0;j<4;j++){
+			result[i]+=M2D[i][j]*camera2[j];
+		}
+	}
+
+	return result;
+}
+
 //!GLFW keyboard callback
 void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -294,15 +313,18 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 
 	if( key == GLFW_KEY_UP  && frame==9) {
 		wheel_angle=0;
-		//glTranslatef(0,0.02,0);
 		GLfloat Translate[16]={1,0,0,0,0,1,0,0,0,0,1,0,0,0.02,0,1};
 		PreMatrixMult=multiply(PreMatrixMult,Translate);
+		camera2[0]+=camera2_l[0]*0.02;
+		camera2[2]+=camera2_l[2]*0.02;
 	}
 	else if( key == GLFW_KEY_DOWN  && frame==9) {
 		wheel_angle=0;
 		//glTranslatef(0,-0.02,0);
 		GLfloat Translate[16]={1,0,0,0,0,1,0,0,0,0,1,0,0,-0.02,0,1};
 		PreMatrixMult=multiply(PreMatrixMult,Translate);
+		camera2[0]-=camera2_l[0]*0.02;
+		camera2[2]-=camera2_l[2]*0.02;
 	}
 
 	if( key == GLFW_KEY_LEFT  && frame==9) {
@@ -315,6 +337,8 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 		    float theta=5*3.14/180;
 		    GLfloat ITRT[16]={cos(theta),sin(theta),0,0,-sin(theta),cos(theta),0,0,0,0,1,0,-1*sin(theta),1*cos(theta)-1,0,1};
 		    PreMatrixMult=multiply(PreMatrixMult,ITRT);
+		     camera2_l[0]=cos(theta)*camera2_l[0]+sin(theta)*camera2_l[2];
+		    camera2_l[2]=-sin(theta)*camera2_l[0]+cos(theta)*camera2_l[2];
 		}
 	}
 	else if( key == GLFW_KEY_RIGHT && frame==9 ) {
@@ -328,6 +352,8 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 		    GLfloat ITRT[16]={cos(theta),sin(theta),0,0,-sin(theta),cos(theta),0,0,0,0,1,0,-1*sin(theta),1*cos(theta)-1,0,1};
 			
 		    PreMatrixMult=multiply(PreMatrixMult,ITRT);
+		    camera2_l[0]=cos(theta)*camera2_l[0]+sin(theta)*camera2_l[2];
+		    camera2_l[2]=-sin(theta)*camera2_l[0]+cos(theta)*camera2_l[2];
 		}
 	}
   

@@ -938,8 +938,12 @@ void Robot::selectCamera()
 	gluLookAt(0,0,3,0,-0.1,0,0.0f,1.0f,0.0f);
      }
 	//Transformation for Camera1
-    if(keys.Camera==2);
+    if(keys.Camera==2){
 	//Transformation for Camera2
+	//glFrustum(-1,1,0,1,0.1,2);
+	gluPerspective(30,1,-1,1000);
+        gluLookAt(keys.camera2[0],keys.camera2[1],keys.camera2[2],keys.camera2[0]+keys.camera2_l[0],keys.camera2[1]+keys.camera2_l[1],keys.camera2[2]+keys.camera2_l[2],0.0f,1.0f,0.0f);
+    }
     if(keys.Camera==3);
 	//Transformation for Camera3
 }
@@ -947,7 +951,7 @@ void Robot::selectCamera()
 void Robot::makeRobot(void)
 {
     glPushMatrix();
-    selectCamera();
+    //selectCamera();
     setFrameConstraints();
     //glMultMatrixf(keys.PreMatrixMult);
     makeHip(keys.hip_TX,keys.hip_TY,keys.hip_TZ,keys.hip_X,keys.hip_Y);

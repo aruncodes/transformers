@@ -31,6 +31,9 @@ public:
 
     int isCarMode;
 
+    float* camera2;
+    float* camera2_l;
+
     int startAnim,stage;
 	KeyControls() {
 		// Default values
@@ -80,6 +83,18 @@ public:
 		}
 
 		Camera=1;
+
+		camera2=new float[4];
+		camera2[0]=0;
+		camera2[1]=-1;
+		camera2[2]=0;
+		camera2[3]=1;
+
+		camera2_l=new float[4];
+		camera2_l[0]=0;
+		camera2_l[1]=0;
+		camera2_l[2]=-1;
+		camera2_l[3]=1;
 	}
 
     void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);

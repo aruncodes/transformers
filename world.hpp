@@ -10,12 +10,13 @@ class World {
 public:
 	Robot robot;
 	GLuint* texture;
+	KeyControls keys;
 
 	World() {
 		initTexture();
-		robot = Robot();
+		robot = Robot();		
 	}
-
+	void selectCamera();
 	void initTexture();
 	void makeScene();
 	void drawScene();
