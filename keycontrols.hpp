@@ -93,6 +93,7 @@ public:
 		camera2_l[1]=0;
 		camera2_l[2]=-1;
 		camera2_l[3]=1;
+		frame=0;
 
 	}
 

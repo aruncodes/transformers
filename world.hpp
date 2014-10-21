@@ -4,20 +4,21 @@
 #include "robot.hpp"
 #include "blocks.hpp"
 #include "texture.hpp"
+#include "shading.hpp"
 
 class World {
 
 public:
 	Robot robot;
 	GLuint* texture;
-    int Camera;
+        int Camera;
+        Shader shade_obj;
 
 	World() {
 		
 		initTexture();
-		// initLights();
+		setLights();
 		robot = Robot();
-		
 		Camera=1;
 	}
 

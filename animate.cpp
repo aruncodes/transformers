@@ -41,7 +41,7 @@ void Robot::animate() {
 	if(keys.stage == 95) {
 		if( !keys.isCarMode){
 			// glTranslatef(0,0,-0.5);
-			keys.hip_TY = -1.4;
+			keys.hip_TY = -1.0;
 		} else {
 			// glTranslatef(0,0,0.5);
 			keys.hip_TY = -0.5;

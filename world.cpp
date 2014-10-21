@@ -6,10 +6,12 @@ using namespace Texture;
 void World::drawScene() {
 
 	glPushMatrix();
-		selectCamera();	
+		selectCamera();
+		shade_obj.initScene();
+		
 		makeScene();
-		setLights();
-
+		//setLights();
+		
 		debugCoord();
 
 		robot.makeRobot();
@@ -25,13 +27,17 @@ void World::initLights() {
 
 void World::setLights() {
 	
-	GLfloat lightpos[] = {1, 0.5, 1, 01};
+	/*GLfloat lightpos[] = {1, 0.5, 1, 01};
 	// glPushMatrix();
 	// 	glTranslatef(0,0,0);
 	// 	defineSphere(0.2,24,24);
 	// glPopMatrix();	
 	
-	glLightfv(GL_LIGHT0, GL_POSITION, lightpos);	
+	glLightfv(GL_LIGHT0, GL_POSITION, lightpos);*/
+	GLfloat light_position[4]={0.0, 10.0, 10.0, 1.0};
+	GLfloat light_diffuse[4]={0.7, 0.7, 0.5, 1.0};
+	GLfloat light_specular[4]={1.0, 0.0, 0.0, 1.0};
+	shade_obj=Shader(light_position,light_diffuse,light_specular);	
 }
 
 void World::makeScene() {

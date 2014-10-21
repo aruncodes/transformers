@@ -546,11 +546,12 @@ void Robot::makeHip(double tx,double ty,double tz,double angle_x,double angle_y,
 {
     //Tranformations
     //glTranslatef(0,-0.05,0);
+     glTranslatef(0,-0.5,0);
     glTranslatef(tx,ty,tz);	
     glRotatef(angle_x,1,0,0);
     glRotatef(angle_y,0,1,0);
     glRotatef(angle_z,0,0,1);
-    glTranslatef(0,-0.5,0);
+   
     glEnable(GL_TEXTURE_2D);
     glCallList(Hip);
     glDisable(GL_TEXTURE_2D);
