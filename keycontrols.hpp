@@ -32,9 +32,6 @@ public:
 
     int startAnim,stage;
 
-    float* camera2;
-	float* camera2_l;
-
 	KeyControls() {
 		// Default values
 		//glLoadIdentity();
@@ -82,17 +79,6 @@ public:
 		   
 		}
 
-		camera2=new float[4];
-		camera2[0]=0;
-		camera2[1]=-1;
-		camera2[2]=0;
-		camera2[3]=1;
-
-		camera2_l=new float[4];
-		camera2_l[0]=0;
-		camera2_l[1]=0;
-		camera2_l[2]=-1;
-		camera2_l[3]=1;
 		frame=0;
 
 	}

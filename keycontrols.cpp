@@ -301,8 +301,6 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 		hip_TX -=   0.05 * y;
 		hip_TZ -=   0.05 * x;
 
-		camera2[0] = hip_TX;
-		camera2[2] = hip_TZ;
 	}
 	else if( key == GLFW_KEY_DOWN  && frame==9) {
 		wheel_angle=0;
@@ -313,8 +311,6 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 		hip_TX +=   0.05 * y;
 		hip_TZ +=   0.05 * x;
 
-		camera2[0] = hip_TX;
-		camera2[2] = hip_TZ;
 	}
 
 	if( key == GLFW_KEY_LEFT  && frame==9) {
@@ -322,12 +318,7 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 		    wheel_angle=20;
 			hip_Z += 5;
 			if(hip_Z > 360) hip_Z -= 360;
-			// std::cout<<hip_Z<<std::endl;
 
-			float theta=5*M_PI/180;
-			float temp1 = camera2_l[0];
-			camera2_l[0]=cos(theta)*camera2_l[0]+sin(theta)*camera2_l[2];
-			camera2_l[2]=-sin(theta)*temp1+cos(theta)*camera2_l[2];
 	}
 	else if( key == GLFW_KEY_RIGHT && frame==9 ) {
 		if(wheel_angle!=-20)
@@ -335,12 +326,6 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 
 			hip_Z -= 5;
 			if(hip_Z < 0) hip_Z += 360;
-			// std::cout<<hip_Z<<std::endl;
-
-			float theta=-5*M_PI/180;
-			float temp1 = camera2_l[0];
-			camera2_l[0]=cos(theta)*camera2_l[0]+sin(theta)*camera2_l[2];
-			camera2_l[2]=-sin(theta)*temp1+cos(theta)*camera2_l[2];
 	}
 
 	if(key == GLFW_KEY_LEFT && !isCarMode) {

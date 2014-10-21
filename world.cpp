@@ -163,20 +163,29 @@ void World::selectCamera()
 	
 	//Transformation for Camera2 : inside car
 	if(Camera==2){
-		
+		double x = robot.keys.hip_TX;
+		double y = robot.keys.hip_TZ;
+
+		double dist = -0.4;
+		double angle = robot.keys.hip_Z;
+		double delta_x = dist * sin( angle * M_PI / 180);
+		double delta_y = dist * cos( angle * M_PI / 180);
+
+		double dist_centre = -1.2;
+		double delta_x_centre = dist_centre * sin( angle * M_PI / 180);
+		double delta_y_centre = dist_centre * cos( angle * M_PI / 180);
+
 		gluPerspective(10,1,0,1000);
-		gluLookAt(robot.keys.camera2[0],robot.keys.camera2[1],robot.keys.camera2[2],
-				robot.keys.camera2[0]+robot.keys.camera2_l[0],
-				robot.keys.camera2[1]+robot.keys.camera2_l[1],
-				robot.keys.camera2[2]+robot.keys.camera2_l[2],
+		gluLookAt(x + delta_x,	-1.35 ,	y + delta_y,
+					x + delta_x_centre,	-1.4 ,	y + delta_y_centre,
 				0.0f,1.0f,0.0f);
 	}
 	
 	//Transformation for Camera3 : Follows car from behind
 	if(Camera==3){
 
-			double x = robot.keys.camera2[0];
-			double y = robot.keys.camera2[2];
+			double x = robot.keys.hip_TX;
+			double y = robot.keys.hip_TZ;
 
 			double dist = 1.5;
 			double angle = robot.keys.hip_Z;
@@ -186,14 +195,14 @@ void World::selectCamera()
 		gluPerspective(30,1,-1,1);
 		gluLookAt(
 			x + delta_x,	-1,		y + delta_y,
-			robot.keys.camera2[0],-1.4,robot.keys.camera2[2],
+			robot.keys.hip_TX,-1.4,robot.keys.hip_TZ,
 			0.0f,1.0f,0.0f);
 	}
 	//Transformation for Camera4 : Always looks at car
 	if(Camera==4){
 		gluPerspective(30,1,-1,1);		
 		gluLookAt(0,0,3,
-			robot.keys.camera2[0],0,robot.keys.camera2[2],
+			robot.keys.hip_TX,0,robot.keys.hip_TZ,
 			0.0f,1.0f,0.0f);
 	}
 }
@@ -203,22 +212,31 @@ void World::debugCoord() {
 	// Coordinate debug code
 	// Sphere to know the position of camera in coordinate system
 
-	double x = robot.keys.camera2[0];
-	double y = robot.keys.camera2[2];
+	double x = robot.keys.hip_TX;
+	double y = robot.keys.hip_TZ;
 
-	double dist = 1;
+	double dist = -0.4;
 	double angle = robot.keys.hip_Z;
 	double delta_x = dist * sin( angle * M_PI / 180);
 	double delta_y = dist * cos( angle * M_PI / 180);
 
+	double dist_centre = -2;
+		double delta_x_centre = dist_centre * sin( angle * M_PI / 180);
+		double delta_y_centre = dist_centre * cos( angle * M_PI / 180);
+
+
 	glPushMatrix();
 		// glLoadIdentity();
-		glTranslatef(
+		/*glTranslatef(
 				x + delta_x,
-				-1 ,
+				-1.35 ,
 				y + delta_y
 				);
-		defineSphere(0.1,24,24);
+		defineSphere(0.1,24,24);*/
+		// glBegin(GL_LINES);
+		// glVertex3f(x + delta_x,	-1.35 ,	y + delta_y);
+		// glVertex3f(x + delta_x_centre,	-1.6 ,	y + delta_y_centre);
+		// glEnd();
 	glPopMatrix();
 	//End of debug code
 
