@@ -291,33 +291,7 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 		rightLowerLeg_X=leftLowerLeg_X=-180;
 	}
 
-
-	if( key == GLFW_KEY_UP  && frame==9) {
-		wheel_angle=0;
-
-		double x = cos(hip_Z * M_PI/180.0);
-		double y = sin(hip_Z * M_PI/180.0);
-		double dist = 0.025;
-
-		hip_TX -=   dist * y;
-		hip_TZ -=   dist * x;
-
-		wheel_rotate -= (dist * 180) / (0.075 * M_PI);
-	}
-	else if( key == GLFW_KEY_DOWN  && frame==9) {
-		wheel_angle=0;
-		
-		double x = cos(hip_Z * M_PI/180.0);
-		double y = sin(hip_Z * M_PI/180.0);
-		double dist = 0.025;
-
-		hip_TX +=   dist * y;
-		hip_TZ +=   dist * x;
-
-		wheel_rotate += (dist * 180) / (0.075 * M_PI);
-	}
-
-	if( key == GLFW_KEY_LEFT  && frame==9) {
+	/*if( key == GLFW_KEY_LEFT  && frame==9) {
 		if(wheel_angle!=20)
 		    wheel_angle=20;
 			hip_Z += 5;
@@ -330,7 +304,7 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 
 			hip_Z -= 5;
 			if(hip_Z < 0) hip_Z += 360;
-	}
+	}*/
 
 	if(key == GLFW_KEY_LEFT && !isCarMode) {
 		hip_Y += 5;
@@ -338,5 +312,54 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 	} else if(key == GLFW_KEY_RIGHT && !isCarMode) {
 		hip_Y -= 5;
 		if(hip_Y < 0) hip_Y += 360;
+	}
+	movement(window);
+}
+
+void KeyControls::movement(GLFWwindow* window) {
+
+	int angle = 0;
+
+	if( glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS  && frame==9) {
+		wheel_angle=0;
+		angle = +3;
+
+		double x = cos(hip_Z * M_PI/180.0);
+		double y = sin(hip_Z * M_PI/180.0);
+		double dist = 0.025;
+
+		hip_TX -=   dist * y;
+		hip_TZ -=   dist * x;
+
+		wheel_rotate -= (dist * 180) / (0.075 * M_PI);
+	}
+	else if( glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS  && frame==9) {
+		wheel_angle=0;
+		angle = -3;
+
+		double x = cos(hip_Z * M_PI/180.0);
+		double y = sin(hip_Z * M_PI/180.0);
+		double dist = 0.025;
+
+		hip_TX +=   dist * y;
+		hip_TZ +=   dist * x;
+
+		wheel_rotate += (dist * 180) / (0.075 * M_PI);
+	}
+
+	if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
+	    wheel_angle=20;
+		
+		if(angle) {
+			hip_Z += angle;
+			if(hip_Z > 360) hip_Z -= 360;
+		}
+			
+	} else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+	    wheel_angle=-20;
+		if(angle) {
+			hip_Z -= angle;
+			if(hip_Z < 0) hip_Z += 360;
+		}
 	}
 }

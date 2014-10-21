@@ -56,7 +56,7 @@ void Robot::animate() {
 	else
 		keys.stage += 5; // Increment stage for convertion from robot to car
 
-	keys.key_callback(0,-1,-1,-1,-1);
+	keys.key_callback(glfwGetCurrentContext(),-1,-1,-1,-1);
 
 	if(keys.stage > 100){
 		// End animation when stage gone above 100

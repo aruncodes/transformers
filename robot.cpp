@@ -924,7 +924,9 @@ void Robot::setFrameConstraints()
 }
 
 void Robot::makeRobot(void)
-{
+{   
+    keys.movement(glfwGetCurrentContext());
+    
     glPushMatrix();
     setFrameConstraints();
     makeHip(keys.hip_TX,keys.hip_TY,keys.hip_TZ,keys.hip_X,keys.hip_Y,keys.hip_Z);

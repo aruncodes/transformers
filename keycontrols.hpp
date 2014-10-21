@@ -85,6 +85,7 @@ public:
 	}
 
     void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+    void movement(GLFWwindow* window);
 };
 
 #endif
