@@ -572,17 +572,21 @@ void Robot::makeBust(double angle_x,double angle_y,double angle_z)
     glBindTexture(GL_TEXTURE_2D,texture[WHEEL]);
     glTranslatef(0.150,0.19,-0.075);
     glRotatef(keys.wheel_angle,0,0,1);
+    glRotatef(keys.wheel_rotate,1,0,0);
     glRotatef(-90,0,1,0);
     defineCylinder(0.075,0.1,24);
     glRotatef(90,0,1,0);
+    glRotatef(-keys.wheel_rotate,1,0,0);
     glRotatef(-keys.wheel_angle,0,0,1);
     glTranslatef(-0.15,-0.19,0.075);
     
     glTranslatef(-0.150,0.19,-0.075);
     glRotatef(keys.wheel_angle,0,0,1);
+    glRotatef(keys.wheel_rotate,1,0,0);
     glRotatef(-90,0,1,0);
     defineCylinder(0.075,0.1,24);
     glRotatef(90,0,1,0);
+    glRotatef(-keys.wheel_rotate,1,0,0);
     glRotatef(-keys.wheel_angle,0,0,1);
     glTranslatef(0.15,-0.19,0.075);
     
@@ -797,9 +801,11 @@ void Robot::makeLeftUpperLeg(double angle_x,double angle_y,double angle_z)
 
     glBindTexture(GL_TEXTURE_2D,texture[WHEEL]);
     glTranslatef(0.075,0,-0.075);
+    glRotatef(keys.wheel_rotate,1,0,0);
     glRotatef(-90,0,1,0);
     defineCylinder(0.075,0.1,24);    
     glRotatef(90,0,1,0);
+    glRotatef(-keys.wheel_rotate,1,0,0);
     glTranslatef(-0.075,0,0.075);
     glDisable(GL_TEXTURE_2D);
 }
@@ -828,9 +834,11 @@ void Robot::makeRightUpperLeg(double angle_x,double angle_y,double angle_z)
 
     glBindTexture(GL_TEXTURE_2D,texture[WHEEL]);
     glTranslatef(-0.075,0,-0.075);
+    glRotatef(keys.wheel_rotate,1,0,0);
     glRotatef(-90,0,1,0);
     defineCylinder(0.075,0.1,24);    
     glRotatef(90,0,1,0);
+    glRotatef(-keys.wheel_rotate,1,0,0);
     glTranslatef(0.075,0,0.075);
     
     glDisable(GL_TEXTURE_2D);

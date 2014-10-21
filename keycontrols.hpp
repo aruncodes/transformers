@@ -24,7 +24,7 @@ public:
     double leftFoot_X;
     double rightFoot_X;
     double hip_TX,hip_TY,hip_TZ,hip_X,hip_Y,hip_Z;
-    int wheel_angle;
+    int wheel_angle,wheel_rotate;
 	int frame;
     GLfloat* PreMatrixMult;
 
@@ -44,6 +44,7 @@ public:
 		rightLowerArm_X =10;
 		rightHand_X=10;
 		wheel_angle=0;
+		wheel_rotate=0;
 		//Bust
 		bust_X=bust_Y=bust_Z=0;
 

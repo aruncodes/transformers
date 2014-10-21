@@ -297,20 +297,24 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 
 		double x = cos(hip_Z * M_PI/180.0);
 		double y = sin(hip_Z * M_PI/180.0);
+		double dist = 0.025;
 
-		hip_TX -=   0.05 * y;
-		hip_TZ -=   0.05 * x;
+		hip_TX -=   dist * y;
+		hip_TZ -=   dist * x;
 
+		wheel_rotate -= (dist * 180) / (0.075 * M_PI);
 	}
 	else if( key == GLFW_KEY_DOWN  && frame==9) {
 		wheel_angle=0;
 		
 		double x = cos(hip_Z * M_PI/180.0);
 		double y = sin(hip_Z * M_PI/180.0);
+		double dist = 0.025;
 
-		hip_TX +=   0.05 * y;
-		hip_TZ +=   0.05 * x;
+		hip_TX +=   dist * y;
+		hip_TZ +=   dist * x;
 
+		wheel_rotate += (dist * 180) / (0.075 * M_PI);
 	}
 
 	if( key == GLFW_KEY_LEFT  && frame==9) {
