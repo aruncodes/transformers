@@ -12,11 +12,26 @@ public:
 	Robot robot;
 	GLuint* texture;
         int Camera;
-        Shader shade_obj;
+	DirectionalLight Dir_light1;
+	DirectionalLight Dir_light2;
+	SpotLight Head_light1;
+	SpotLight Head_light2;
+	bool light1;
+	bool light2;
+	bool light3;
+	bool light4;
 
 	World() {
 		
 		initTexture();
+		setLights();
+		robot = Robot();
+		Camera=1;
+		initTexture();
+		light1=true;
+		light2=true;
+		light3=true;
+		light4=true;
 		setLights();
 		robot = Robot();
 		Camera=1;
@@ -31,7 +46,8 @@ public:
 	void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 	void debugCoord();
-
+	void setSceneProperties();
+	void setRobotProperties();
 };
 
 

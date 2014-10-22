@@ -43,7 +43,6 @@ void renderGL( void )
 void key_callback_wrapper(GLFWwindow* window, int key, int scancode, int action, int mods) {
     WORLD.robot.keys.key_callback(window,key,scancode,action,mods);
     WORLD.key_callback(window,key,scancode,action,mods);
-    WORLD.shade_obj.key_callback(window,key,scancode,action,mods);
 }
 
 int main (int argc, char *argv[]) 

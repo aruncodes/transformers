@@ -12,7 +12,7 @@ namespace Blocks {
 
 		glBindTexture(GL_TEXTURE_2D,tf.front);
 		glBegin(GL_QUADS);
-			glNormal3f(0.0f, 0.0f, -1.0f);
+		    glNormal3f(0.0f, 0.0f, -1.0f);
 		    glTexCoord2d(0.0,0.0);	    
 		    glVertex3f(-half_length,-half_width,half_height);
 		    glTexCoord2d(1.0,0.0);
