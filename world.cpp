@@ -1,3 +1,4 @@
+#include <iostream>
 #include "world.hpp"
 
 using namespace Blocks;
@@ -7,19 +8,58 @@ void World::drawScene() {
 
 	glPushMatrix();
 		selectCamera();
-		glEnable(GL_LIGHTING);
+		
 		setLights();
-		Dir_light1.initScene(light1);
-		Dir_light2.initScene(light2);
-		Head_light1.initScene(light3);
-		Head_light2.initScene(light4);
-		setSceneProperties();
+		
+		setSceneProperties();		
 		makeScene();
+
 		debugCoord();
+		
 		setRobotProperties();
 		robot.makeRobot();
 		robot.animate();
 	glPopMatrix();
+}
+
+void World::initLights() {
+
+	glEnable(GL_LIGHTING);
+	glShadeModel(GL_SMOOTH);
+	glEnable(GL_NORMALIZE);
+
+	// Enable color tracking
+	glEnable(GL_COLOR_MATERIAL);
+
+	// Set Material properties to follow glColor values
+	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+
+	GLfloat light_position1[4]={1.0,-1.0,1.0,0.0};
+	GLfloat light_ambient1[4]={0.7, 0.0, 0.7, 1.0};
+	GLfloat light_diffuse1[4]={0.7, 0.0, 0.7, 1.0};
+	GLfloat light_specular1[4]={1.0, 1.0, 1.0, 1.0};
+	Dir_light1=DirectionalLight(light_position1,light_ambient1,light_diffuse1,light_specular1,GL_LIGHT0);
+
+	GLfloat light_position2[4]={-1.0,1.0,1.0,0.0};
+	GLfloat light_ambient2[4]={0.7, 0.7, 0.0, 1.0};
+	GLfloat light_diffuse2[4]={0.7, 0.7, 0.0, 1.0};
+	GLfloat light_specular2[4]={1.0, 1.0, 1.0, 1.0};
+	Dir_light2=DirectionalLight(light_position2,light_ambient2,light_diffuse2,light_specular2,GL_LIGHT1);	
+
+	//HeadLight1
+	GLfloat light_position3[4]={0,-1.37,0,1};
+	GLfloat light_diffuse3[4]={1.0, 1.0, 1.0, 1.0};
+	GLfloat light_specular3[4]={1.0, 1.0, 1.0, 1.0};
+	GLfloat spot_direction3[4]={0,-1.5,0};
+	Head_light1=SpotLight(light_position3,light_diffuse3,light_specular3,spot_direction3,GL_LIGHT2);
+
+	//HeadLight2
+	GLfloat light_position4[4]={0,-1.37,0,1};
+	GLfloat light_diffuse4[4]={1.0, 1.0, 1.0, 1.0};
+	GLfloat light_specular4[4]={1.0, 1.0, 1.0, 1.0};
+	GLfloat spot_direction4[4]={0,-1.5,0};
+	Head_light2=SpotLight(light_position4,light_diffuse4,light_specular4,spot_direction4,GL_LIGHT3);
+
 }
 
 void World::setSceneProperties(){
@@ -38,11 +78,6 @@ void World::setRobotProperties(){
   glMaterialfv(GL_FRONT, GL_DIFFUSE, scene_diffuse);
 }
 
-void World::initLights() {
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
-
-}
 void World::makeScene() {
 
 	TextureFaces tf;
@@ -124,34 +159,16 @@ void World::makeScene() {
 
 void World::setLights() {
 	
-	/*GLfloat lightpos[] = {1, 0.5, 1, 01};
-	// glPushMatrix();
-	// 	glTranslatef(0,0,0);
-	// 	defineSphere(0.2,24,24);
-	// glPopMatrix();	
-	
-	glLightfv(GL_LIGHT0, GL_POSITION, lightpos);*/
+	Dir_light1.initScene();
+	Dir_light2.initScene();
+	Head_light1.initScene();
+	Head_light2.initScene();
 
-	GLfloat light_position1[4]={1.0,-1.0,1.0,0.0};
-	GLfloat light_ambient1[4]={0.7, 0.0, 0.7, 1.0};
-	GLfloat light_diffuse1[4]={0.7, 0.0, 0.7, 1.0};
-	GLfloat light_specular1[4]={1.0, 1.0, 1.0, 1.0};
-	Dir_light1=DirectionalLight(light_position1,light_ambient1,light_diffuse1,light_specular1,GL_LIGHT0);
-
-	GLfloat light_position2[4]={-1.0,1.0,1.0,0.0};
-	GLfloat light_ambient2[4]={0.7, 0.7, 0.0, 1.0};
-	GLfloat light_diffuse2[4]={0.7, 0.7, 0.0, 1.0};
-	GLfloat light_specular2[4]={1.0, 1.0, 1.0, 1.0};
-
-	Dir_light2=DirectionalLight(light_position2,light_ambient2,light_diffuse2,light_specular2,GL_LIGHT1);	
-
-
-//HeadLight1
-
+	//Headlight position calculations
 	double x = robot.keys.hip_TX;
 	double y = robot.keys.hip_TZ;
 
-	double dist = 0.5;
+	double dist = 0.67;
 	double angle = robot.keys.hip_Z;
 	double delta_x = dist * sin( angle * M_PI / 180);
 	double delta_y = dist * cos( angle * M_PI / 180);
@@ -160,28 +177,20 @@ void World::setLights() {
 	double delta_x_centre = dist_centre * sin( angle * M_PI / 180);
 	double delta_y_centre = dist_centre * cos( angle * M_PI / 180);
 
-	double dist2=0.1;
+	double dist2=0.13;
 	double angle2=robot.keys.hip_Z;
 	double delta_x2 = dist2 * cos( angle2 * M_PI / 180);
 	double delta_y2 = dist2 * sin( angle2 * M_PI / 180);
 
-	GLfloat light_position3[4]={x-delta_x-delta_x2,-1.35,y-delta_y+delta_y2,1};
-	GLfloat light_diffuse3[4]={1.0, 1.0, 1.0, 1.0};
-	GLfloat light_specular3[4]={1.0, 1.0, 1.0, 1.0};
-	GLfloat spot_direction3[4]={x-delta_x_centre-delta_x2,-1,y-delta_y_centre+delta_y2};
-	Head_light1=SpotLight(light_position3,light_diffuse3,light_specular3,spot_direction3,GL_LIGHT2);
+//HeadLight1
 
-
+	Head_light1.updatePosition(x-delta_x-delta_x2,-1.37,y-delta_y+delta_y2);
+	Head_light1.updateDirection(x-delta_x_centre-delta_x2,-1.5,y-delta_y_centre+delta_y2);
 
 //HeadLight2
 
-	GLfloat light_position4[4]={x-delta_x+delta_x2,-1.35,y-delta_y-delta_y2,1};
-	GLfloat light_diffuse4[4]={0.7, 0.7, 0.7, 1.0};
-	GLfloat light_specular4[4]={1.0, 0.0, 0.0, 1.0};
-	GLfloat spot_direction4[4]={x-delta_x_centre+delta_x2,-1,y-delta_y_centre-delta_y2};
-	Head_light2=SpotLight(light_position4,light_diffuse4,light_specular4,spot_direction4,GL_LIGHT3);
-
-
+	Head_light2.updatePosition(x-delta_x+delta_x2,-1.37,y-delta_y-delta_y2);
+	Head_light2.updateDirection(x-delta_x_centre+delta_x2,-1.5,y-delta_y_centre-delta_y2);
 }
 
 void World::initTexture() {
@@ -217,14 +226,21 @@ void World::key_callback(GLFWwindow* window, int key, int scancode, int action, 
 		Camera=4;
 	}
 	if (key == GLFW_KEY_L && action == GLFW_PRESS && mods == GLFW_MOD_SHIFT ) 
-		light1 = !light1; 
+		Dir_light1.light = !Dir_light1.light; 
 	if (key == GLFW_KEY_L && action == GLFW_PRESS && mods == 0) 
-		light2 = !light2; 
+		Dir_light2.light = !Dir_light2.light; 
 
 	if (key == GLFW_KEY_O && action == GLFW_PRESS && mods == GLFW_MOD_SHIFT ) 
-		light3 = !light3; 
+		Head_light1.light = !Head_light1.light; 
 	if (key == GLFW_KEY_O && action == GLFW_PRESS && mods == 0) 
-		light4 = !light4; 
+		Head_light2.light = !Head_light2.light; 
+
+	if(key == GLFW_KEY_F5 && action == GLFW_PRESS && mods == 0) {
+		glEnable(GL_LIGHTING);
+	}
+	if(key == GLFW_KEY_F5 && action == GLFW_PRESS && mods == GLFW_MOD_SHIFT) {
+		glDisable(GL_LIGHTING);
+	}
 }
 
 void World::selectCamera()
@@ -249,9 +265,9 @@ void World::selectCamera()
 		double delta_x_centre = dist_centre * sin( angle * M_PI / 180);
 		double delta_y_centre = dist_centre * cos( angle * M_PI / 180);
 
-		gluPerspective(10,1,0,1000);
+		gluPerspective(30,1,-1,1);
 		gluLookAt(x + delta_x,	-1.35 ,	y + delta_y,
-					x + delta_x_centre,	-1.4 ,	y + delta_y_centre,
+					x + delta_x_centre,	-1.5 ,	y + delta_y_centre,
 				0.0f,1.0f,0.0f);
 	}
 	
@@ -282,14 +298,13 @@ void World::selectCamera()
 }
 
 void World::debugCoord() {
-	//if(1) return;
+	if(1) return;
 	// Coordinate debug code
 	// Sphere to know the position of camera in coordinate system
-
 	double x = robot.keys.hip_TX;
 	double y = robot.keys.hip_TZ;
 
-	double dist = 0.5;
+	double dist = 0.67;
 	double angle = robot.keys.hip_Z;
 	double delta_x = dist * sin( angle * M_PI / 180);
 	double delta_y = dist * cos( angle * M_PI / 180);
@@ -298,19 +313,33 @@ void World::debugCoord() {
 	double delta_x_centre = dist_centre * sin( angle * M_PI / 180);
 	double delta_y_centre = dist_centre * cos( angle * M_PI / 180);
 
+	double dist2=0.13;
+	double angle2=robot.keys.hip_Z;
+	double delta_x2 = dist2 * cos( angle2 * M_PI / 180);
+	double delta_y2 = dist2 * sin( angle2 * M_PI / 180);
 
 	glPushMatrix();
-		 glLoadIdentity();
-		glTranslatef(
-				x + delta_x,
-				-1.35 ,
-				y + delta_y
-				);
-		 defineSphere(0.5,24,24);
+		 // glLoadIdentity();
+		// glTranslatef(
+		// 		x - delta_x - delta_x2,
+		// 		-1.37 ,
+		// 		y - delta_y + delta_y2
+		// 		);
+		//  defineSphere(0.05,24,24);
 		 glBegin(GL_LINES);
-		 glVertex3f(x + delta_x,	-1.35 ,	y + delta_y);
-		 glVertex3f(x + delta_x_centre,	-1.6 ,	y + delta_y_centre);
+		 glVertex3f(x-delta_x+delta_x2,-1.37,y-delta_y-delta_y2);
+		 glVertex3f( x-delta_x_centre+delta_x2,-1.5,y-delta_y_centre-delta_y2);
 		 glEnd();
+		 glBegin(GL_LINES);
+		 glVertex3f(x-delta_x-delta_x2,-1.37,y-delta_y+delta_y2);
+		 glVertex3f( x-delta_x_centre-delta_x2,-1.5,y-delta_y_centre+delta_y2);
+		 glEnd();
+	// glTranslatef(
+	// 			x-delta_x_centre-delta_x2,
+	// 			 	-1.5,
+	// 			 	y-delta_y_centre+delta_y2
+	// 			);
+	// 	 defineSphere(0.05,24,24);
 	glPopMatrix();
 	//End of debug code
 

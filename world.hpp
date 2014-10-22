@@ -11,28 +11,16 @@ class World {
 public:
 	Robot robot;
 	GLuint* texture;
-        int Camera;
+    int Camera;
 	DirectionalLight Dir_light1;
 	DirectionalLight Dir_light2;
 	SpotLight Head_light1;
 	SpotLight Head_light2;
-	bool light1;
-	bool light2;
-	bool light3;
-	bool light4;
 
 	World() {
 		
+		initLights();
 		initTexture();
-		setLights();
-		robot = Robot();
-		Camera=1;
-		initTexture();
-		light1=true;
-		light2=true;
-		light3=true;
-		light4=true;
-		setLights();
 		robot = Robot();
 		Camera=1;
 	}

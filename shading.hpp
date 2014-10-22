@@ -4,15 +4,21 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-class DirectionalLight {
+class Light {
+	public:
+	GLfloat light_position[4];
+	GLfloat light_diffuse[4];
+	GLfloat light_specular[4];
+	GLenum light_enum;
+	bool light;
+
+	void updatePosition(double x,double y,double z);
+};
 
 
-public:
-GLfloat light_position[4];
-GLfloat light_diffuse[4];
-GLfloat light_specular[4];
-GLfloat light_ambient[4];
-GLenum light_enum;
+class DirectionalLight: public Light {
+	public:
+	GLfloat light_ambient[4];
 
 	DirectionalLight(){
 	}
@@ -25,21 +31,17 @@ GLenum light_enum;
 			light_ambient[i]=l_ambient[i];
 		}
 		light_enum=light_num;
+		light=true;
 	}
-	void initScene(bool light);
+
+	void initScene();
+
 };
 
 
-class SpotLight {
-
-
-public:
-bool light;
-GLfloat light_position[4];
-GLfloat light_diffuse[4];
-GLfloat light_specular[4];
-GLfloat spot_direction[3];
-GLenum light_enum;
+class SpotLight: public Light {
+	public:
+	GLfloat spot_direction[3];
 
 	SpotLight(){
 	}
@@ -55,7 +57,8 @@ GLenum light_enum;
 		light=true;
 		light_enum=light_num;
 	}
-	void initScene(bool light);
+	void initScene();
+	void updateDirection(double x,double y,double z);
 };
 
 

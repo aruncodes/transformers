@@ -313,7 +313,7 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 		hip_Y -= 5;
 		if(hip_Y < 0) hip_Y += 360;
 	}
-	movement(window);
+	// movement(window);
 }
 
 void KeyControls::movement(GLFWwindow* window) {
@@ -347,7 +347,7 @@ void KeyControls::movement(GLFWwindow* window) {
 		wheel_rotate += (dist * 180) / (0.075 * M_PI);
 	}
 
-	if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
+	if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS && frame==9) {
 	    wheel_angle=20;
 		
 		if(angle) {
@@ -355,7 +355,7 @@ void KeyControls::movement(GLFWwindow* window) {
 			if(hip_Z > 360) hip_Z -= 360;
 		}
 			
-	} else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS) {
+	} else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS && frame==9) {
 	    wheel_angle=-20;
 		if(angle) {
 			hip_Z -= angle;

@@ -25,18 +25,13 @@
 #include "world.hpp"
 
 std::string filename, progname;
-// Robot ROBOT;
 World WORLD;
 
 void renderGL( void )
 {
-
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glEnable(GL_DEPTH_TEST);
-    //glShadeModel(GL_FLAT);
-    // ROBOT.makeRobot();
-    // ROBOT.animate();
-    // glRotatef(1,0,01,0);
+
     WORLD.drawScene();
 }
 
@@ -86,9 +81,8 @@ int main (int argc, char *argv[])
   //Initialize GL state
   csX75::initGL();
   
-  // Initialize robot
+  // Initialize world and robot
  
-  // ROBOT=Robot();
   WORLD=World();
   
   glScalef(0.5,0.5,0.5);

@@ -51,7 +51,6 @@ namespace Blocks {
 		
 		glBindTexture(GL_TEXTURE_2D,tf.bottom);
 		glBegin(GL_QUADS);    
-		    //glColor3f(0,0,1.0);
 			glNormal3f(0.0f, 1.0f,0.0f);
 		    glTexCoord2d(0.0,0.0);
 		    glVertex3f(half_length,-half_width,-half_height);
@@ -231,22 +230,24 @@ namespace Blocks {
 		    double x = cos(a) * radius;
 		    double y = sin(a) * radius;
 		    glVertex3f(x,y,-hl);
+		    glNormal3f(x,y,-hl);
 		    glVertex3f(x,y, hl);
+		    glNormal3f(x,y, hl);
 		 
 		    a += step;
 		}
 		glEnd();
 		glColor3f(1,1,1);
 
-    // glBindTexture(GL_TEXTURE_2D,5);
 		a = 0;
 		glBegin(GL_TRIANGLE_FAN);
+		glNormal3f(0,0,-1);
 		for (int i = 0; i < numSteps; ++i)
 		{
 		    double x = cos(a) * radius;
 		    double y = sin(a) * radius;
 
-		    glTexCoord2d(cos(a)*0.5+0.5,sin(a)*0.5+0.5);
+		    	glTexCoord2d(cos(a)*0.5+0.5,sin(a)*0.5+0.5);
 		    glVertex3f(x,y, hl);
 		 
 		    a += step;
@@ -255,12 +256,12 @@ namespace Blocks {
 
 		a=0;
 		glBegin(GL_POLYGON);
+		glNormal3f(0,0,1);	
 		for (int i = 0; i < numSteps; ++i)
 		{
 		    double x = cos(a) * radius;
 		    double y = sin(a) * radius;
 
-		    //glTexCoord2d(x/0.17 + 0.8 ,y/0.15 + 0.5 );
 		    glTexCoord2d(cos(a)*0.5+0.5,sin(a)*0.5+0.5);
 		    glVertex3f(x,y, -hl);
 		 
