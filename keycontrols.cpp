@@ -6,7 +6,7 @@
 
 using namespace std;
 
-GLfloat* multiply(GLfloat* a,GLfloat b[])
+/*GLfloat* multiply(GLfloat* a,GLfloat b[])
 {
 	GLfloat* Result_Matrix;
 	GLfloat a2D[4][4];
@@ -30,7 +30,7 @@ GLfloat* multiply(GLfloat* a,GLfloat b[])
 		Result_Matrix[i]=result2D[i%4][i/4];
 	}
 	return Result_Matrix;
-}
+}*/
 
 //!GLFW keyboard callback
 void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)

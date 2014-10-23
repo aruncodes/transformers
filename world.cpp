@@ -7,10 +7,12 @@ using namespace Texture;
 void World::drawScene() {
 
 	glPushMatrix();
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();			
 		selectCamera();
-		
-		setLights();
-		
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		setLights();	
 		setSceneProperties();		
 		makeScene();
 
@@ -94,64 +96,101 @@ void World::makeScene() {
 
 	// glRotatef(45,1,1,0);
 	double half_width,half_length,half_height;
+	double width,length,height;
 	half_width=half_length=half_height=1.8;
+	length=width=height=3.6;
+	double delta_length=length/30;
+	double delta_width=width/30;
+	double delta_height=height/30;
+	double l=-half_length;
+	double w=-half_width;
+	double h=-half_height;
 
 	glBindTexture(GL_TEXTURE_2D,tf.front);
-		glBegin(GL_QUADS);
-		    glTexCoord2d(0.0,1.0);
-		    glVertex3f(half_length,half_width,-half_height);
-		    glTexCoord2d(1.0,1.0);
-		    glVertex3f(-half_length,half_width,-half_height);
-		    glTexCoord2d(1.0,0.0);
-		    glVertex3f(-half_length,-half_width,-half_height);
-		    glTexCoord2d(0.0,0.0);
-		    glVertex3f(half_length,-half_width,-half_height);
-		glEnd();
+		for(int i=0;i<30;i++){
+		    for(int j=0;j<30;j++){
+			glBegin(GL_QUADS);
+				glNormal3f(0,0,1);
+		    		glTexCoord2d((i+1)/30.0,(j+1)/30.0);
+		    		glVertex3f(l+(i+1)*delta_length,w+(j+1)*delta_width,-half_height);
+				glTexCoord2d((i)/30.0,(j+1)/30.0);
+		    		glVertex3f(l+(i)*delta_length,w+(j+1)*delta_width,-half_height);
+				glTexCoord2d((i)/30.0,j/30.0);
+		    		glVertex3f(l+(i)*delta_length,w+(j)*delta_length,-half_height);
+				glTexCoord2d((i+1)/30.0,j/30.0);
+		    		glVertex3f(l+(i+1)*delta_length,w+(j)*delta_length,-half_height);		    		
+			glEnd();
+		    }
+		}
 
 	glBindTexture(GL_TEXTURE_2D,tf.right);
-		glBegin(GL_QUADS);    
-		    glTexCoord2d(0.0f,1.0);
-		    glVertex3f(-half_length,half_width,-half_height);
-		    glTexCoord2d(0.0,0.0);
-		    glVertex3f(-half_length,-half_width,-half_height);
-		    glTexCoord2d(1.0,0.0);
-		    glVertex3f(-half_length,-half_width,half_height);
-		    glTexCoord2d(1.0,1.0);
-		    glVertex3f(-half_length,half_width,half_height);
-		glEnd();
+		for(int i=0;i<30;i++){
+		    for(int j=0;j<30;j++){
+			glBegin(GL_QUADS);
+				glNormal3f(1,0,0);
+		    		glTexCoord2d((i+1)/30.0,(j+1)/30.0);
+		    		glVertex3f(-half_length,w+(i+1)*delta_width,h+(j+1)*delta_height);
+				glTexCoord2d((i)/30.0,(j+1)/30.0);
+		    		glVertex3f(-half_length,w+i*delta_width,h+(j+1)*delta_height);
+				glTexCoord2d((i)/30.0,j/30.0);
+		    		glVertex3f(-half_length,w+(i)*delta_width,h+(j)*delta_height);
+		    		glTexCoord2d((i+1)/30.0,j/30.0);
+		    		glVertex3f(-half_length,w+(i+1)*delta_width,h+(j)*delta_height);
+			glEnd();
+		    }
+		}
+
 	glBindTexture(GL_TEXTURE_2D,tf.left);
-		glBegin(GL_QUADS);    
-		    glTexCoord2d(1.0,1.0);
-		    glVertex3f(half_length,half_width,-half_height);
-		    glTexCoord2d(1.0,0.0);
-		    glVertex3f(half_length,-half_width,-half_height);
-		    glTexCoord2d(0.0,0.0);
-		    glVertex3f(half_length,-half_width,half_height);
-		    glTexCoord2d(0.0,1.0);
-		    glVertex3f(half_length,half_width,half_height);
-		glEnd();
+		for(int i=0;i<30;i++){
+		    for(int j=0;j<30;j++){
+			glBegin(GL_QUADS);
+				glNormal3f(-1,0,0);
+		    		glTexCoord2d((i+1)/30.0,(j+1)/30.0);
+		    		glVertex3f(half_length,w+(i+1)*delta_width,h+(j+1)*delta_height);
+				glTexCoord2d((i+1)/30.0,j/30.0);
+		    		glVertex3f(half_length,w+(i+1)*delta_width,h+(j)*delta_height);	
+				glTexCoord2d((i)/30.0,j/30.0);
+		    		glVertex3f(half_length,w+(i)*delta_width,h+(j)*delta_height);
+				glTexCoord2d((i)/30.0,(j+1)/30.0);
+		    		glVertex3f(half_length,w+i*delta_width,h+(j+1)*delta_height);							
+			glEnd();
+		    }
+		}
 	glBindTexture(GL_TEXTURE_2D,tf.top);
-		glBegin(GL_QUADS);    
-		    glTexCoord2d(0.0,0.0);	
-		    glVertex3f(half_length,half_width,half_height);
-	        glTexCoord2d(1.0,0.0);
-		    glVertex3f(-half_length,half_width,half_height);
-            glTexCoord2d(1.0,1.0);
-		    glVertex3f(-half_length,half_width,-half_height);
-		    glTexCoord2d(0.0,1.0);
-		    glVertex3f(half_length,half_width,-half_height);
-		glEnd();
+		for(int i=0;i<30;i++){
+		    for(int j=0;j<30;j++){
+			glBegin(GL_QUADS);
+				glNormal3f(0,-1,0);
+		    		glTexCoord2d((i)/30.0,(j+1)/30.0);
+		    		glVertex3f(l+(i)*delta_length,half_width,h+(j+1)*delta_height);
+				glTexCoord2d((i+1)/30.0,(j+1)/30.0);
+		    		glVertex3f(l+(i+1)*delta_length,half_width,h+(j+1)*delta_height);
+				glTexCoord2d((i)/30.0,j/30.0);
+		    		glVertex3f(l+(i+1)*delta_length,half_width,h+(j)*delta_height);
+				glTexCoord2d((i)/30.0,(j)/30.0);
+				glVertex3f(l+(i)*delta_length,half_width,h+(j)*delta_height);
+											
+			glEnd();
+		    }
+		}
+
 	glBindTexture(GL_TEXTURE_2D,tf.bottom);
-		glBegin(GL_QUADS);    
-		    glTexCoord2d(0.0,0.0);
-		    glVertex3f(half_length,-half_width,-half_height);
-		    glTexCoord2d(1.0,0.0);
-		    glVertex3f(-half_length,-half_width,-half_height);
-		    glTexCoord2d(1.0,1.0);
-		    glVertex3f(-half_length,-half_width,half_height);
-		    glTexCoord2d(0.0,1.0);
-		    glVertex3f(half_length,-half_width,half_height);
-		glEnd();
+		    for(int i=0;i<30;i++){
+		    for(int j=0;j<30;j++){
+			glBegin(GL_QUADS);
+				glNormal3f(0,1,0);
+		    		glTexCoord2d((i)/30.0,(j+1)/30.0);
+		    		glVertex3f(l+(i)*delta_length,-half_width,h+(j+1)*delta_height);
+				glTexCoord2d((i)/30.0,(j)/30.0);
+				glVertex3f(l+(i)*delta_length,-half_width,h+(j)*delta_height);
+				glTexCoord2d((i)/30.0,j/30.0);
+		    		glVertex3f(l+(i+1)*delta_length,-half_width,h+(j)*delta_height);
+				glTexCoord2d((i+1)/30.0,(j+1)/30.0);
+		    		glVertex3f(l+(i+1)*delta_length,-half_width,h+(j+1)*delta_height);
+											
+			glEnd();
+		    }
+		}
 		
 	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
@@ -184,13 +223,17 @@ void World::setLights() {
 
 //HeadLight1
 
-	Head_light1.updatePosition(x-delta_x-delta_x2,-1.37,y-delta_y+delta_y2);
-	Head_light1.updateDirection(x-delta_x_centre-delta_x2,-1.5,y-delta_y_centre+delta_y2);
+	Head_light1.updatePosition((x-delta_x-delta_x2),-1.37,(y-delta_y+delta_y2));
+	Head_light1.updateDirection(-delta_x_centre,0,-delta_y_centre);
 
+	
+	
 //HeadLight2
 
 	Head_light2.updatePosition(x-delta_x+delta_x2,-1.37,y-delta_y-delta_y2);
-	Head_light2.updateDirection(x-delta_x_centre+delta_x2,-1.5,y-delta_y_centre-delta_y2);
+	Head_light2.updateDirection(-delta_x_centre,0,-delta_y_centre);
+
+
 }
 
 void World::initTexture() {
@@ -247,7 +290,7 @@ void World::selectCamera()
 {
 	//Transformation for Camera1 : global camera
 	if(Camera==1){
-		gluPerspective(30,1,-1,1000);
+		gluPerspective(60,1,1,-1000);
 		gluLookAt(0,0,4,0,-0.1,0,0.0f,1.0f,0.0f);
 	}
 	
@@ -265,7 +308,7 @@ void World::selectCamera()
 		double delta_x_centre = dist_centre * sin( angle * M_PI / 180);
 		double delta_y_centre = dist_centre * cos( angle * M_PI / 180);
 
-		gluPerspective(30,1,-1,1);
+		gluPerspective(30,1,1,-1);
 		gluLookAt(x + delta_x,	-1.35 ,	y + delta_y,
 					x + delta_x_centre,	-1.5 ,	y + delta_y_centre,
 				0.0f,1.0f,0.0f);
@@ -282,7 +325,7 @@ void World::selectCamera()
 			double delta_x = dist * sin( angle * M_PI / 180);
 			double delta_y = dist * cos( angle * M_PI / 180);
 
-		gluPerspective(30,1,-1,1);
+		gluPerspective(30,1,1,-1);
 		gluLookAt(
 			x + delta_x,	-1,		y + delta_y,
 			robot.keys.hip_TX,-1.4,robot.keys.hip_TZ,
@@ -290,7 +333,7 @@ void World::selectCamera()
 	}
 	//Transformation for Camera4 : Always looks at car
 	if(Camera==4){
-		gluPerspective(30,1,-1,1);		
+		gluPerspective(60,1,1,-1);		
 		gluLookAt(0,0,3,
 			robot.keys.hip_TX,0,robot.keys.hip_TZ,
 			0.0f,1.0f,0.0f);
@@ -319,21 +362,26 @@ void World::debugCoord() {
 	double delta_y2 = dist2 * sin( angle2 * M_PI / 180);
 
 	glPushMatrix();
-		 // glLoadIdentity();
-		// glTranslatef(
-		// 		x - delta_x - delta_x2,
-		// 		-1.37 ,
-		// 		y - delta_y + delta_y2
-		// 		);
-		//  defineSphere(0.05,24,24);
+		 glLoadIdentity();
+
+		 /*glTranslatef(
+		 		(x - delta_x - delta_x2)/(y - delta_y + delta_y2),
+		 		-1.37 /(y - delta_y + delta_y2),
+		 		y - delta_y + delta_y2
+		 		);
+		  defineSphere(0.05,24,24);*/
+		 glTranslatef(
+		 		-0.15,0.15,0
+		 		);
+		 defineSphere(0.2,24,24);
 		 glBegin(GL_LINES);
-		 glVertex3f(x-delta_x+delta_x2,-1.37,y-delta_y-delta_y2);
-		 glVertex3f( x-delta_x_centre+delta_x2,-1.5,y-delta_y_centre-delta_y2);
+		 glVertex3f(0,0,1);
+		 glVertex3f(0,0,-1);
 		 glEnd();
-		 glBegin(GL_LINES);
+		 /*glBegin(GL_LINES)
 		 glVertex3f(x-delta_x-delta_x2,-1.37,y-delta_y+delta_y2);
 		 glVertex3f( x-delta_x_centre-delta_x2,-1.5,y-delta_y_centre+delta_y2);
-		 glEnd();
+		 glEnd();*/
 	// glTranslatef(
 	// 			x-delta_x_centre-delta_x2,
 	// 			 	-1.5,
@@ -344,3 +392,5 @@ void World::debugCoord() {
 	//End of debug code
 
 }
+
+
