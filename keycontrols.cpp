@@ -306,14 +306,27 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 			if(hip_Z < 0) hip_Z += 360;
 	}*/
 
-	if(key == GLFW_KEY_LEFT && !isCarMode) {
-		hip_Y += 5;
-		if(hip_Y > 360) hip_Y -= 360;
-	} else if(key == GLFW_KEY_RIGHT && !isCarMode) {
-		hip_Y -= 5;
-		if(hip_Y < 0) hip_Y += 360;
-	}
 	// movement(window);
+
+	// Debug keys to update angles
+	if(key == GLFW_KEY_KP_7) {
+		hip_X = int(hip_X + 5) % 360;
+	}
+	if(key == GLFW_KEY_KP_4) {
+		hip_X = int(hip_X - 5) % 360;
+	}
+	if(key == GLFW_KEY_KP_8) {
+		hip_Y = int(hip_Y + 5) % 360;
+	}
+	if(key == GLFW_KEY_KP_5) {
+		hip_Y = int(hip_Y - 5) % 360;
+	}
+	if(key == GLFW_KEY_KP_9) {
+		hip_Z = int(hip_Z + 5) % 360;
+	}
+	if(key == GLFW_KEY_KP_6) {
+		hip_Z = int(hip_Z - 5) % 360;
+	}
 }
 
 void KeyControls::movement(GLFWwindow* window) {
