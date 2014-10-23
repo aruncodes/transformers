@@ -207,7 +207,7 @@ void World::setLights() {
 	double x = robot.keys.hip_TX;
 	double y = robot.keys.hip_TZ;
 
-	double dist = 0.67;
+	double dist = 0.67-0.02;
 	double angle = robot.keys.hip_Z;
 	double delta_x = dist * sin( angle * M_PI / 180);
 	double delta_y = dist * cos( angle * M_PI / 180);
@@ -216,22 +216,39 @@ void World::setLights() {
 	double delta_x_centre = dist_centre * sin( angle * M_PI / 180);
 	double delta_y_centre = dist_centre * cos( angle * M_PI / 180);
 
-	double dist2=0.13;
+	double dist2=0.13-0.03;
 	double angle2=robot.keys.hip_Z;
 	double delta_x2 = dist2 * cos( angle2 * M_PI / 180);
 	double delta_y2 = dist2 * sin( angle2 * M_PI / 180);
 
 //HeadLight1
 
-	Head_light1.updatePosition((x-delta_x-delta_x2),-1.37,(y-delta_y+delta_y2));
+	Head_light1.updatePosition((x-delta_x-delta_x2),-1.47,(y-delta_y+delta_y2));
 	Head_light1.updateDirection(-delta_x_centre,0,-delta_y_centre);
-
-	
+	glPushMatrix();
+	    glTranslatef((x-delta_x-delta_x2),-1.47,(y-delta_y+delta_y2));
+	    if(!Head_light1.light)
+	    	glColor4f(0,0,0,0);
+	    else
+		glColor4f(1,1,1,1);
+	    defineSphere(0.03,20,20);
+	    glColor3f(1,1,1);
+	glPopMatrix();
 	
 //HeadLight2
 
-	Head_light2.updatePosition(x-delta_x+delta_x2,-1.37,y-delta_y-delta_y2);
+	Head_light2.updatePosition(x-delta_x+delta_x2,-1.47,y-delta_y-delta_y2);
 	Head_light2.updateDirection(-delta_x_centre,0,-delta_y_centre);
+
+	glPushMatrix();
+	    glTranslatef((x-delta_x+delta_x2),-1.47,(y-delta_y-delta_y2));
+	    if(!Head_light2.light)
+	    	glColor4f(0,0,0,0);
+	    else
+		glColor4f(1,1,1,1);
+	    defineSphere(0.03,20,20);
+	    glColor3f(1,1,1);
+	glPopMatrix();
 
 
 }
