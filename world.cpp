@@ -5,23 +5,17 @@ using namespace Blocks;
 using namespace Texture;
 
 void World::drawScene() {
-
-	glPushMatrix();
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();			
-		selectCamera();
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		setLights();	
-		setSceneProperties();		
-		makeScene();
-
-		debugCoord();
-		
-		setRobotProperties();
-		robot.makeRobot();
-		robot.animate();
-	glPopMatrix();
+			
+	selectCamera();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	setLights();	
+	setSceneProperties();		
+	makeScene();
+	debugCoord();
+	setRobotProperties();
+	robot.makeRobot();
+	robot.animate();
 }
 
 void World::initLights() {
@@ -99,75 +93,76 @@ void World::makeScene() {
 	double width,length,height;
 	half_width=half_length=half_height=1.8;
 	length=width=height=3.6;
-	double delta_length=length/30;
-	double delta_width=width/30;
-	double delta_height=height/30;
+	double units=100;
+	double delta_length=length/units;
+	double delta_width=width/units;
+	double delta_height=height/units;
 	double l=-half_length;
 	double w=-half_width;
 	double h=-half_height;
 
 	glBindTexture(GL_TEXTURE_2D,tf.front);
-		for(int i=0;i<30;i++){
-		    for(int j=0;j<30;j++){
+		for(int i=0;i<units;i++){
+		    for(int j=0;j<units;j++){
 			glBegin(GL_QUADS);
 				glNormal3f(0,0,1);
-		    		glTexCoord2d((i+1)/30.0,(j+1)/30.0);
+		    		glTexCoord2d((i+1)/units,(j+1)/units);
 		    		glVertex3f(l+(i+1)*delta_length,w+(j+1)*delta_width,-half_height);
-				glTexCoord2d((i)/30.0,(j+1)/30.0);
+				glTexCoord2d((i)/units,(j+1)/units);
 		    		glVertex3f(l+(i)*delta_length,w+(j+1)*delta_width,-half_height);
-				glTexCoord2d((i)/30.0,j/30.0);
+				glTexCoord2d((i)/units,j/units);
 		    		glVertex3f(l+(i)*delta_length,w+(j)*delta_length,-half_height);
-				glTexCoord2d((i+1)/30.0,j/30.0);
+				glTexCoord2d((i+1)/units,j/units);
 		    		glVertex3f(l+(i+1)*delta_length,w+(j)*delta_length,-half_height);		    		
 			glEnd();
 		    }
 		}
 
 	glBindTexture(GL_TEXTURE_2D,tf.right);
-		for(int i=0;i<30;i++){
-		    for(int j=0;j<30;j++){
+		for(int i=0;i<units;i++){
+		    for(int j=0;j<units;j++){
 			glBegin(GL_QUADS);
 				glNormal3f(1,0,0);
-		    		glTexCoord2d((i+1)/30.0,(j+1)/30.0);
+		    		glTexCoord2d((i+1)/units,(j+1)/units);
 		    		glVertex3f(-half_length,w+(i+1)*delta_width,h+(j+1)*delta_height);
-				glTexCoord2d((i)/30.0,(j+1)/30.0);
+				glTexCoord2d((i)/units,(j+1)/units);
 		    		glVertex3f(-half_length,w+i*delta_width,h+(j+1)*delta_height);
-				glTexCoord2d((i)/30.0,j/30.0);
+				glTexCoord2d((i)/units,j/units);
 		    		glVertex3f(-half_length,w+(i)*delta_width,h+(j)*delta_height);
-		    		glTexCoord2d((i+1)/30.0,j/30.0);
+		    		glTexCoord2d((i+1)/units,j/units);
 		    		glVertex3f(-half_length,w+(i+1)*delta_width,h+(j)*delta_height);
 			glEnd();
 		    }
 		}
 
 	glBindTexture(GL_TEXTURE_2D,tf.left);
-		for(int i=0;i<30;i++){
-		    for(int j=0;j<30;j++){
+		for(int i=0;i<units;i++){
+		    for(int j=0;j<units;j++){
 			glBegin(GL_QUADS);
 				glNormal3f(-1,0,0);
-		    		glTexCoord2d((i+1)/30.0,(j+1)/30.0);
+		    		glTexCoord2d((i+1)/units,(j+1)/units);
 		    		glVertex3f(half_length,w+(i+1)*delta_width,h+(j+1)*delta_height);
-				glTexCoord2d((i+1)/30.0,j/30.0);
+				glTexCoord2d((i+1)/units,j/units);
 		    		glVertex3f(half_length,w+(i+1)*delta_width,h+(j)*delta_height);	
-				glTexCoord2d((i)/30.0,j/30.0);
+				glTexCoord2d((i)/units,j/units);
 		    		glVertex3f(half_length,w+(i)*delta_width,h+(j)*delta_height);
-				glTexCoord2d((i)/30.0,(j+1)/30.0);
+				glTexCoord2d((i)/units,(j+1)/units);
 		    		glVertex3f(half_length,w+i*delta_width,h+(j+1)*delta_height);							
 			glEnd();
 		    }
 		}
 	glBindTexture(GL_TEXTURE_2D,tf.top);
-		for(int i=0;i<30;i++){
-		    for(int j=0;j<30;j++){
+		for(int i=0;i<units;i++){
+		    for(int j=0;j<units;j++){
 			glBegin(GL_QUADS);
 				glNormal3f(0,-1,0);
-		    		glTexCoord2d((i)/30.0,(j+1)/30.0);
+		    		glTexCoord2d((i)/units,(j+1)/units);
 		    		glVertex3f(l+(i)*delta_length,half_width,h+(j+1)*delta_height);
-				glTexCoord2d((i+1)/30.0,(j+1)/30.0);
+				glTexCoord2d((i+1)/units,(j+1)/units);
 		    		glVertex3f(l+(i+1)*delta_length,half_width,h+(j+1)*delta_height);
-				glTexCoord2d((i)/30.0,j/30.0);
+				glTexCoord2d((i)/units,j/units);
 		    		glVertex3f(l+(i+1)*delta_length,half_width,h+(j)*delta_height);
-				glTexCoord2d((i)/30.0,(j)/30.0);
+				glTexCoord2d((i)/units,(j)/units);
 				glVertex3f(l+(i)*delta_length,half_width,h+(j)*delta_height);
 											
 			glEnd();
@@ -175,17 +170,17 @@ void World::makeScene() {
 		}
 
 	glBindTexture(GL_TEXTURE_2D,tf.bottom);
-		    for(int i=0;i<30;i++){
-		    for(int j=0;j<30;j++){
+		    for(int i=0;i<units;i++){
+		    for(int j=0;j<units;j++){
 			glBegin(GL_QUADS);
 				glNormal3f(0,1,0);
-		    		glTexCoord2d((i)/30.0,(j+1)/30.0);
+		    		glTexCoord2d((i)/units,(j+1)/units);
 		    		glVertex3f(l+(i)*delta_length,-half_width,h+(j+1)*delta_height);
-				glTexCoord2d((i)/30.0,(j)/30.0);
+				glTexCoord2d((i)/units,(j)/units);
 				glVertex3f(l+(i)*delta_length,-half_width,h+(j)*delta_height);
-				glTexCoord2d((i)/30.0,j/30.0);
+				glTexCoord2d((i)/units,j/units);
 		    		glVertex3f(l+(i+1)*delta_length,-half_width,h+(j)*delta_height);
-				glTexCoord2d((i+1)/30.0,(j+1)/30.0);
+				glTexCoord2d((i+1)/units,(j+1)/units);
 		    		glVertex3f(l+(i+1)*delta_length,-half_width,h+(j+1)*delta_height);
 											
 			glEnd();
@@ -200,9 +195,10 @@ void World::setLights() {
 	
 	Dir_light1.initScene();
 	Dir_light2.initScene();
-	Head_light1.initScene();
-	Head_light2.initScene();
-
+	if(robot.keys.isCarMode){
+		Head_light1.initScene();
+		Head_light2.initScene();
+	}
 	//Headlight position calculations
 	double x = robot.keys.hip_TX;
 	double y = robot.keys.hip_TZ;
@@ -221,35 +217,38 @@ void World::setLights() {
 	double delta_x2 = dist2 * cos( angle2 * M_PI / 180);
 	double delta_y2 = dist2 * sin( angle2 * M_PI / 180);
 
-//HeadLight1
+	if(robot.keys.isCarMode){
+	  //HeadLight1
 
-	Head_light1.updatePosition((x-delta_x-delta_x2),-1.47,(y-delta_y+delta_y2));
-	Head_light1.updateDirection(-delta_x_centre,0,-delta_y_centre);
+	  Head_light1.updatePosition((x-delta_x-delta_x2),-1.47,(y-delta_y+delta_y2));
+	  Head_light1.updateDirection(-delta_x_centre,0-0.2,-delta_y_centre);
+	  
 	glPushMatrix();
 	    glTranslatef((x-delta_x-delta_x2),-1.47,(y-delta_y+delta_y2));
 	    if(!Head_light1.light)
-	    	glColor4f(0,0,0,0);
+	    	glColor3f(0,0,0);
 	    else
-		glColor4f(1,1,1,1);
-	    defineSphere(0.03,20,20);
+		glColor3f(0.9,0.91,0.98);
+	    glRotatef(angle,0,1,0);
+	    defineCylinder(0.05,0.03,20);
 	    glColor3f(1,1,1);
-	glPopMatrix();
+	 glPopMatrix();
 	
-//HeadLight2
+	//HeadLight2
+	  Head_light2.updatePosition(x-delta_x+delta_x2,-1.47,y-delta_y-delta_y2);
+	  Head_light2.updateDirection(-delta_x_centre,0-0.2,-delta_y_centre);
 
-	Head_light2.updatePosition(x-delta_x+delta_x2,-1.47,y-delta_y-delta_y2);
-	Head_light2.updateDirection(-delta_x_centre,0,-delta_y_centre);
-
-	glPushMatrix();
+	  glPushMatrix();
 	    glTranslatef((x-delta_x+delta_x2),-1.47,(y-delta_y-delta_y2));
 	    if(!Head_light2.light)
-	    	glColor4f(0,0,0,0);
+	    	glColor3f(0,0,0);
 	    else
-		glColor4f(1,1,1,1);
-	    defineSphere(0.03,20,20);
+		glColor3f(0.9,0.91,0.98);
+	    glRotatef(angle,0,1,0);
+	    defineCylinder(0.05,0.03,20);
 	    glColor3f(1,1,1);
-	glPopMatrix();
-
+	  glPopMatrix();
+	}
 
 }
 
@@ -271,11 +270,12 @@ void World::initTexture() {
 //!GLFW keyboard callback
 void World::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
+
 	if(key == GLFW_KEY_F1 && action == GLFW_PRESS) {
 		Camera=1;
 	}
 
-	if(key == GLFW_KEY_F2 && action == GLFW_PRESS) {
+	if(key == GLFW_KEY_F2 && action == GLFW_PRESS && robot.keys.isCarMode) {
 		Camera=2;
 	}		
 
@@ -305,6 +305,10 @@ void World::key_callback(GLFWwindow* window, int key, int scancode, int action, 
 
 void World::selectCamera()
 {
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+
 	//Transformation for Camera1 : global camera
 	if(Camera==1){
 		gluPerspective(60,1,1,-1000);
@@ -325,7 +329,7 @@ void World::selectCamera()
 		double delta_x_centre = dist_centre * sin( angle * M_PI / 180);
 		double delta_y_centre = dist_centre * cos( angle * M_PI / 180);
 
-		gluPerspective(30,1,1,-1);
+		gluPerspective(30,1,0.3,-1);
 		gluLookAt(x + delta_x,	-1.35 ,	y + delta_y,
 					x + delta_x_centre,	-1.5 ,	y + delta_y_centre,
 				0.0f,1.0f,0.0f);
@@ -352,7 +356,7 @@ void World::selectCamera()
 	if(Camera==4){
 		gluPerspective(60,1,1,-1);		
 		gluLookAt(0,0,3,
-			robot.keys.hip_TX,0,robot.keys.hip_TZ,
+			robot.keys.hip_TX,-1.4,robot.keys.hip_TZ,
 			0.0f,1.0f,0.0f);
 	}
 }

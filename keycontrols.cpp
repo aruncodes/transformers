@@ -6,32 +6,6 @@
 
 using namespace std;
 
-/*GLfloat* multiply(GLfloat* a,GLfloat b[])
-{
-	GLfloat* Result_Matrix;
-	GLfloat a2D[4][4];
-	GLfloat b2D[4][4];
-	GLfloat result2D[4][4];
-	Result_Matrix=new GLfloat[16];
-	for(int i=0;i<16;i++){
-		a2D[i%4][i/4]=a[i];
-		b2D[i%4][i/4]=b[i];
-	}
-	for(int i=0;i<4;i++){
-		for(int j=0;j<4;j++){
-			result2D[i][j]=0;
-			for(int k=0;k<4;k++){
-				result2D[i][j]+=a2D[i][k]*b2D[k][j];
-			}
-		}
-	}
-
-	for(int i=0;i<16;i++){
-		Result_Matrix[i]=result2D[i%4][i/4];
-	}
-	return Result_Matrix;
-}*/
-
 //!GLFW keyboard callback
 void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -336,13 +310,16 @@ void KeyControls::movement(GLFWwindow* window) {
 	if( glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS  && frame==9) {
 		wheel_angle=0;
 		angle = +3;
-
+		
 		double x = cos(hip_Z * M_PI/180.0);
 		double y = sin(hip_Z * M_PI/180.0);
 		double dist = 0.025;
 
-		hip_TX -=   dist * y;
-		hip_TZ -=   dist * x;
+		if((hip_TX-dist * y)<=1.1 && (hip_TX-dist * y)>=-1.1 && (hip_TZ-dist * x)<=1.3 && (hip_TZ-dist * x)>=-1.1){
+			hip_TX -=   dist * y;
+			hip_TZ -=   dist * x;
+		}
+		
 
 		wheel_rotate -= (dist * 180) / (0.075 * M_PI);
 	}
@@ -352,11 +329,14 @@ void KeyControls::movement(GLFWwindow* window) {
 
 		double x = cos(hip_Z * M_PI/180.0);
 		double y = sin(hip_Z * M_PI/180.0);
+		
 		double dist = 0.025;
-
-		hip_TX +=   dist * y;
-		hip_TZ +=   dist * x;
-
+	
+		if( (hip_TX+dist * y)<=1.1 && (hip_TX+dist * y)>=-1.1 && (hip_TZ+dist * x)<=1.3 && (hip_TZ+dist * x)>=-1.1){
+			hip_TX +=   dist * y;
+			hip_TZ +=   dist * x;
+		}
+	
 		wheel_rotate += (dist * 180) / (0.075 * M_PI);
 	}
 
@@ -364,6 +344,7 @@ void KeyControls::movement(GLFWwindow* window) {
 	    wheel_angle=20;
 		
 		if(angle) {
+			
 			hip_Z += angle;
 			if(hip_Z > 360) hip_Z -= 360;
 		}
