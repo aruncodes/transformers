@@ -7,13 +7,16 @@ using namespace Texture;
 void World::drawScene() {
 			
 	selectCamera();
+
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	setLights();	
+
 	setSceneProperties();		
 	makeScene();
+
 	debugCoord();
-	setRobotProperties();
+
 	robot.makeRobot();
 	robot.animate();
 }
@@ -42,34 +45,12 @@ void World::initLights() {
 	GLfloat light_specular2[4]={1.0, 1.0, 1.0, 1.0};
 	Dir_light2=DirectionalLight(light_position2,light_ambient2,light_diffuse2,light_specular2,GL_LIGHT1);	
 
-	//HeadLight1
-	GLfloat light_position3[4]={0,-1.37,0,1};
-	GLfloat light_diffuse3[4]={1.0, 1.0, 1.0, 1.0};
-	GLfloat light_specular3[4]={1.0, 1.0, 1.0, 1.0};
-	GLfloat spot_direction3[4]={0,-1.5,0};
-	Head_light1=SpotLight(light_position3,light_diffuse3,light_specular3,spot_direction3,GL_LIGHT2);
-
-	//HeadLight2
-	GLfloat light_position4[4]={0,-1.37,0,1};
-	GLfloat light_diffuse4[4]={1.0, 1.0, 1.0, 1.0};
-	GLfloat light_specular4[4]={1.0, 1.0, 1.0, 1.0};
-	GLfloat spot_direction4[4]={0,-1.5,0};
-	Head_light2=SpotLight(light_position4,light_diffuse4,light_specular4,spot_direction4,GL_LIGHT3);
-
 }
 
 void World::setSceneProperties(){
   GLfloat scene_specular[4]={0.1, 0.1, 0.1, 1.0};
   GLfloat scene_diffuse[4]={1.0, 1.0, 0.0, 1.0};
   glMaterialf(GL_FRONT, GL_SHININESS, 0.01f);
-  glMaterialfv(GL_FRONT, GL_SPECULAR, scene_specular);
-  glMaterialfv(GL_FRONT, GL_DIFFUSE, scene_diffuse);
-}
-
-void World::setRobotProperties(){
-  GLfloat scene_specular[4]={1.0, 1.0, 1.0, 1.0};
-  GLfloat scene_diffuse[4]={1.0, 0.7, 0.7, 1.0};
-  glMaterialf(GL_FRONT, GL_SHININESS, 100.0f);
   glMaterialfv(GL_FRONT, GL_SPECULAR, scene_specular);
   glMaterialfv(GL_FRONT, GL_DIFFUSE, scene_diffuse);
 }
@@ -93,7 +74,7 @@ void World::makeScene() {
 	double width,length,height;
 	half_width=half_length=half_height=1.8;
 	length=width=height=3.6;
-	double units=100;
+	double units=40;
 	double delta_length=length/units;
 	double delta_width=width/units;
 	double delta_height=height/units;
@@ -195,60 +176,6 @@ void World::setLights() {
 	
 	Dir_light1.initScene();
 	Dir_light2.initScene();
-	if(robot.keys.isCarMode){
-		Head_light1.initScene();
-		Head_light2.initScene();
-	}
-	//Headlight position calculations
-	double x = robot.keys.hip_TX;
-	double y = robot.keys.hip_TZ;
-
-	double dist = 0.67-0.02;
-	double angle = robot.keys.hip_Z;
-	double delta_x = dist * sin( angle * M_PI / 180);
-	double delta_y = dist * cos( angle * M_PI / 180);
-
-	double dist_centre = 1.2;
-	double delta_x_centre = dist_centre * sin( angle * M_PI / 180);
-	double delta_y_centre = dist_centre * cos( angle * M_PI / 180);
-
-	double dist2=0.13-0.03;
-	double angle2=robot.keys.hip_Z;
-	double delta_x2 = dist2 * cos( angle2 * M_PI / 180);
-	double delta_y2 = dist2 * sin( angle2 * M_PI / 180);
-
-	if(robot.keys.isCarMode){
-	  //HeadLight1
-
-	  Head_light1.updatePosition((x-delta_x-delta_x2),-1.47,(y-delta_y+delta_y2));
-	  Head_light1.updateDirection(-delta_x_centre,0-0.2,-delta_y_centre);
-	  
-	glPushMatrix();
-	    glTranslatef((x-delta_x-delta_x2),-1.47,(y-delta_y+delta_y2));
-	    if(!Head_light1.light)
-	    	glColor3f(0,0,0);
-	    else
-		glColor3f(0.9,0.91,0.98);
-	    glRotatef(angle,0,1,0);
-	    defineCylinder(0.05,0.03,20);
-	    glColor3f(1,1,1);
-	 glPopMatrix();
-	
-	//HeadLight2
-	  Head_light2.updatePosition(x-delta_x+delta_x2,-1.47,y-delta_y-delta_y2);
-	  Head_light2.updateDirection(-delta_x_centre,0-0.2,-delta_y_centre);
-
-	  glPushMatrix();
-	    glTranslatef((x-delta_x+delta_x2),-1.47,(y-delta_y-delta_y2));
-	    if(!Head_light2.light)
-	    	glColor3f(0,0,0);
-	    else
-		glColor3f(0.9,0.91,0.98);
-	    glRotatef(angle,0,1,0);
-	    defineCylinder(0.05,0.03,20);
-	    glColor3f(1,1,1);
-	  glPopMatrix();
-	}
 
 }
 
@@ -291,9 +218,9 @@ void World::key_callback(GLFWwindow* window, int key, int scancode, int action, 
 		Dir_light2.light = !Dir_light2.light; 
 
 	if (key == GLFW_KEY_O && action == GLFW_PRESS && mods == GLFW_MOD_SHIFT ) 
-		Head_light1.light = !Head_light1.light; 
+		robot.Head_light1.light = !robot.Head_light1.light; 
 	if (key == GLFW_KEY_O && action == GLFW_PRESS && mods == 0) 
-		Head_light2.light = !Head_light2.light; 
+		robot.Head_light2.light = !robot.Head_light2.light; 
 
 	if(key == GLFW_KEY_F5 && action == GLFW_PRESS && mods == 0) {
 		glEnable(GL_LIGHTING);

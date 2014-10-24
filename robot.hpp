@@ -3,6 +3,7 @@
 #define _ROBOT_HPP_
 
 #include "keycontrols.hpp"
+#include "shading.hpp"
 
 class point
 {
@@ -114,17 +115,24 @@ private:
     GLuint RightFoot;
     
     GLuint* texture;
+
     
     enum {LOGO,BLUE,RED,HEAD,WHEEL,HIP,BUST_LEFT,
     RIGHT_FOOT_RIGHT};
 
 public:
 
+    SpotLight Head_light1;
+    SpotLight Head_light2;
+    
     KeyControls keys;
     Robot()
     {
       initStructuralConstraints();
+      
       initTexture();
+      initLights();
+      
       initHip();
       initBust();
       initNeck();
@@ -157,6 +165,10 @@ public:
     }
 
   void initTexture();
+
+  void initLights();
+  void setLights();
+  void setRobotProperties();
 
   void initStructuralConstraints();
   //initilize Hip structure

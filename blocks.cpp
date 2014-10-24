@@ -218,12 +218,12 @@ namespace Blocks {
 	     }
 	 }
 
-	 void defineCylinder(double radius,double length,double numSteps) {
+	 void defineCylinder(double radius,double length,double numSteps,double color) {
 	 	double hl = length * 0.5f;
 		double a = 0.0f;
 		double step = 2 * (M_PI / (double)numSteps);
 		
-		//glColor3f(0.1,0.1,0.1);
+		glColor3f(0.1,0.1,0.1);
 		glBegin(GL_TRIANGLE_STRIP);
 		for (int i = 0; i < numSteps; ++i)
 		{
@@ -237,7 +237,7 @@ namespace Blocks {
 		    a += step;
 		}
 		glEnd();
-		//glColor3f(1,1,1);
+		glColor3f(color,color,color);
 
 		a = 0;
 		glBegin(GL_TRIANGLE_FAN);
@@ -269,6 +269,7 @@ namespace Blocks {
 		}
 		glEnd();
 
+		glColor3f(1,1,1);
 	 }
 
 }

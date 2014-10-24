@@ -14,8 +14,6 @@ public:
     int Camera;
 	DirectionalLight Dir_light1;
 	DirectionalLight Dir_light2;
-	SpotLight Head_light1;
-	SpotLight Head_light2;
 
 	World() {
 		
@@ -35,7 +33,6 @@ public:
 
 	void debugCoord();
 	void setSceneProperties();
-	void setRobotProperties();
 };
 
 

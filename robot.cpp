@@ -171,7 +171,7 @@ void Robot::initNeck()
     glNewList(Neck,GL_COMPILE);
 	glPushMatrix();
 	   glRotatef(90,1,0,0);
-     	   defineCylinder(0.075,0.03,20);
+     	   defineCylinder(0.075,0.03,20,1);
 	glPopMatrix();
     glEndList();
 }
@@ -574,7 +574,7 @@ void Robot::makeBust(double angle_x,double angle_y,double angle_z)
     glRotatef(keys.wheel_angle,0,0,1);
     glRotatef(keys.wheel_rotate,1,0,0);
     glRotatef(-90,0,1,0);
-    defineCylinder(0.075,0.1,24);
+    defineCylinder(0.075,0.1,24,1);
     glRotatef(90,0,1,0);
     glRotatef(-keys.wheel_rotate,1,0,0);
     glRotatef(-keys.wheel_angle,0,0,1);
@@ -584,7 +584,7 @@ void Robot::makeBust(double angle_x,double angle_y,double angle_z)
     glRotatef(keys.wheel_angle,0,0,1);
     glRotatef(keys.wheel_rotate,1,0,0);
     glRotatef(-90,0,1,0);
-    defineCylinder(0.075,0.1,24);
+    defineCylinder(0.075,0.1,24,1);
     glRotatef(90,0,1,0);
     glRotatef(-keys.wheel_rotate,1,0,0);
     glRotatef(-keys.wheel_angle,0,0,1);
@@ -803,7 +803,7 @@ void Robot::makeLeftUpperLeg(double angle_x,double angle_y,double angle_z)
     glTranslatef(0.075,0,-0.075);
     glRotatef(keys.wheel_rotate,1,0,0);
     glRotatef(-90,0,1,0);
-    defineCylinder(0.075,0.1,24);    
+    defineCylinder(0.075,0.1,24,1);    
     glRotatef(90,0,1,0);
     glRotatef(-keys.wheel_rotate,1,0,0);
     glTranslatef(-0.075,0,0.075);
@@ -836,7 +836,7 @@ void Robot::makeRightUpperLeg(double angle_x,double angle_y,double angle_z)
     glTranslatef(-0.075,0,-0.075);
     glRotatef(keys.wheel_rotate,1,0,0);
     glRotatef(-90,0,1,0);
-    defineCylinder(0.075,0.1,24);    
+    defineCylinder(0.075,0.1,24,1);    
     glRotatef(90,0,1,0);
     glRotatef(-keys.wheel_rotate,1,0,0);
     glTranslatef(0.075,0,0.075);
@@ -923,9 +923,100 @@ void Robot::setFrameConstraints()
 
 }
 
+void Robot::initLights() {
+    //HeadLight1
+    GLfloat light_position3[4]={0,-1.37,0,1};
+    GLfloat light_diffuse3[4]={1.0, 1.0, 1.0, 1.0};
+    GLfloat light_specular3[4]={1.0, 1.0, 1.0, 1.0};
+    GLfloat spot_direction3[4]={0,-1.5,0};
+    Head_light1=SpotLight(light_position3,light_diffuse3,light_specular3,spot_direction3,GL_LIGHT2);
+
+    //HeadLight2
+    GLfloat light_position4[4]={0,-1.37,0,1};
+    GLfloat light_diffuse4[4]={1.0, 1.0, 1.0, 1.0};
+    GLfloat light_specular4[4]={1.0, 1.0, 1.0, 1.0};
+    GLfloat spot_direction4[4]={0,-1.5,0};
+    Head_light2=SpotLight(light_position4,light_diffuse4,light_specular4,spot_direction4,GL_LIGHT3);
+
+}
+
+void Robot::setLights() {
+    if(!keys.isCarMode){
+        Head_light1.light = false;
+        Head_light2.light = false;
+    }
+    if(keys.isCarMode){
+        //Headlight position calculations
+        double x = keys.hip_TX;
+        double y = keys.hip_TZ;
+
+        double dist = 0.67-0.02;
+        double angle = keys.hip_Z;
+        double delta_x = dist * sin( angle * M_PI / 180);
+        double delta_y = dist * cos( angle * M_PI / 180);
+
+        double dist_centre = 1.2;
+        double delta_x_centre = dist_centre * sin( angle * M_PI / 180);
+        double delta_y_centre = dist_centre * cos( angle * M_PI / 180);
+
+        double dist2=0.13-0.03;
+        double angle2=keys.hip_Z;
+        double delta_x2 = dist2 * cos( angle2 * M_PI / 180);
+        double delta_y2 = dist2 * sin( angle2 * M_PI / 180);
+
+        //HeadLight1
+        Head_light1.updatePosition((x-delta_x-delta_x2),-1.47,(y-delta_y+delta_y2));
+        Head_light1.updateDirection(-delta_x_centre,0-0.2,-delta_y_centre);
+
+        //HeadLight2
+        Head_light2.updatePosition(x-delta_x+delta_x2,-1.47,y-delta_y-delta_y2);
+        Head_light2.updateDirection(-delta_x_centre,0-0.2,-delta_y_centre);
+        
+        double color = 0;
+        glPushMatrix();
+            glTranslatef((x-delta_x-delta_x2),-1.47,(y-delta_y+delta_y2));
+            if(!Head_light1.light)
+                color = 0.1;
+            else
+                color = 0.91;
+            glRotatef(angle,0,1,0);
+            defineCylinder(0.03,0.03,20,color);
+         glPopMatrix();
+        
+        
+          glPushMatrix();
+            glTranslatef((x-delta_x+delta_x2),-1.47,(y-delta_y-delta_y2));
+            if(!Head_light2.light)
+                color = 0.1;
+            else
+                color = 0.91;
+            glRotatef(angle,0,1,0);
+            defineCylinder(0.03,0.03,20,color);
+          glPopMatrix();
+    }
+
+
+    Head_light1.initScene();
+    Head_light2.initScene();
+}
+
+void Robot::setRobotProperties(){
+    GLfloat scene_specular[4]={1.0, 1.0, 1.0, 1.0};
+    GLfloat scene_diffuse[4]={1.0, 0.7, 0.7, 1.0};
+    glMaterialf(GL_FRONT, GL_SHININESS, 100.0f);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, scene_specular);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, scene_diffuse);
+}
+
+// void Robot::makeHeadLights() {
+        
+// }
+
 void Robot::makeRobot(void)
 {   
     keys.movement(glfwGetCurrentContext());
+    setLights();
+
     glPushMatrix();
     setFrameConstraints();
     makeHip(keys.hip_TX,keys.hip_TY,keys.hip_TZ,keys.hip_X,keys.hip_Y,keys.hip_Z);
