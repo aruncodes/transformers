@@ -304,7 +304,6 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 }
 
 void KeyControls::movement(GLFWwindow* window) {
-
 	int angle = 0;
 
 	if( glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS  && frame==9) {
@@ -315,7 +314,7 @@ void KeyControls::movement(GLFWwindow* window) {
 		double y = sin(hip_Z * M_PI/180.0);
 		double dist = 0.025;
 
-		if((hip_TX-dist * y)<=1.1 && (hip_TX-dist * y)>=-1.1 && (hip_TZ-dist * x)<=1.3 && (hip_TZ-dist * x)>=-1.1){
+		if((hip_TX-(dist+0.425)* y)<=1.3 && (hip_TX-(dist+0.425)*y)>=-1.3 && (hip_TZ-(dist+0.425)*x)<=1.3 && (hip_TZ-(dist+0.425)*x)>=-1.3){
 			hip_TX -=   dist * y;
 			hip_TZ -=   dist * x;
 		}
@@ -332,7 +331,7 @@ void KeyControls::movement(GLFWwindow* window) {
 		
 		double dist = 0.025;
 	
-		if( (hip_TX+dist * y)<=1.1 && (hip_TX+dist * y)>=-1.1 && (hip_TZ+dist * x)<=1.3 && (hip_TZ+dist * x)>=-1.1){
+		if( (hip_TX+(dist-0.425)* y)<=1.3 && (hip_TX+(dist-0.425)* y)>=-1.3 && (hip_TZ+(dist-0.425)* x)<=1.3 && (hip_TZ+(dist-0.425)* x)>=-1.3){
 			hip_TX +=   dist * y;
 			hip_TZ +=   dist * x;
 		}
@@ -344,16 +343,31 @@ void KeyControls::movement(GLFWwindow* window) {
 	    wheel_angle=20;
 		
 		if(angle) {
+
+			double x = cos((hip_Z+angle) * M_PI/180.0);
+			double y = sin((hip_Z+angle) * M_PI/180.0);
+
+			double dist = -0.425;
 			
-			hip_Z += angle;
-			if(hip_Z > 360) hip_Z -= 360;
+			if( (hip_TX+dist* y)<=1.3 && (hip_TX+dist* y)>=-1.3 && (hip_TZ+dist* x)<=1.3 && (hip_TZ+dist* x)>=-1.3){
+				hip_Z += angle;
+				if(hip_Z > 360) hip_Z -= 360;
+			}
 		}
 			
 	} else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS && frame==9) {
 	    wheel_angle=-20;
 		if(angle) {
-			hip_Z -= angle;
-			if(hip_Z < 0) hip_Z += 360;
-		}
+			double x = cos((hip_Z-angle) * M_PI/180.0);
+			double y = sin((hip_Z-angle) * M_PI/180.0);
+
+			double dist = -0.425;
+			
+			if( (hip_TX+dist* y)<=1.3 && (hip_TX+dist* y)>=-1.3 && (hip_TZ+dist* x)<=1.3 && (hip_TZ+dist* x)>=-1.3){
+				hip_Z -= angle;
+				if(hip_Z < 0) hip_Z += 360;
+			}
+		}	
+
 	}
 }
