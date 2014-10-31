@@ -20,7 +20,7 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 
 	/* Start animation */
 	if(key == GLFW_KEY_C) {
-		key_frame.startAnim = 1;
+		startTransform = 1;
 	}
 
 	
@@ -271,15 +271,15 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 	}
 
 	/*if( key == GLFW_KEY_LEFT  && frame==9) {
-		if(wheel_angle!=20)
-		    wheel_angle=20;
+		if(key_frame.wheel_angle!=20)
+		    key_frame.wheel_angle=20;
 			hip_Z += 5;
 			if(hip_Z > 360) hip_Z -= 360;
 
 	}
 	else if( key == GLFW_KEY_RIGHT && frame==9 ) {
-		if(wheel_angle!=-20)
-		    wheel_angle=-20;
+		if(key_frame.wheel_angle!=-20)
+		    key_frame.wheel_angle=-20;
 
 			hip_Z -= 5;
 			if(hip_Z < 0) hip_Z += 360;
@@ -312,7 +312,7 @@ void KeyControls::movement(GLFWwindow* window) {
 	int angle = 0;
 
 	if( glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS  && frame==9) {
-		wheel_angle=0;
+		key_frame.wheel_angle=0;
 		angle = +3;
 		
 		double x = cos(key_frame.hip_Z * M_PI/180.0);
@@ -325,10 +325,10 @@ void KeyControls::movement(GLFWwindow* window) {
 		}
 		
 
-		wheel_rotate -= (dist * 180) / (0.075 * M_PI);
+		key_frame.wheel_rotate -= (dist * 180) / (0.075 * M_PI);
 	}
 	else if( glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS  && frame==9) {
-		wheel_angle=0;
+		key_frame.wheel_angle=0;
 		angle = -3;
 
 		double x = cos(key_frame.hip_Z * M_PI/180.0);
@@ -341,11 +341,11 @@ void KeyControls::movement(GLFWwindow* window) {
 			key_frame.hip_TZ +=   dist * x;
 		}
 	
-		wheel_rotate += (dist * 180) / (0.075 * M_PI);
+		key_frame.wheel_rotate += (dist * 180) / (0.075 * M_PI);
 	}
 
 	if(glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS && frame==9) {
-	    wheel_angle=20;
+	    key_frame.wheel_angle=20;
 		
 		if(angle) {
 
@@ -361,7 +361,7 @@ void KeyControls::movement(GLFWwindow* window) {
 		}
 			
 	} else if(glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS && frame==9) {
-	    wheel_angle=-20;
+	    key_frame.wheel_angle=-20;
 		if(angle) {
 			double x = cos((key_frame.hip_Z-angle) * M_PI/180.0);
 			double y = sin((key_frame.hip_Z-angle) * M_PI/180.0);

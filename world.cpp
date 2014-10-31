@@ -18,7 +18,7 @@ void World::drawScene() {
 	debugCoord();
 
 	robot.makeRobot();
-	robot.animate();
+	robot.transform();
 }
 
 void World::initLights() {

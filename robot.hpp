@@ -243,7 +243,7 @@ public:
   void makeRobot(void);
   void setFrameConstraints();
 
-  void animate();
+  void transform();
 }; 
 
 #endif
