@@ -6,7 +6,7 @@
 double prev_angle=0;
 void Robot::animate() {
 	
-	if(!keys.startAnim)
+	if(!keys.key_frame.startAnim)
 		return;
 
 	if(keys.stage == 0) keys.frame =  0;
@@ -24,34 +24,34 @@ void Robot::animate() {
 	
 	if(keys.stage == 25) {
 		if( keys.isCarMode){
-			keys.hip_Y = prev_angle;
+			keys.key_frame.hip_Y = prev_angle;
 		}
 	}
 
 	if(keys.stage == 75) {
-		double cur = keys.hip_X;
+		double cur = keys.key_frame.hip_X;
 		if( !keys.isCarMode){
-			keys.hip_X += -90;
-			prev_angle = keys.hip_Y;
-			keys.hip_Y = 0;
+			keys.key_frame.hip_X += -90;
+			prev_angle = keys.key_frame.hip_Y;
+			keys.key_frame.hip_Y = 0;
 		} else {
-			keys.hip_X += 90;
-			prev_angle = keys.hip_Z;
-			keys.hip_Z = 0;
+			keys.key_frame.hip_X += 90;
+			prev_angle = keys.key_frame.hip_Z;
+			keys.key_frame.hip_Z = 0;
 		}
 	}
 
 	if(keys.stage == 85) {
 		if( !keys.isCarMode){
-			keys.hip_Z = prev_angle;
+			keys.key_frame.hip_Z = prev_angle;
 		}
 	}
 	
 	if(keys.stage == 95) {
 		if( !keys.isCarMode){
-			keys.hip_TY = -1.0;
+			keys.key_frame.hip_TY = -1.0;
 		} else {
-			keys.hip_TY = -0.5;
+			keys.key_frame.hip_TY = -0.5;
 		}
 	}
 
@@ -67,13 +67,13 @@ void Robot::animate() {
 
 	if(keys.stage > 100){
 		// End animation when stage gone above 100
-		keys.startAnim=0;
+		keys.key_frame.startAnim=0;
 		// keys.stage=100;
 		keys.isCarMode = 1;
 	}
 	if(keys.stage < 0 ) {
 		// End animation when stage gone below 0
-		keys.startAnim=0;
+		keys.key_frame.startAnim=0;
 		// keys.stage=0;
 		keys.isCarMode = 0;	
 	}

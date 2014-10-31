@@ -1,13 +1,12 @@
-#ifndef _KEYCONTROLS_HPP_
-#define _KEYCONTROLS_HPP_
+#ifndef _FRAME_HPP_
+#define _FRAME_HPP_
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include "frame.hpp"
 
-class KeyControls {
+class Frame {
 public:
-    /*double bust_X,bust_Y,bust_Z;
+    double bust_X,bust_Y,bust_Z;
 
     double head_X,head_Y,head_Z;
 
@@ -24,27 +23,19 @@ public:
     double rightLowerLeg_X;
     double leftFoot_X;
     double rightFoot_X;
-    double hip_TX,hip_TY,hip_TZ,hip_X,hip_Y,hip_Z;*/
-    int wheel_angle,wheel_rotate;
-    int frame;
-    int isCarMode;
-    //int startAnim,
-    int stage;
-    Frame key_frame;
+    double hip_TX,hip_TY,hip_TZ,hip_X,hip_Y,hip_Z;
+    int startAnim;
 
-	KeyControls() {
-		// Default values
-		//glLoadIdentity();
-		key_frame=Frame();
+    Frame() {
 		//Arms
-		/*leftUpperArm_X=leftUpperArm_Y=leftUpperArm_Z=10;
+		leftUpperArm_X=leftUpperArm_Y=leftUpperArm_Z=10;
 		leftLowerArm_X = 10;
 		leftHand_X=10;
 		
 		rightUpperArm_X=rightUpperArm_Y=rightUpperArm_Z=10;
 		rightLowerArm_X =10;
 		rightHand_X=10;
-		
+
 		//Bust
 		bust_X=bust_Y=bust_Z=0;
 
@@ -64,20 +55,13 @@ public:
 
 		//Hip
 		hip_TX=hip_TZ=0;
-		hip_TY=-0.5;//-1.4;
-		hip_X=hip_Y=hip_Z=0;*/
-
-		wheel_angle=0;
-		wheel_rotate=0;
+		hip_TY=-0.5;
+		hip_X=hip_Y=hip_Z=0;
 
 		//Animation
-		stage=0;
-		isCarMode=0;
-		frame=0;
+		startAnim=0;
 	}
-
-    void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-    void movement(GLFWwindow* window);
 };
+
 
 #endif

@@ -947,11 +947,11 @@ void Robot::setLights() {
     }
     if(keys.isCarMode){
         //Headlight position calculations
-        double x = keys.hip_TX;
-        double y = keys.hip_TZ;
+        double x = keys.key_frame.hip_TX;
+        double y = keys.key_frame.hip_TZ;
 
         double dist = 0.67-0.02;
-        double angle = keys.hip_Z;
+        double angle = keys.key_frame.hip_Z;
         double delta_x = dist * sin( angle * M_PI / 180);
         double delta_y = dist * cos( angle * M_PI / 180);
 
@@ -960,7 +960,7 @@ void Robot::setLights() {
         double delta_y_centre = dist_centre * cos( angle * M_PI / 180);
 
         double dist2=0.13-0.03;
-        double angle2=keys.hip_Z;
+        double angle2=keys.key_frame.hip_Z;
         double delta_x2 = dist2 * cos( angle2 * M_PI / 180);
         double delta_y2 = dist2 * sin( angle2 * M_PI / 180);
 
@@ -1019,34 +1019,34 @@ void Robot::makeRobot(void)
 
     glPushMatrix();
     setFrameConstraints();
-    makeHip(keys.hip_TX,keys.hip_TY,keys.hip_TZ,keys.hip_X,keys.hip_Y,keys.hip_Z);
+    makeHip(keys.key_frame.hip_TX,keys.key_frame.hip_TY,keys.key_frame.hip_TZ,keys.key_frame.hip_X,keys.key_frame.hip_Y,keys.key_frame.hip_Z);
 
     glPushMatrix();
-        makeLeftUpperLeg(keys.leftUpperLeg_X,keys.leftUpperLeg_Y,keys.leftUpperLeg_Z);
-        makeLeftLowerLeg(keys.leftLowerLeg_X);
-        makeLeftFoot(keys.leftFoot_X);
+        makeLeftUpperLeg(keys.key_frame.leftUpperLeg_X,keys.key_frame.leftUpperLeg_Y,keys.key_frame.leftUpperLeg_Z);
+        makeLeftLowerLeg(keys.key_frame.leftLowerLeg_X);
+        makeLeftFoot(keys.key_frame.leftFoot_X);
     glPopMatrix();
 
     glPushMatrix();
-        makeRightUpperLeg(keys.rightUpperLeg_X,keys.rightUpperLeg_Y,keys.rightUpperLeg_Z);
-        makeRightLowerLeg(keys.rightLowerLeg_X);
-        makeRightFoot(keys.rightFoot_X);
+        makeRightUpperLeg(keys.key_frame.rightUpperLeg_X,keys.key_frame.rightUpperLeg_Y,keys.key_frame.rightUpperLeg_Z);
+        makeRightLowerLeg(keys.key_frame.rightLowerLeg_X);
+        makeRightFoot(keys.key_frame.rightFoot_X);
     glPopMatrix();
 
     glPushMatrix();
-        makeBust(keys.bust_X,keys.bust_Y,keys.bust_Z);
+        makeBust(keys.key_frame.bust_X,keys.key_frame.bust_Y,keys.key_frame.bust_Z);
 
         glPushMatrix();
 	        makeLeftShoulder();
-            makeLeftUpperArmFront(keys.leftUpperArm_X,keys.leftUpperArm_Y,keys.leftUpperArm_Z);
+            makeLeftUpperArmFront(keys.key_frame.leftUpperArm_X,keys.key_frame.leftUpperArm_Y,keys.key_frame.leftUpperArm_Z);
     		glPushMatrix();
     		    makeLeftUpperArmBehind(behindArmAngle);
     		glPopMatrix();
-                makeLeftLowerArmFront(keys.leftLowerArm_X);
+                makeLeftLowerArmFront(keys.key_frame.leftLowerArm_X);
     		glPushMatrix();
     		    makeLeftLowerArmBehind(behindArmAngle);
     		glPopMatrix();
-                makeLeftFrontHand(keys.leftHand_X);
+                makeLeftFrontHand(keys.key_frame.leftHand_X);
     		glPushMatrix();
     		    makeLeftBehindHand(behindArmAngle);
     		glPopMatrix();
@@ -1054,15 +1054,15 @@ void Robot::makeRobot(void)
 
         glPushMatrix();
 	        makeRightShoulder();
-            makeRightUpperArmFront(keys.rightUpperArm_X,keys.rightUpperArm_Y,keys.rightUpperArm_Z);
+            makeRightUpperArmFront(keys.key_frame.rightUpperArm_X,keys.key_frame.rightUpperArm_Y,keys.key_frame.rightUpperArm_Z);
     		glPushMatrix();
     		    makeRightUpperArmBehind(behindArmAngle);
     		glPopMatrix();
-                makeRightLowerArmFront(keys.rightLowerArm_X);
+                makeRightLowerArmFront(keys.key_frame.rightLowerArm_X);
     		glPushMatrix();
     		    makeRightLowerArmBehind(behindArmAngle);
     		glPopMatrix();
-                makeRightFrontHand(keys.rightHand_X);
+                makeRightFrontHand(keys.key_frame.rightHand_X);
     		glPushMatrix();
     		    makeRightBehindHand(behindArmAngle);
     		glPopMatrix();
@@ -1070,7 +1070,7 @@ void Robot::makeRobot(void)
 
         glPushMatrix();
             makeNeck();
-            makeHead(keys.head_X,keys.head_Y,keys.head_Z);
+            makeHead(keys.key_frame.head_X,keys.key_frame.head_Y,keys.key_frame.head_Z);
         glPopMatrix();
     glPopMatrix();
     glPopMatrix();

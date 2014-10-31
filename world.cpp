@@ -244,11 +244,11 @@ void World::selectCamera()
 	
 	//Transformation for Camera2 : inside car
 	if(Camera==2){
-		double x = robot.keys.hip_TX;
-		double y = robot.keys.hip_TZ;
+		double x = robot.keys.key_frame.hip_TX;
+		double y = robot.keys.key_frame.hip_TZ;
 
 		double dist = -0.4;
-		double angle = robot.keys.hip_Z;
+		double angle = robot.keys.key_frame.hip_Z;
 		double delta_x = dist * sin( angle * M_PI / 180);
 		double delta_y = dist * cos( angle * M_PI / 180);
 
@@ -265,25 +265,25 @@ void World::selectCamera()
 	//Transformation for Camera3 : Follows car from behind
 	if(Camera==3){
 
-			double x = robot.keys.hip_TX;
-			double y = robot.keys.hip_TZ;
+			double x = robot.keys.key_frame.hip_TX;
+			double y = robot.keys.key_frame.hip_TZ;
 
 			double dist = 1.5;
-			double angle = robot.keys.hip_Z;
+			double angle = robot.keys.key_frame.hip_Z;
 			double delta_x = dist * sin( angle * M_PI / 180);
 			double delta_y = dist * cos( angle * M_PI / 180);
 
 		gluPerspective(30,1,1,-1);
 		gluLookAt(
 			x + delta_x,	-1,		y + delta_y,
-			robot.keys.hip_TX,-1.4,robot.keys.hip_TZ,
+			robot.keys.key_frame.hip_TX,-1.4,robot.keys.key_frame.hip_TZ,
 			0.0f,1.0f,0.0f);
 	}
 	//Transformation for Camera4 : Always looks at car
 	if(Camera==4){
 		gluPerspective(60,1,1,-1);		
 		gluLookAt(0,0,3,
-			robot.keys.hip_TX,-1.4,robot.keys.hip_TZ,
+			robot.keys.key_frame.hip_TX,-1.4,robot.keys.key_frame.hip_TZ,
 			0.0f,1.0f,0.0f);
 	}
 }
@@ -292,11 +292,11 @@ void World::debugCoord() {
 	if(1) return;
 	// Coordinate debug code
 	// Sphere to know the position of camera in coordinate system
-	double x = robot.keys.hip_TX;
-	double y = robot.keys.hip_TZ;
+	double x = robot.keys.key_frame.hip_TX;
+	double y = robot.keys.key_frame.hip_TZ;
 
 	double dist = 0.67;
-	double angle = robot.keys.hip_Z;
+	double angle = robot.keys.key_frame.hip_Z;
 	double delta_x = dist * sin( angle * M_PI / 180);
 	double delta_y = dist * cos( angle * M_PI / 180);
 
@@ -305,7 +305,7 @@ void World::debugCoord() {
 	double delta_y_centre = dist_centre * cos( angle * M_PI / 180);
 
 	double dist2=0.13;
-	double angle2=robot.keys.hip_Z;
+	double angle2=robot.keys.key_frame.hip_Z;
 	double delta_x2 = dist2 * cos( angle2 * M_PI / 180);
 	double delta_y2 = dist2 * sin( angle2 * M_PI / 180);
 
