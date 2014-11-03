@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <stdio.h>
+#include <sstream>
 #include <GL/glew.h>
 
 #include "robot.hpp"
@@ -10,6 +11,7 @@
 
 using namespace Blocks;
 using namespace Texture;
+using namespace std;
 
 void Robot::initStructuralConstraints()
 {
@@ -1074,4 +1076,20 @@ void Robot::makeRobot(void)
         glPopMatrix();
     glPopMatrix();
     glPopMatrix();
+}
+
+string Robot::getHeadLightVector() {
+    ostringstream str;
+
+    str << Head_light1.light << " " << Head_light2.light ;
+
+    string out = str.str();
+
+    return out;
+}
+
+void Robot::setHeadLightVector(string vector) {
+    istringstream str(vector);
+    
+    str >> Head_light1.light >> Head_light2.light ;
 }

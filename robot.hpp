@@ -244,6 +244,9 @@ public:
   void setFrameConstraints();
 
   void transform();
+
+  std::string getHeadLightVector();
+  void setHeadLightVector(std::string);
 }; 
 
 #endif

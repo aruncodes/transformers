@@ -288,6 +288,22 @@ void World::selectCamera()
 	}
 }
 
+string World::getLightVector() {
+    ostringstream str;
+
+    str << Dir_light1.light << " " << Dir_light2.light ;
+
+    string out = str.str();
+
+    return out;
+}
+
+void World::setLightVector(string vector) {
+    istringstream str(vector);
+    
+    str >> Dir_light1.light >> Dir_light2.light ;
+}
+
 void World::debugCoord() {
 	if(1) return;
 	// Coordinate debug code

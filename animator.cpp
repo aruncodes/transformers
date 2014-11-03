@@ -61,6 +61,8 @@ void Animator::record() {
 	keyfile.open(recordFile.c_str(),ios::out | ios::app);
 	if(keyfile.is_open()) {
 		keyfile << frame.getCurrentVector() << endl;
+		keyfile << WORLD.getLightVector() << endl;
+		keyfile << WORLD.robot.getHeadLightVector() << endl;
 		keyfile.close();
 	} else {
 		cout<<" Error opening keyframe file" << endl;
@@ -70,17 +72,23 @@ void Animator::record() {
 Frame Animator::read(ifstream &keyfile) {
 	Frame frame;
 
-	string line;
+	string vector,light,headlight;
 	if(keyfile.is_open()) {
-		getline(keyfile,line);
+		getline(keyfile,vector);
+		getline(keyfile,light);
+		getline(keyfile,headlight);
 	} else {
 		cout<<" Error opening keyframe file" << endl;
 		frame.valid = false;
 	}
 
-	frame.updateFrameFromVector(line);
+	frame.updateFrameFromVector(vector);
+	if(!light.empty())
+		WORLD.setLightVector(light);
+	if(!headlight.empty())
+		WORLD.robot.setHeadLightVector(headlight);
 	
-	if(line.empty())
+	if(vector.empty())
 		frame.valid = false;
 
 	return frame;

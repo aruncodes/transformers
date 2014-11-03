@@ -33,6 +33,9 @@ public:
 
 	void debugCoord();
 	void setSceneProperties();
+
+	std::string getLightVector();
+	void setLightVector(std::string);
 };
 
 
