@@ -19,12 +19,27 @@ public:
 	int mode;
 	World WORLD;
 	Frame nextFrame;
+	int frame_no;
+	double no_of_inbetween_frames[88];
 
 	Animator() {
   		recordFile = RECORDFILE;
   		WORLD=World();
   		nextFrame=Frame();
   		mode = NONE;
+		frame_no=0;
+		double copy_of_inbetween_frames[88]={3,5,3,3,5,3,3,5,3,3,
+						     5,3,3,5,3,3,5,3,3,5,
+						     3,3,5,3,3,5,3,3,5,3,
+						     3,5,3,3,5,3,3,5,3,3,
+						     40,3,5,5,3,3,5,3,3,5,
+						     3,3,5,3,3,5,3,3,5,3,
+						     3,5,3,3,5,3,3,5,3,3,5,
+						     3,3,5,3,3,5,3,3,5,3,
+						     20,20,20,20,20,20,20};
+		for(int i=0;i<88;i++){
+		    no_of_inbetween_frames[i]=copy_of_inbetween_frames[i];
+		}
 	}
 
 	void renderFrame();

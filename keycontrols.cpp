@@ -25,6 +25,46 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 
 	
 
+//--------------------------------------------------
+
+/* Hip Y control*/
+	if( key == GLFW_KEY_P && mods == 0 && action == GLFW_PRESS) {
+		key_frame.hip_Y += 5;
+	} else if( key == GLFW_KEY_P && mods == GLFW_MOD_SHIFT ) {
+		key_frame.hip_Y -= 5;
+	} 
+
+/* Hip TX control*/
+	if( key == GLFW_KEY_LEFT && mods == GLFW_MOD_SHIFT && action == GLFW_PRESS) {
+		key_frame.hip_TX -= 0.05;
+	} else if( key == GLFW_KEY_RIGHT && mods == GLFW_MOD_SHIFT && action == GLFW_PRESS) {
+		key_frame.hip_TX += 0.05;
+	}
+
+/* Hip TZ control*/
+	if( key == GLFW_KEY_UP && mods == GLFW_MOD_SHIFT && action == GLFW_PRESS) {
+		if(!isCarMode && frame!=9)
+			key_frame.hip_TZ -= 0.05;
+	} else if( key == GLFW_KEY_DOWN && mods == GLFW_MOD_SHIFT && action == GLFW_PRESS) {
+		if(!isCarMode && frame!=9)
+			key_frame.hip_TZ += 0.05;
+	}
+
+/*Left Foot*/
+	if( key == GLFW_KEY_N && mods == 0) {
+			key_frame.leftFoot_X -= 5;
+	} else if( key == GLFW_KEY_N && mods == GLFW_MOD_SHIFT ) {
+			key_frame.leftFoot_X += 5;
+	}
+
+/*Right Foot*/
+	if( key == GLFW_KEY_F11 && action == GLFW_PRESS) {
+			key_frame.rightFoot_X -= 5;
+	} else if( key == GLFW_KEY_F12 && action == GLFW_PRESS) {
+			key_frame.rightFoot_X += 5;
+	} 
+
+
 //---------Arm Controls-----------------
 /* Left lower arm control*/
 	if( key == GLFW_KEY_X && mods == 0) {

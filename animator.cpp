@@ -29,14 +29,14 @@ void Animator::draw() {
 void Animator::play() {
 	ifstream keyfile;
 	keyfile.open(recordFile.c_str(),ios::in);
-
+	frame_no=0;
 	Frame prev = read(keyfile);
 	Frame next,current;
 	do {
 		next = read(keyfile);
 		if(!next.valid) break;
 
-		for( int i = 0; i <= 100; i += 10) {
+		for( int i = 0; i <= 10*no_of_inbetween_frames[frame_no]; i += 10) {
 			current = interpolate(next,prev,i);
 			
 			WORLD.robot.keys.key_frame = current; // update frame
@@ -48,6 +48,7 @@ void Animator::play() {
 			while(glfwGetTime() <= 0.05);
 		}
 		prev = next;
+		frame_no++;
 	}while( !keyfile.eof() );
 
 	keyfile.close();
@@ -106,7 +107,7 @@ Frame Animator::interpolate(Frame &next,Frame &prev,int progress) {
 	//
 	Frame delta = prev;
 
-	double prog = double( progress) / 100.0;
+	double prog = double( progress) / (10.0*no_of_inbetween_frames[frame_no]);
 
 	delta.bust_X += prog * ( next.bust_X - prev.bust_X );
 	delta.bust_Y += prog * ( next.bust_Y - prev.bust_Y );
@@ -153,7 +154,7 @@ Frame Animator::interpolate(Frame &next,Frame &prev,int progress) {
 	delta.hip_Y += prog * ( next.hip_Y - prev.hip_Y );
 	delta.hip_Z += prog * ( next.hip_Z - prev.hip_Z );
 
-	cout<<prog << " : " <<delta.getCurrentVector() <<endl;
+	//cout<<prog << " : " <<delta.getCurrentVector() <<endl;
 	return delta;
 }
 
