@@ -29,7 +29,7 @@ void SpotLight::initScene()
 
   glLightfv(light_enum, GL_SPOT_DIRECTION, spot_direction);
   glLightf(light_enum, GL_SPOT_EXPONENT,10.0);
-  glLightf(light_enum, GL_SPOT_CUTOFF,25.0);
+  glLightf(light_enum, GL_SPOT_CUTOFF,15.0);
 
   if(light){
     glEnable(light_enum);

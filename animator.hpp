@@ -21,6 +21,7 @@ public:
 	Frame nextFrame;
 	int frame_no;
 	double no_of_inbetween_frames[88];
+	
 
 	Animator() {
   		recordFile = RECORDFILE;
@@ -40,6 +41,8 @@ public:
 		for(int i=0;i<88;i++){
 		    no_of_inbetween_frames[i]=copy_of_inbetween_frames[i];
 		}
+
+		
 	}
 
 	void renderFrame();

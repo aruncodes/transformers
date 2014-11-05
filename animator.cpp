@@ -6,7 +6,9 @@ void Animator::renderFrame() {
 		draw();
 	} 
 	else if(mode == PLAY) {
+		WORLD.Top_Spot_light.light=true;
 		play();
+		WORLD.Top_Spot_light.light=false;
 	}
 }
 
@@ -27,12 +29,16 @@ void Animator::draw() {
 }
 
 void Animator::play() {
+	
 	ifstream keyfile;
 	keyfile.open(recordFile.c_str(),ios::in);
 	frame_no=0;
 	Frame prev = read(keyfile);
 	Frame next,current;
 	do {
+
+		//Walk_Spot_light
+     	   	
 		next = read(keyfile);
 		if(!next.valid) break;
 

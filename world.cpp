@@ -45,6 +45,14 @@ void World::initLights() {
 	GLfloat light_specular2[4]={1.0, 1.0, 1.0, 1.0};
 	Dir_light2=DirectionalLight(light_position2,light_ambient2,light_diffuse2,light_specular2,GL_LIGHT1);	
 
+	//SpotLight
+	GLfloat light_position3[4]={0,1,0,1};
+	GLfloat light_diffuse3[4]={0.7, 0.3, 0.7, 1.0};
+	GLfloat light_specular3[4]={0.7, 0.3, 0.7, 1.0};
+	GLfloat spot_direction3[4]={0,-1,0};
+	Top_Spot_light=SpotLight(light_position3,light_diffuse3,light_specular3,spot_direction3,GL_LIGHT4);
+	Top_Spot_light.light=false;
+
 }
 
 void World::setSceneProperties(){
@@ -176,7 +184,8 @@ void World::setLights() {
 	
 	Dir_light1.initScene();
 	Dir_light2.initScene();
-
+	Top_Spot_light.updatePosition(robot.keys.key_frame.hip_TX,0.7,robot.keys.key_frame.hip_TZ-0.2);
+	Top_Spot_light.initScene();
 }
 
 void World::initTexture() {

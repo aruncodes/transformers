@@ -62,7 +62,7 @@ public:
 
 		//Hip
 		hip_TX=hip_TZ=0;
-		hip_TY=-0.5;
+		hip_TY=-0.8;
 		hip_X=hip_Y=hip_Z=0;
 
 		wheel_angle=0;

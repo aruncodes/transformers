@@ -14,6 +14,7 @@ public:
     int Camera;
 	DirectionalLight Dir_light1;
 	DirectionalLight Dir_light2;
+	SpotLight Top_Spot_light;
 
 	World() {
 		
