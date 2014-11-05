@@ -16,33 +16,29 @@ class Animator {
 
 	std::string recordFile;
 public:
+	int screenWidth,screenHeight;
 	int mode;
 	World WORLD;
 	Frame nextFrame;
-	int frame_no;
-	double no_of_inbetween_frames[88];
-	
+	int frameNo;
+	int nFrames;
+	int defaultNFrames;
+	unsigned char *pRGB;
+	bool capture;
 
-	Animator() {
+	Animator(int w,int h) {
+
+		screenWidth = w;
+		screenHeight = h;
+
   		recordFile = RECORDFILE;
   		WORLD=World();
   		nextFrame=Frame();
   		mode = NONE;
-		frame_no=0;
-		double copy_of_inbetween_frames[88]={3,5,3,3,5,3,3,5,3,3,
-						     5,3,3,5,3,3,5,3,3,5,
-						     3,3,5,3,3,5,3,3,5,3,
-						     3,5,3,3,5,3,3,5,3,3,
-						     40,3,5,5,3,3,5,3,3,5,
-						     3,3,5,3,3,5,3,3,5,3,
-						     3,5,3,3,5,3,3,5,3,3,5,
-						     3,3,5,3,3,5,3,3,5,3,
-						     20,20,20,20,20,20,20};
-		for(int i=0;i<88;i++){
-		    no_of_inbetween_frames[i]=copy_of_inbetween_frames[i];
-		}
-
-		
+  		nFrames = 0;
+  		defaultNFrames = 5;
+		frameNo = 0;
+		capture = false;
 	}
 
 	void renderFrame();
@@ -54,10 +50,9 @@ public:
 	void draw();
 
 	Frame interpolate(Frame &next,Frame &prev,int progress);
-
-	void startAnimation(void);
-	void interpolateFrames(Frame prev_frame,Frame suc_frame);
 	void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+
+	void capture_frame(unsigned int framenum);
 };
 
 #endif

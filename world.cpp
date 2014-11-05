@@ -226,6 +226,9 @@ void World::key_callback(GLFWwindow* window, int key, int scancode, int action, 
 	if (key == GLFW_KEY_L && action == GLFW_PRESS && mods == 0) 
 		Dir_light2.light = !Dir_light2.light; 
 
+	if (key == GLFW_KEY_SEMICOLON && action == GLFW_PRESS && mods == 0) 
+		Top_Spot_light.light = !Top_Spot_light.light; 
+
 	if (key == GLFW_KEY_O && action == GLFW_PRESS && mods == GLFW_MOD_SHIFT ) 
 		robot.Head_light1.light = !robot.Head_light1.light; 
 	if (key == GLFW_KEY_O && action == GLFW_PRESS && mods == 0) 
@@ -300,7 +303,7 @@ void World::selectCamera()
 string World::getLightVector() {
     ostringstream str;
 
-    str << Dir_light1.light << " " << Dir_light2.light ;
+    str << Dir_light1.light << " " << Dir_light2.light << " " <<Top_Spot_light.light;
 
     string out = str.str();
 
@@ -310,7 +313,7 @@ string World::getLightVector() {
 void World::setLightVector(string vector) {
     istringstream str(vector);
     
-    str >> Dir_light1.light >> Dir_light2.light ;
+    str >> Dir_light1.light >> Dir_light2.light >> Top_Spot_light.light;
 }
 
 void World::debugCoord() {

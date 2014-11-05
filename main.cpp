@@ -25,7 +25,7 @@
 #include "animator.hpp"
 
 std::string filename, progname;
-Animator animator;
+Animator animator(512,512);
 
 void key_callback_wrapper(GLFWwindow* window, int key, int scancode, int action, int mods) {
     animator.WORLD.robot.keys.key_callback(window,key,scancode,action,mods);
@@ -76,7 +76,7 @@ int main (int argc, char *argv[])
   csX75::initGL();
   
   // Initialize animator, world and robot
-  animator = Animator();
+  animator = Animator(win_width,win_height);
 
   glScalef(0.5,0.5,0.5);
   // Loop until the user closes the window

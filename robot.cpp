@@ -1081,7 +1081,7 @@ void Robot::makeRobot(void)
 string Robot::getHeadLightVector() {
     ostringstream str;
 
-    str << Head_light1.light << " " << Head_light2.light ;
+    str << Head_light1.light << " " << Head_light2.light << " " << keys.frame ;
 
     string out = str.str();
 
@@ -1091,5 +1091,5 @@ string Robot::getHeadLightVector() {
 void Robot::setHeadLightVector(string vector) {
     istringstream str(vector);
     
-    str >> Head_light1.light >> Head_light2.light ;
+    str >> Head_light1.light >> Head_light2.light >> keys.frame;
 }
