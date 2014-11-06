@@ -184,13 +184,11 @@ void Robot::initHead()
 
     TextureFaces tf(texture[HEAD]);
     tf.top = texture[16];
-    glColor3f(0,0,0);
-    tf.front = -1;
+    tf.front = texture[22];//-1;
 
     glNewList(Head,GL_COMPILE);
     defineTrapizoid(0.2,0.15+0.03/3,0.15,0.12,tf);
     glEndList();
-    glColor3f(1,1,1);
 }
 
 void Robot::initLeftShoulder()

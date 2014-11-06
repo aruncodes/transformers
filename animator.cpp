@@ -205,7 +205,7 @@ void Animator::capture_frame(unsigned int framenum)
   
   glReadPixels(0, 0, screenWidth, screenHeight, GL_RGB, GL_UNSIGNED_BYTE, pRGB);
   char filename[200];
-  sprintf(filename,"frames/frame_%04d.ppm",framenum);
+  sprintf(filename,"/media/arun/DriveD/IITB-Assignment/cg/frames/frame_%04d.ppm",framenum);
   std::ofstream out(filename, std::ios::out);
   out<<"P6"<<std::endl;
   out<<screenWidth<<" "<<screenHeight<<" 255"<<std::endl;

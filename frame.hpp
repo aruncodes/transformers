@@ -61,8 +61,9 @@ public:
 		head_X=head_Y=head_Z=0;
 
 		//Hip
-		hip_TX=hip_TZ=0;
-		hip_TY=-0.8;
+		hip_TX=0;
+		hip_TZ=-0.8	;
+		hip_TY=-0.5;
 		hip_X=hip_Y=hip_Z=0;
 
 		wheel_angle=0;
