@@ -280,9 +280,6 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 		key_frame.rightFoot_X = 0;
 		//Head
 		key_frame.head_X=key_frame.head_Y=key_frame.head_Z=00;
-		//Hip
-		//hip_TX=hip_TY=hip_TZ=0;
-		// hip_Y=0;
 	}
 
 	if(frame >= 3){
@@ -309,23 +306,6 @@ void KeyControls::key_callback(GLFWwindow* window, int key, int scancode, int ac
 	if(frame >= 9){
 		key_frame.rightLowerLeg_X=key_frame.leftLowerLeg_X=-180;
 	}
-
-	/*if( key == GLFW_KEY_LEFT  && frame==9) {
-		if(key_frame.wheel_angle!=20)
-		    key_frame.wheel_angle=20;
-			hip_Z += 5;
-			if(hip_Z > 360) hip_Z -= 360;
-
-	}
-	else if( key == GLFW_KEY_RIGHT && frame==9 ) {
-		if(key_frame.wheel_angle!=-20)
-		    key_frame.wheel_angle=-20;
-
-			hip_Z -= 5;
-			if(hip_Z < 0) hip_Z += 360;
-	}*/
-
-	// movement(window);
 
 	// Debug keys to update angles
 	if(key == GLFW_KEY_KP_7) {

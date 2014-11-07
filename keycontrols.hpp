@@ -17,7 +17,6 @@ public:
 
 	KeyControls() {
 		// Default values
-		//glLoadIdentity();
 		key_frame=Frame();
 
 		frame=0;

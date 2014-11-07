@@ -80,8 +80,6 @@ void Robot::transform() {
 
 	if(keys.stage%10 == 0 || keys.stage%10 == 5) {
 		glfwSwapBuffers(glfwGetCurrentContext());  
-	  	// sleep(0.8);	
-	  	// usleep(1 * 100 * 1000);
 	}
 
 }

@@ -15,16 +15,11 @@ using namespace std;
 
 void Robot::initStructuralConstraints()
 {
-    //Hip_LeftUpperLeg_Joint=point(0.075,0,0);
     Hip_LeftUpperLeg_Joint=point(0.075,-0.075,0);
     LeftUpperLeg_LeftLowerLeg_Joint=point(0,-0.1,0.075);
-    //Hip_RightUpperLeg_Joint=point(-0.075,0,0);
     Hip_RightUpperLeg_Joint=point(-0.075,-0.075,0);
     RightUpperLeg_RightLowerLeg_Joint=point(0,-0.1,0.075);
-    //Bust_Hip_Joint=point(0,0,0);
     Bust_Hip_Joint=point(0,0.075,0);
-    // RightShoulder_Bust_Joint=point(-0.1,0.25,0);
-    //LeftShoulder_Bust_Joint=point(0.1,0.25,0);
     RightShoulder_Bust_Joint=point(-0.15,0.25,0);
     LeftShoulder_Bust_Joint=point(0.15,0.25,0);
     NeckBustJoint=point(0,0.25,0);
@@ -172,8 +167,8 @@ void Robot::initNeck()
     Neck=glGenLists(1);
     glNewList(Neck,GL_COMPILE);
 	glPushMatrix();
-	   glRotatef(90,1,0,0);
-     	   defineCylinder(0.075,0.03,20,1);
+        glRotatef(90,1,0,0);
+        defineCylinder(0.075,0.03,20,1);
 	glPopMatrix();
     glEndList();
 }
@@ -549,7 +544,7 @@ void Robot::makeHip(double tx,double ty,double tz,double angle_x,double angle_y,
 {
     //Tranformations
     //glTranslatef(0,-0.05,0);
-     glTranslatef(0,-0.5,0);
+    glTranslatef(0,-0.5,0);
     glTranslatef(tx,ty,tz);	
     glRotatef(angle_x,1,0,0);
     glRotatef(angle_y,0,1,0);
@@ -659,7 +654,7 @@ void Robot::makeLeftUpperArmFront(double angle_x,double angle_y,double angle_z)
 void Robot::makeLeftLowerArmFront(double angle_x)
 {
     //Tranformations
-     glTranslatef(LeftUpperArmFront_LeftLowerArmFront_Joint.x,LeftUpperArmFront_LeftLowerArmFront_Joint.y,LeftUpperArmFront_LeftLowerArmFront_Joint.z);
+    glTranslatef(LeftUpperArmFront_LeftLowerArmFront_Joint.x,LeftUpperArmFront_LeftLowerArmFront_Joint.y,LeftUpperArmFront_LeftLowerArmFront_Joint.z);
     glRotatef(-angle_x,1,0,0);
     glTranslatef(-LeftLowerArmFront_Upper_Point.x,-LeftLowerArmFront_Upper_Point.y,-LeftLowerArmFront_Upper_Point.z);	
     
@@ -685,7 +680,7 @@ void Robot::makeRightUpperArmFront(double angle_x,double angle_y,double angle_z)
 void Robot::makeRightLowerArmFront(double angle_x)
 {
     //Tranformations
-     glTranslatef(LeftUpperArmFront_LeftLowerArmFront_Joint.x,LeftUpperArmFront_LeftLowerArmFront_Joint.y,LeftUpperArmFront_LeftLowerArmFront_Joint.z);
+    glTranslatef(LeftUpperArmFront_LeftLowerArmFront_Joint.x,LeftUpperArmFront_LeftLowerArmFront_Joint.y,LeftUpperArmFront_LeftLowerArmFront_Joint.z);
     glRotatef(-angle_x,1,0,0);
     glTranslatef(-RightLowerArmFront_Upper_Point.x,-RightLowerArmFront_Upper_Point.y,-RightLowerArmFront_Upper_Point.z);	
     
@@ -698,7 +693,7 @@ void Robot::makeRightLowerArmFront(double angle_x)
 void Robot::makeLeftUpperArmBehind(double angle_y)
 {
     //Tranformations
-     glTranslatef(LeftUpperArmFront_LeftUpperArmBehind_Joint.x,LeftUpperArmFront_LeftUpperArmBehind_Joint.y,LeftUpperArmFront_LeftUpperArmBehind_Joint.z);
+    glTranslatef(LeftUpperArmFront_LeftUpperArmBehind_Joint.x,LeftUpperArmFront_LeftUpperArmBehind_Joint.y,LeftUpperArmFront_LeftUpperArmBehind_Joint.z);
     glRotatef(-angle_y,0,1,0);
     glTranslatef(-LeftUpperArmBehind_Right_Point.x,-LeftUpperArmBehind_Right_Point.y,-LeftUpperArmBehind_Right_Point.z);	
     
@@ -722,7 +717,7 @@ void Robot::makeLeftLowerArmBehind(double angle_y)
 void Robot::makeRightUpperArmBehind(double angle_y)
 {
     //Tranformations
-     glTranslatef(RightUpperArmFront_RightUpperArmBehind_Joint.x,RightUpperArmFront_RightUpperArmBehind_Joint.y,RightUpperArmFront_RightUpperArmBehind_Joint.z);
+    glTranslatef(RightUpperArmFront_RightUpperArmBehind_Joint.x,RightUpperArmFront_RightUpperArmBehind_Joint.y,RightUpperArmFront_RightUpperArmBehind_Joint.z);
     glRotatef(angle_y,0,1,0);
     glTranslatef(-RightUpperArmBehind_Left_Point.x,-RightUpperArmBehind_Left_Point.y,-RightUpperArmBehind_Left_Point.z);	
     
@@ -758,7 +753,7 @@ void Robot::makeLeftFrontHand(double angle_x)
 void Robot::makeRightFrontHand(double angle_x)
 {
     //Tranformations
-     glTranslatef(RightLowerArmFront_RightFrontHand_Joint.x,RightLowerArmFront_RightFrontHand_Joint.y,RightLowerArmFront_RightFrontHand_Joint.z);
+    glTranslatef(RightLowerArmFront_RightFrontHand_Joint.x,RightLowerArmFront_RightFrontHand_Joint.y,RightLowerArmFront_RightFrontHand_Joint.z);
     glRotatef(-angle_x,1,0,0);
     glTranslatef(-RightFrontHand_Upper_Point.x,-RightFrontHand_Upper_Point.y,-RightFrontHand_Upper_Point.z);	
     
@@ -782,7 +777,7 @@ void Robot::makeLeftBehindHand(double angle_y)
 void Robot::makeRightBehindHand(double angle_y)
 {
     //Tranformations
-     glTranslatef(RightFrontHand_RightBehindHand_Joint.x,RightFrontHand_RightBehindHand_Joint.y,RightFrontHand_RightBehindHand_Joint.z);
+    glTranslatef(RightFrontHand_RightBehindHand_Joint.x,RightFrontHand_RightBehindHand_Joint.y,RightFrontHand_RightBehindHand_Joint.z);
     glRotatef(angle_y,0,1,0);
     glTranslatef(-RightBehindHand_Upper_Point.x,-RightBehindHand_Upper_Point.y,-RightBehindHand_Upper_Point.z);	
     
@@ -1011,9 +1006,6 @@ void Robot::setRobotProperties(){
     glMaterialfv(GL_FRONT, GL_DIFFUSE, scene_diffuse);
 }
 
-// void Robot::makeHeadLights() {
-        
-// }
 
 void Robot::makeRobot(void)
 {   

@@ -24,69 +24,71 @@
 #include "gl_framework.hpp"
 #include "animator.hpp"
 
-std::string filename, progname;
-Animator animator(512,512);
+ std::string filename, progname;
+ Animator animator(512,512);
 
-void key_callback_wrapper(GLFWwindow* window, int key, int scancode, int action, int mods) {
-    animator.WORLD.robot.keys.key_callback(window,key,scancode,action,mods);
-    animator.WORLD.key_callback(window,key,scancode,action,mods);
-    animator.key_callback(window,key,scancode,action,mods);
+ void key_callback_wrapper(GLFWwindow* window, int key, int scancode, int action, int mods) {
+ 	animator.WORLD.robot.keys.key_callback(window,key,scancode,action,mods);
+ 	animator.WORLD.key_callback(window,key,scancode,action,mods);
+ 	animator.key_callback(window,key,scancode,action,mods);
 
-  	animator.nextFrame.getCurrentVector();
-}
+    //!Close the window if the ESC key was pressed
+ 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+ 		glfwSetWindowShouldClose(window, GL_TRUE);
+ }
 
-int main (int argc, char *argv[]) 
-{
-  progname=argv[0];
- 
-  //! The pointer to the GLFW window
-  GLFWwindow* window;
-  //! Setting up the GLFW Error callback
-  glfwSetErrorCallback(csX75::error_callback);
+ int main (int argc, char *argv[]) 
+ {
+ 	progname=argv[0];
 
-  //! Initialize GLFW
-  if (!glfwInit())
-    return -1;
+  	//! The pointer to the GLFW window
+ 	GLFWwindow* window;
+  	//! Setting up the GLFW Error callback
+ 	glfwSetErrorCallback(csX75::error_callback);
 
-  int win_width=512;
-  int win_height=512;
+  	//! Initialize GLFW
+ 	if (!glfwInit())
+ 		return -1;
 
-  //! Create a windowed mode window and its OpenGL context
-  window = glfwCreateWindow(win_width, win_height, "Transformers", NULL, NULL);
-  if (!window)
-    {
-      glfwTerminate();
-      return -1;
-    }
-  
-  //! Make the window's context current 
-  glfwMakeContextCurrent(window);
+ 	int win_width=512;
+ 	int win_height=512;
 
-  //Keyboard Callback
-  glfwSetKeyCallback(window, key_callback_wrapper);
-  //Framebuffer resize callback
-  glfwSetFramebufferSizeCallback(window, csX75::framebuffer_size_callback);
+  	//! Create a windowed mode window and its OpenGL context
+ 	window = glfwCreateWindow(win_width, win_height, "Transformers", NULL, NULL);
+ 	if (!window)
+ 	{
+ 		glfwTerminate();
+ 		return -1;
+ 	}
 
-  // Ensure we can capture the escape key being pressed below
-  glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+  	//! Make the window's context current 
+ 	glfwMakeContextCurrent(window);
 
-  glfwGetFramebufferSize(window, &win_width, &win_height);
-  csX75::framebuffer_size_callback(window, win_width, win_height);
-  //Initialize GL state
-  csX75::initGL();
-  
-  // Initialize animator, world and robot
-  animator = Animator(win_width,win_height);
+  	//Keyboard Callback
+ 	glfwSetKeyCallback(window, key_callback_wrapper);
+  	//Framebuffer resize callback
+ 	glfwSetFramebufferSizeCallback(window, csX75::framebuffer_size_callback);
 
-  glScalef(0.5,0.5,0.5);
-  // Loop until the user closes the window
-  while (glfwWindowShouldClose(window) == 0)
-  {
+  	// Ensure we can capture the escape key being pressed below
+ 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+
+ 	glfwGetFramebufferSize(window, &win_width, &win_height);
+ 	csX75::framebuffer_size_callback(window, win_width, win_height);
+  	//Initialize GL state
+ 	csX75::initGL();
+
+  	// Initialize animator, world and robot
+ 	animator = Animator(win_width,win_height);
+
+ 	glScalef(0.5,0.5,0.5);
+  	// Loop until the user closes the window
+ 	while (glfwWindowShouldClose(window) == 0)
+ 	{
     // Render here
-    animator.renderFrame();
-  }
+ 		animator.renderFrame();
+ 	}
 
-  glfwDestroyWindow(window);
-  glfwTerminate();
-  return 0;
-}
+ 	glfwDestroyWindow(window);
+ 	glfwTerminate();
+ 	return 0;
+ }

@@ -77,7 +77,6 @@ void World::makeScene() {
 
 	glEnable(GL_TEXTURE_2D);
 
-	// glRotatef(45,1,1,0);
 	double half_width,half_length,half_height;
 	double width,length,height;
 	half_width=half_length=half_height=1.8;
@@ -95,14 +94,14 @@ void World::makeScene() {
 		    for(int j=0;j<units;j++){
 			glBegin(GL_QUADS);
 				glNormal3f(0,0,1);
-		    		glTexCoord2d((i+1)/units,(j+1)/units);
-		    		glVertex3f(l+(i+1)*delta_length,w+(j+1)*delta_width,-half_height);
+		    	glTexCoord2d((i+1)/units,(j+1)/units);
+		    	glVertex3f(l+(i+1)*delta_length,w+(j+1)*delta_width,-half_height);
 				glTexCoord2d((i)/units,(j+1)/units);
-		    		glVertex3f(l+(i)*delta_length,w+(j+1)*delta_width,-half_height);
+		    	glVertex3f(l+(i)*delta_length,w+(j+1)*delta_width,-half_height);
 				glTexCoord2d((i)/units,j/units);
-		    		glVertex3f(l+(i)*delta_length,w+(j)*delta_length,-half_height);
+		    	glVertex3f(l+(i)*delta_length,w+(j)*delta_length,-half_height);
 				glTexCoord2d((i+1)/units,j/units);
-		    		glVertex3f(l+(i+1)*delta_length,w+(j)*delta_length,-half_height);		    		
+		    	glVertex3f(l+(i+1)*delta_length,w+(j)*delta_length,-half_height);		    		
 			glEnd();
 		    }
 		}
@@ -112,14 +111,14 @@ void World::makeScene() {
 		    for(int j=0;j<units;j++){
 			glBegin(GL_QUADS);
 				glNormal3f(1,0,0);
-		    		glTexCoord2d((i+1)/units,(j+1)/units);
-		    		glVertex3f(-half_length,w+(i+1)*delta_width,h+(j+1)*delta_height);
+		    	glTexCoord2d((i+1)/units,(j+1)/units);
+		    	glVertex3f(-half_length,w+(i+1)*delta_width,h+(j+1)*delta_height);
 				glTexCoord2d((i)/units,(j+1)/units);
-		    		glVertex3f(-half_length,w+i*delta_width,h+(j+1)*delta_height);
+		    	glVertex3f(-half_length,w+i*delta_width,h+(j+1)*delta_height);
 				glTexCoord2d((i)/units,j/units);
-		    		glVertex3f(-half_length,w+(i)*delta_width,h+(j)*delta_height);
-		    		glTexCoord2d((i+1)/units,j/units);
-		    		glVertex3f(-half_length,w+(i+1)*delta_width,h+(j)*delta_height);
+		    	glVertex3f(-half_length,w+(i)*delta_width,h+(j)*delta_height);
+		    	glTexCoord2d((i+1)/units,j/units);
+		    	glVertex3f(-half_length,w+(i+1)*delta_width,h+(j)*delta_height);
 			glEnd();
 		    }
 		}
@@ -129,14 +128,14 @@ void World::makeScene() {
 		    for(int j=0;j<units;j++){
 			glBegin(GL_QUADS);
 				glNormal3f(-1,0,0);
-		    		glTexCoord2d((i+1)/units,(j+1)/units);
-		    		glVertex3f(half_length,w+(i+1)*delta_width,h+(j+1)*delta_height);
+		    	glTexCoord2d((i+1)/units,(j+1)/units);
+		    	glVertex3f(half_length,w+(i+1)*delta_width,h+(j+1)*delta_height);
 				glTexCoord2d((i+1)/units,j/units);
-		    		glVertex3f(half_length,w+(i+1)*delta_width,h+(j)*delta_height);	
+		    	glVertex3f(half_length,w+(i+1)*delta_width,h+(j)*delta_height);	
 				glTexCoord2d((i)/units,j/units);
-		    		glVertex3f(half_length,w+(i)*delta_width,h+(j)*delta_height);
+		    	glVertex3f(half_length,w+(i)*delta_width,h+(j)*delta_height);
 				glTexCoord2d((i)/units,(j+1)/units);
-		    		glVertex3f(half_length,w+i*delta_width,h+(j+1)*delta_height);							
+		    	glVertex3f(half_length,w+i*delta_width,h+(j+1)*delta_height);							
 			glEnd();
 		    }
 		}
@@ -145,12 +144,12 @@ void World::makeScene() {
 		    for(int j=0;j<units;j++){
 			glBegin(GL_QUADS);
 				glNormal3f(0,-1,0);
-		    		glTexCoord2d((i)/units,(j+1)/units);
-		    		glVertex3f(l+(i)*delta_length,half_width,h+(j+1)*delta_height);
+		    	glTexCoord2d((i)/units,(j+1)/units);
+		    	glVertex3f(l+(i)*delta_length,half_width,h+(j+1)*delta_height);
 				glTexCoord2d((i+1)/units,(j+1)/units);
-		    		glVertex3f(l+(i+1)*delta_length,half_width,h+(j+1)*delta_height);
+		    	glVertex3f(l+(i+1)*delta_length,half_width,h+(j+1)*delta_height);
 				glTexCoord2d((i)/units,j/units);
-		    		glVertex3f(l+(i+1)*delta_length,half_width,h+(j)*delta_height);
+		    	glVertex3f(l+(i+1)*delta_length,half_width,h+(j)*delta_height);
 				glTexCoord2d((i)/units,(j)/units);
 				glVertex3f(l+(i)*delta_length,half_width,h+(j)*delta_height);
 											
@@ -163,14 +162,14 @@ void World::makeScene() {
 		    for(int j=0;j<units;j++){
 			glBegin(GL_QUADS);
 				glNormal3f(0,1,0);
-		    		glTexCoord2d((i)/units,(j+1)/units);
-		    		glVertex3f(l+(i)*delta_length,-half_width,h+(j+1)*delta_height);
+		    	glTexCoord2d((i)/units,(j+1)/units);
+		    	glVertex3f(l+(i)*delta_length,-half_width,h+(j+1)*delta_height);
 				glTexCoord2d((i)/units,(j)/units);
 				glVertex3f(l+(i)*delta_length,-half_width,h+(j)*delta_height);
 				glTexCoord2d((i)/units,j/units);
-		    		glVertex3f(l+(i+1)*delta_length,-half_width,h+(j)*delta_height);
+		    	glVertex3f(l+(i+1)*delta_length,-half_width,h+(j)*delta_height);
 				glTexCoord2d((i+1)/units,(j+1)/units);
-		    		glVertex3f(l+(i+1)*delta_length,-half_width,h+(j+1)*delta_height);
+		    	glVertex3f(l+(i+1)*delta_length,-half_width,h+(j+1)*delta_height);
 											
 			glEnd();
 		    }
@@ -277,13 +276,13 @@ void World::selectCamera()
 	//Transformation for Camera3 : Follows car from behind
 	if(Camera==3){
 
-			double x = robot.keys.key_frame.hip_TX;
-			double y = robot.keys.key_frame.hip_TZ;
+		double x = robot.keys.key_frame.hip_TX;
+		double y = robot.keys.key_frame.hip_TZ;
 
-			double dist = 1.5;
-			double angle = robot.keys.key_frame.hip_Z;
-			double delta_x = dist * sin( angle * M_PI / 180);
-			double delta_y = dist * cos( angle * M_PI / 180);
+		double dist = 1.5;
+		double angle = robot.keys.key_frame.hip_Z;
+		double delta_x = dist * sin( angle * M_PI / 180);
+		double delta_y = dist * cos( angle * M_PI / 180);
 
 		gluPerspective(30,1,1,-1);
 		gluLookAt(
@@ -317,7 +316,7 @@ void World::setLightVector(string vector) {
 }
 
 void World::debugCoord() {
-	if(1) return;
+	if(1) return; // Turn on or off debugging
 	// Coordinate debug code
 	// Sphere to know the position of camera in coordinate system
 	double x = robot.keys.key_frame.hip_TX;
@@ -340,12 +339,6 @@ void World::debugCoord() {
 	glPushMatrix();
 		 glLoadIdentity();
 
-		 /*glTranslatef(
-		 		(x - delta_x - delta_x2)/(y - delta_y + delta_y2),
-		 		-1.37 /(y - delta_y + delta_y2),
-		 		y - delta_y + delta_y2
-		 		);
-		  defineSphere(0.05,24,24);*/
 		 glTranslatef(
 		 		-0.15,0.15,0
 		 		);
@@ -354,16 +347,7 @@ void World::debugCoord() {
 		 glVertex3f(0,0,1);
 		 glVertex3f(0,0,-1);
 		 glEnd();
-		 /*glBegin(GL_LINES)
-		 glVertex3f(x-delta_x-delta_x2,-1.37,y-delta_y+delta_y2);
-		 glVertex3f( x-delta_x_centre-delta_x2,-1.5,y-delta_y_centre+delta_y2);
-		 glEnd();*/
-	// glTranslatef(
-	// 			x-delta_x_centre-delta_x2,
-	// 			 	-1.5,
-	// 			 	y-delta_y_centre+delta_y2
-	// 			);
-	// 	 defineSphere(0.05,24,24);
+
 	glPopMatrix();
 	//End of debug code
 
